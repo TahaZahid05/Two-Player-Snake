@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Generic_counter.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/VGA_Driver.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/7Segment_Display_Interface.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/VGA_Interface.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Target_Generator.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Snake_control.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Navigation_State_Machine.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Master_State_Machine.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Score_Counter.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sources_1/new/Master_Game.v"
+verilog xil_defaultlib  "../../../snake_game.srcs/sim_1/new/Snake_TB.v"
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

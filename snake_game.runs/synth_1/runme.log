@@ -1,0 +1,380 @@
+
+*** Running vivado
+    with args -log Master_Game.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Master_Game.tcl
+
+
+
+****** Vivado v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source Master_Game.tcl -notrace
+Command: synth_design -top Master_Game -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 9588
+WARNING: [Synth 8-6901] identifier 'DecCount3' is used before its declaration [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:32]
+WARNING: [Synth 8-6901] identifier 'DecCount2' is used before its declaration [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:32]
+WARNING: [Synth 8-6901] identifier 'NBYTES' is used before its declaration [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/bin2ascii.v:24]
+WARNING: [Synth 8-6901] identifier 'NBYTES' is used before its declaration [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/bin2ascii.v:25]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1025.473 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'Master_Game' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Master_Game.v:23]
+INFO: [Synth 8-6157] synthesizing module 'PS2Receiver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/PS2Receiver.v:23]
+INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/debouncer.v:23]
+	Parameter COUNT_MAX bound to: 19 - type: integer 
+	Parameter COUNT_WIDTH bound to: 5 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'debouncer' (1#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/debouncer.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/PS2Receiver.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'PS2Receiver' (2#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/hw/hw.srcs/sources_1/imports/hdl/PS2Receiver.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Master_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Master_State_Machine.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'Master_State_Machine' (3#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Master_State_Machine.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Navigation_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Navigation_State_Machine.v:23]
+WARNING: [Synth 8-567] referenced signal 'state_snake' should be on the sensitivity list [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Navigation_State_Machine.v:38]
+INFO: [Synth 8-6155] done synthesizing module 'Navigation_State_Machine' (4#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Navigation_State_Machine.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Snake_control' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Snake_control.v:3]
+	Parameter MaxY bound to: 120 - type: integer 
+	Parameter MaxX bound to: 160 - type: integer 
+	Parameter SnakeLength bound to: 40 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 26 - type: integer 
+	Parameter COUNTER_MAX bound to: 5000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter' (5#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'moveSnake' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Snake_control.v:23]
+WARNING: [Synth 8-7023] instance 'moveSnake' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Snake_control.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'Snake_control' (6#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Snake_control.v:3]
+WARNING: [Synth 8-689] width (5) of port connection 'score' does not match port width (4) of module 'Snake_control' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Master_Game.v:133]
+WARNING: [Synth 8-689] width (5) of port connection 'score' does not match port width (4) of module 'Snake_control' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Master_Game.v:146]
+INFO: [Synth 8-6157] synthesizing module 'Target_Generator' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Target_Generator.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'Target_Generator' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Target_Generator.v:23]
+INFO: [Synth 8-6157] synthesizing module 'VGA_Interface' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Interface.v:23]
+INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Driver.v:23]
+	Parameter VertTimeToPulseWeidthEnd bound to: 10'b0000000010 
+	Parameter VertTimeToBackPorchEnd bound to: 10'b0000011111 
+	Parameter VertTimeToDisplayTimeEnd bound to: 10'b0111111111 
+	Parameter VertTimeToFrontPorchEnd bound to: 10'b1000001001 
+	Parameter HorzTimeToPulseWidthEnd bound to: 10'b0001100000 
+	Parameter HorzTimeToBackPorchEnd bound to: 10'b0010010000 
+	Parameter HorzTimeToDisplayTimeEnd bound to: 10'b1100010000 
+	Parameter HorzTimeToFrontPorchEnd bound to: 10'b1100100000 
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized0' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 2 - type: integer 
+	Parameter COUNTER_MAX bound to: 3 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized0' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+WARNING: [Synth 8-7071] port 'COUNT' of module 'Generic_counter' is unconnected for instance 'CounterTo3' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Driver.v:63]
+WARNING: [Synth 8-7023] instance 'CounterTo3' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Driver.v:63]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized1' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 10 - type: integer 
+	Parameter COUNTER_MAX bound to: 10'b1100011111 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized1' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized2' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 10 - type: integer 
+	Parameter COUNTER_MAX bound to: 10'b1000001000 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized2' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'CounterTo520' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Driver.v:86]
+WARNING: [Synth 8-7023] instance 'CounterTo520' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Driver.v:86]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Driver' (8#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Driver.v:23]
+WARNING: [Synth 8-689] width (9) of port connection 'ADDRV' does not match port width (10) of module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Interface.v:54]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Interface' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/VGA_Interface.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Score_Counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized3' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 17 - type: integer 
+	Parameter COUNTER_MAX bound to: 99999 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized3' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+WARNING: [Synth 8-7071] port 'COUNT' of module 'Generic_counter' is unconnected for instance 'Bit17Counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:58]
+WARNING: [Synth 8-7023] instance 'Bit17Counter' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:58]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized4' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 1 - type: integer 
+	Parameter COUNTER_MAX bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized4' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'Bit2Counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:69]
+WARNING: [Synth 8-7023] instance 'Bit2Counter' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:69]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized5' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+	Parameter COUNTER_WIDTH bound to: 4 - type: integer 
+	Parameter COUNTER_MAX bound to: 9 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized5' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Generic_counter.v:23]
+WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'Bit4Counter3' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:96]
+WARNING: [Synth 8-7023] instance 'Bit4Counter3' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:96]
+INFO: [Synth 8-6155] done synthesizing module 'Score_Counter' (10#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Score_Counter.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Multiplexer_4way' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Multiplexer_4way.v:23]
+INFO: [Synth 8-226] default block is never used [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Multiplexer_4way.v:40]
+INFO: [Synth 8-6155] done synthesizing module 'Multiplexer_4way' (11#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Multiplexer_4way.v:23]
+INFO: [Synth 8-6157] synthesizing module 'Segment_Display_Interface' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/7Segment_Display_Interface.v:23]
+INFO: [Synth 8-226] default block is never used [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/7Segment_Display_Interface.v:32]
+INFO: [Synth 8-226] default block is never used [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/7Segment_Display_Interface.v:42]
+INFO: [Synth 8-6155] done synthesizing module 'Segment_Display_Interface' (12#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/7Segment_Display_Interface.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'Master_Game' (13#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/sources_1/new/Master_Game.v:23]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1025.473 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1025.473 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1025.473 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.032 . Memory (MB): peak = 1025.473 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc]
+WARNING: [Vivado 12-584] No ports matched 'BTNC'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:126]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:126]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTND'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:127]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:127]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNL'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:128]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:128]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNR'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:129]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:129]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNU'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:130]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:130]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNC'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:131]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:131]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTND'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:132]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:132]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNL'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:133]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:133]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNR'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:134]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:134]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNU'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:135]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc:135]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.srcs/constrs_1/new/Snake_Constr.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Master_Game_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/Master_Game_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1082.961 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1082.961 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_snake_reg' in module 'Navigation_State_Machine'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                               00
+                 iSTATE2 |                               01 |                               01
+                 iSTATE1 |                               10 |                               11
+                 iSTATE0 |                               11 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_snake_reg' using encoding 'sequential' in module 'Navigation_State_Machine'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   26 Bit       Adders := 2     
+	   2 Input   17 Bit       Adders := 1     
+	   2 Input   10 Bit       Adders := 4     
+	   2 Input    8 Bit       Adders := 4     
+	   2 Input    7 Bit       Adders := 4     
+	   2 Input    5 Bit       Adders := 2     
+	   2 Input    4 Bit       Adders := 2     
+	   2 Input    2 Bit       Adders := 1     
+	   2 Input    1 Bit       Adders := 2     
++---Registers : 
+	               26 Bit    Registers := 2     
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 1     
+	               12 Bit    Registers := 3     
+	               10 Bit    Registers := 4     
+	                8 Bit    Registers := 83    
+	                7 Bit    Registers := 81    
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 33    
++---Muxes : 
+	   2 Input   26 Bit        Muxes := 2     
+	   2 Input   17 Bit        Muxes := 1     
+	  42 Input   12 Bit        Muxes := 2     
+	   4 Input   12 Bit        Muxes := 2     
+	   2 Input   12 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 4     
+	   4 Input    8 Bit        Muxes := 2     
+	   4 Input    7 Bit        Muxes := 2     
+	   4 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 2     
+	   4 Input    4 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 5     
+	   2 Input    2 Bit        Muxes := 17    
+	   2 Input    1 Bit        Muxes := 31    
+	   3 Input    1 Bit        Muxes := 1     
+	  12 Input    1 Bit        Muxes := 2     
+	   4 Input    1 Bit        Muxes := 4     
+	  37 Input    1 Bit        Muxes := 2     
+	  10 Input    1 Bit        Muxes := 18    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 1082.961 ; gain = 57.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:36 ; elapsed = 00:00:37 . Memory (MB): peak = 1085.004 ; gain = 59.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:40 ; elapsed = 00:00:40 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:40 ; elapsed = 00:00:40 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:40 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:40 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    11|
+|3     |LUT1   |    10|
+|4     |LUT2   |    87|
+|5     |LUT3   |    28|
+|6     |LUT4   |   190|
+|7     |LUT5   |    63|
+|8     |LUT6   |   476|
+|9     |MUXF7  |     1|
+|10    |FDRE   |   560|
+|11    |FDSE   |   201|
+|12    |IBUF   |     3|
+|13    |OBUF   |    26|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1090.500 ; gain = 65.027
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:39 . Memory (MB): peak = 1090.500 ; gain = 7.539
+Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 1090.500 ; gain = 65.027
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 1102.562 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 12 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1105.809 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+59 Infos, 30 Warnings, 10 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:45 ; elapsed = 00:00:47 . Memory (MB): peak = 1105.809 ; gain = 80.336
+INFO: [Common 17-1381] The checkpoint 'C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/iron-man/snake_game.runs/synth_1/Master_Game.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Master_Game_utilization_synth.rpt -pb Master_Game_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Nov  4 03:19:49 2024...
