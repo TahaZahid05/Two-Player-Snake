@@ -1,152 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1731598829">
   <File Type="PA-TCL" Name="Master_Game.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="Master_Game_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="Master_Game_reports.tcl"/>
   <File Type="RDS-RDS" Name="Master_Game.vds"/>
   <File Type="RDS-UTIL" Name="Master_Game_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="Master_Game_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="Master_Game.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="Master_Game_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="Master_Game_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Generic_counter.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Generic_counter.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Generic_counter.v"/>
+        <Attr Name="ImportTime" Val="1731568705"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Master_State_Machine.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Master_State_Machine.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Master_State_Machine.v"/>
+        <Attr Name="ImportTime" Val="1731577958"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Navigation_State_Machine.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Navigation_State_Machine.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Navigation_State_Machine.v"/>
+        <Attr Name="ImportTime" Val="1731556357"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/PS2Receiver.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/PS2Receiver.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/PS2Receiver.v"/>
+        <Attr Name="ImportTime" Val="1731521296"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Score_Counter.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Score_Counter.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Score_Counter.v"/>
+        <Attr Name="ImportTime" Val="1731577942"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Snake_control.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Snake_control.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Snake_control.v"/>
+        <Attr Name="ImportTime" Val="1731578034"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Target_Generator.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Target_Generator.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Target_Generator.v"/>
+        <Attr Name="ImportTime" Val="1731569030"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Driver.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/VGA_Driver.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Driver.v"/>
+        <Attr Name="ImportTime" Val="1731575785"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Interface.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/VGA_Interface.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Interface.v"/>
+        <Attr Name="ImportTime" Val="1731567853"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/debouncer.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/debouncer.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/debouncer.v"/>
+        <Attr Name="ImportTime" Val="1731521297"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Master_Game.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Master_Game.v">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Master_Game.v"/>
+        <Attr Name="ImportTime" Val="1731577949"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Multiplexer_4way.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Multiplexer_4way.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Multiplexer_4way.v"/>
+        <Attr Name="ImportTime" Val="1731521296"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/7Segment_Display_Interface.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/7Segment_Display_Interface.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/7Segment_Display_Interface.v"/>
+        <Attr Name="ImportTime" Val="1731521296"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/bin2ascii.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/bin2ascii.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/bin2ascii.v"/>
+        <Attr Name="ImportTime" Val="1731521297"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Int_TB.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/VGA_Int_TB.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Int_TB.v"/>
+        <Attr Name="ImportTime" Val="1731521296"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Multiplexer_4Ways.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/Multiplexer_4Ways.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/Multiplexer_4Ways.v"/>
+        <Attr Name="ImportTime" Val="1731521296"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/uart_buf_con.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/uart_buf_con.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/uart_buf_con.v"/>
+        <Attr Name="ImportTime" Val="1731521297"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/uart_tx.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/uart_tx.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/uart_tx.v"/>
+        <Attr Name="ImportTime" Val="1731521297"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/top.v">
+    <File Path="$PSRCDIR/sources_1/imports/new/top.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/sources_1/new/top.v"/>
+        <Attr Name="ImportTime" Val="1731521297"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -160,8 +195,10 @@
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
     <Filter Type="Constrs"/>
-    <File Path="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/constrs_1/new/Snake_Constr.xdc">
+    <File Path="$PSRCDIR/constrs_1/imports/new/Snake_Constr.xdc">
       <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Two-Player-Snake-main/snake_game.srcs/constrs_1/new/Snake_Constr.xdc"/>
+        <Attr Name="ImportTime" Val="1731521296"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
       </FileInfo>
@@ -177,9 +214,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>
