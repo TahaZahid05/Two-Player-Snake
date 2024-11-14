@@ -1,0 +1,100 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
+| Date         : Thu Nov 14 20:43:07 2024
+| Host         : Taha running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file Master_Game_control_sets_placed.rpt
+| Design       : Master_Game
+| Device       : xc7a35t
+----------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    22 |
+|    Minimum number of control sets                        |    22 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    99 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    22 |
+| >= 0 to < 4        |     6 |
+| >= 4 to < 6        |     4 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     4 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     2 |
+| >= 16              |     3 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              32 |           17 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              56 |           22 |
+| Yes          | No                    | No                     |              47 |           17 |
+| Yes          | No                    | Yes                    |               5 |            3 |
+| Yes          | Yes                   | No                     |             609 |          168 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-------------------------------+---------------------------------------------------+--------------------------------------------+------------------+----------------+--------------+
+|          Clock Signal         |                   Enable Signal                   |              Set/Reset Signal              | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------------------+---------------------------------------------------+--------------------------------------------+------------------+----------------+--------------+
+|  CLK_IBUF_BUFG                |                                                   | vgai/vga/CounterTo799/count_value_reg[5]_0 |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                |                                                   | vgai/vga/CounterTo520/count_value_reg[9]_1 |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/db_data/Iv_i_1__0_n_0           |                                            |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/db_clk/clear                    |                                            |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/db_data/O_i_1__0_n_0            |                                            |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/db_clk/O_i_1_n_0                |                                            |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                |                                                   | keyboard_receiver/db_clk/clear             |                1 |              4 |         4.00 |
+| ~keyboard_receiver/db_clk/clk | keyboard_receiver/cnt                             | keyboard_receiver/cnt[3]_i_1_n_0           |                1 |              4 |         4.00 |
+|  CLK_IBUF_BUFG                | msm/E[0]                                          | BTNC_reg_n_0                               |                3 |              5 |         1.67 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/db_data/count[4]_i_1_n_0        | keyboard_receiver/db_data/Iv_i_1__0_n_0    |                2 |              5 |         2.50 |
+|  CLK_IBUF_BUFG                | nsm1/E[0]                                         |                                            |                4 |              7 |         1.75 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/keycode[7]_i_1_n_0              |                                            |                1 |              8 |         8.00 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/FSM_sequential_state_snake_reg[0][0] |                                            |                2 |              8 |         4.00 |
+|  CLK_IBUF_BUFG                |                                                   | keyboard_receiver/oflag_reg_0              |                5 |              9 |         1.80 |
+| ~keyboard_receiver/db_clk/clk |                                                   |                                            |                3 |              9 |         3.00 |
+|  CLK_IBUF_BUFG                | vgai/vga/CounterTo3/CounterTo4Trigger             |                                            |                2 |             10 |         5.00 |
+|  CLK_IBUF_BUFG                | vgai/vga/CounterTo799/TrigSecondCounter           |                                            |                4 |             10 |         2.50 |
+|  CLK_IBUF_BUFG                |                                                   | vgai/vga/CounterTo799/SR[0]                |                6 |             15 |         2.50 |
+|  CLK_IBUF_BUFG                | tg/horizontal_shift_reg                           | tg/vertical_shift_reg[6]_i_1_n_0           |                4 |             15 |         3.75 |
+|  CLK_IBUF_BUFG                |                                                   |                                            |               14 |             23 |         1.64 |
+|  CLK_IBUF_BUFG                |                                                   | BTNC_reg_n_0                               |                8 |             26 |         3.25 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/E[0]                                 | s1/moveSnake/SR[0]                         |              161 |            585 |         3.63 |
++-------------------------------+---------------------------------------------------+--------------------------------------------+------------------+----------------+--------------+
+
+
