@@ -5,6 +5,7 @@ module Snake_control(
     input [3:0] score,
     input [1:0] state_master,
     input [1:0] state_navigation,
+    input [1:0] state_navigation_2,
     input [14:0] target_address,
     input [18:0] pixel_address,
     output [11:0] COLOUR_OUT,
@@ -53,6 +54,9 @@ module Snake_control(
     reg [7:0] SnakeState_X [0:SnakeLength-1];
     reg [6:0] SnakeState_Y [0:SnakeLength-1];
     
+    reg [7:0] SnakeState_X_2 [0:SnakeLength-1];
+    reg [6:0] SnakeState_Y_2 [0:SnakeLength-1];
+    
     //Create snake pixels
     genvar PixNo;
     generate
@@ -62,14 +66,20 @@ module Snake_control(
                 if (counter == 5000000) begin
                     SnakeState_X[PixNo + 1] <= SnakeState_X[PixNo];
                     SnakeState_Y[PixNo + 1] <= SnakeState_Y[PixNo];
+                    SnakeState_X_2[PixNo+1] <= SnakeState_X_2[PixNo];
+                    SnakeState_Y_2[PixNo+1] <= SnakeState_Y_2[PixNo];
                 end
                 else if(RESET) begin
                     SnakeState_X[PixNo + 1] <= 80;
                     SnakeState_Y[PixNo + 1] <= 100;
+                    SnakeState_X_2[PixNo + 1] <= 150;
+                    SnakeState_Y_2[PixNo + 1] <= 50;
                 end
             end
         end
     endgenerate
+    
+    
     
     //Determine next position of snake
     always@(posedge CLK) begin
@@ -103,11 +113,41 @@ module Snake_control(
                         SnakeState_X[0] <= SnakeState_X[0] - 1;
                 end
             endcase
+            case(state_navigation_2)
+                2'd0: begin
+                    if (SnakeState_X_2[0] == MaxX)
+                        SnakeState_X_2[0] <= 0;
+                    else
+                        SnakeState_X_2[0] <= SnakeState_X_2[0] + 1;
+                end
+                
+                2'd1: begin
+                    if (SnakeState_Y_2[0] == MaxY)
+                        SnakeState_Y_2[0] <= 0;
+                    else
+                        SnakeState_Y_2[0] <= SnakeState_Y_2[0] + 1;
+                end
+                
+                2'd2: begin
+                    if (SnakeState_Y_2[0] == 0)
+                        SnakeState_Y_2[0] <= MaxY;
+                    else
+                        SnakeState_Y_2[0] <= SnakeState_Y_2[0] - 1;
+                end
+                
+                2'd3: begin
+                    if (SnakeState_X_2[0] == 0)
+                        SnakeState_X_2[0] <= MaxX;
+                    else
+                        SnakeState_X_2[0] <= SnakeState_X_2[0] - 1;
+                end
+            endcase
         end
     end    
     
     always@(posedge CLK) begin
-        if (SnakeState_X[0] == target_horizontal_addr[7:0] && SnakeState_Y[0] == target_vertical_addr[6:0])
+        if ((SnakeState_X[0] == target_horizontal_addr[7:0] && SnakeState_Y[0] == target_vertical_addr[6:0]) |
+            (SnakeState_X_2[0] == target_horizontal_addr[7:0] && SnakeState_Y_2[0] == target_vertical_addr[6:0]))
             reached <= 1'b1;
         else
             reached <= 1'b0;
@@ -427,6 +467,320 @@ module Snake_control(
                 if (score >= 5'd9) begin
                     colour <= 12'h0f0;
                     if (SnakeState_X[0] == SnakeState_X[39] && SnakeState_Y[0] == SnakeState_Y[39])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[0] == horizontal_addr[9:2] && SnakeState_Y_2[0] == vertical_addr[8:2]) begin
+                if (score >= 5'd0) begin
+                    colour <= 12'h00f;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[1] == horizontal_addr[9:2] && SnakeState_Y_2[1] == vertical_addr[8:2]) begin
+                if (score >= 5'd0) begin
+                    colour <= 12'h00f;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[2] == horizontal_addr[9:2] && SnakeState_Y_2[2] == vertical_addr[8:2]) begin
+                if (score >= 5'd0) begin
+                    colour <= 12'h00f;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[3] == horizontal_addr[9:2] && SnakeState_Y_2[3] == vertical_addr[8:2]) begin
+                if (score >= 5'd1) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[4] == horizontal_addr[9:2] && SnakeState_Y_2[4] == vertical_addr[8:2]) begin
+                if (score >= 5'd1) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[5] == horizontal_addr[9:2] && SnakeState_Y_2[5] == vertical_addr[8:2]) begin
+                if (score >= 5'd1) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[6] == horizontal_addr[9:2] && SnakeState_Y_2[6] == vertical_addr[8:2]) begin
+                if (score >= 5'd1) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[7] == horizontal_addr[9:2] && SnakeState_Y_2[7] == vertical_addr[8:2]) begin
+                if (score >= 5'd1) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[8] == horizontal_addr[9:2] && SnakeState_Y_2[8] == vertical_addr[8:2]) begin
+                if (score >= 5'd2) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[9] == horizontal_addr[9:2] && SnakeState_Y_2[9] == vertical_addr[8:2]) begin
+                if (score >= 5'd2) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[10] == horizontal_addr[9:2] && SnakeState_Y_2[10] == vertical_addr[8:2]) begin
+                if (score >= 5'd2) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[11] == horizontal_addr[9:2] && SnakeState_Y_2[11] == vertical_addr[8:2]) begin
+                if (score >= 5'd2) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[12] == horizontal_addr[9:2] && SnakeState_Y_2[12] == vertical_addr[8:2]) begin
+                if (score >= 5'd3) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[13] == horizontal_addr[9:2] && SnakeState_Y_2[13] == vertical_addr[8:2]) begin
+                if (score >= 5'd3) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[14] == horizontal_addr[9:2] && SnakeState_Y_2[14] == vertical_addr[8:2]) begin
+                if (score >= 5'd3) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[15] == horizontal_addr[9:2] && SnakeState_Y_2[15] == vertical_addr[8:2]) begin
+                if (score >= 5'd3) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[16] == horizontal_addr[9:2] && SnakeState_Y_2[16] == vertical_addr[8:2]) begin
+                if (score >= 5'd4) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[17] == horizontal_addr[9:2] && SnakeState_Y_2[17] == vertical_addr[8:2]) begin
+                if (score >= 5'd4) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[18] == horizontal_addr[9:2] && SnakeState_Y_2[18] == vertical_addr[8:2]) begin
+                if (score >= 5'd4) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[19] == horizontal_addr[9:2] && SnakeState_Y_2[19] == vertical_addr[8:2]) begin
+                if (score >= 5'd4) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[20] == horizontal_addr[9:2] && SnakeState_Y_2[20] == vertical_addr[8:2]) begin
+                if (score >= 5'd5) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[21] == horizontal_addr[9:2] && SnakeState_Y_2[21] == vertical_addr[8:2]) begin
+                if (score >= 5'd5) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[22] == horizontal_addr[9:2] && SnakeState_Y_2[22] == vertical_addr[8:2]) begin
+                if (score >= 5'd5) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[23] == horizontal_addr[9:2] && SnakeState_Y_2[23] == vertical_addr[8:2]) begin
+                if (score >= 5'd5) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[24] == horizontal_addr[9:2] && SnakeState_Y_2[24] == vertical_addr[8:2]) begin
+                if (score >= 5'd6) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[25] == horizontal_addr[9:2] && SnakeState_Y_2[25] == vertical_addr[8:2]) begin
+                if (score >= 5'd6) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[26] == horizontal_addr[9:2] && SnakeState_Y_2[26] == vertical_addr[8:2]) begin
+                if (score >= 5'd6) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[27] == horizontal_addr[9:2] && SnakeState_Y_2[27] == vertical_addr[8:2]) begin
+                if (score >= 5'd6) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[28] == horizontal_addr[9:2] && SnakeState_Y_2[28] == vertical_addr[8:2]) begin
+                if (score >= 5'd7) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[29] == horizontal_addr[9:2] && SnakeState_Y_2[29] == vertical_addr[8:2]) begin
+                if (score >= 5'd7) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[30] == horizontal_addr[9:2] && SnakeState_Y_2[30] == vertical_addr[8:2]) begin
+                if (score >= 5'd7) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[31] == horizontal_addr[9:2] && SnakeState_Y_2[31] == vertical_addr[8:2]) begin
+                if (score >= 5'd7) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[32] == horizontal_addr[9:2] && SnakeState_Y_2[32] == vertical_addr[8:2]) begin
+                if (score >= 5'd8) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[33] == horizontal_addr[9:2] && SnakeState_Y_2[33] == vertical_addr[8:2]) begin
+                if (score >= 5'd8) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[34] == horizontal_addr[9:2] && SnakeState_Y_2[34] == vertical_addr[8:2]) begin
+                if (score >= 5'd8) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[35] == horizontal_addr[9:2] && SnakeState_Y_2[35] == vertical_addr[8:2]) begin
+                if (score >= 5'd8) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[35] && SnakeState_Y_2[0] == SnakeState_Y_2[35])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[36] == horizontal_addr[9:2] && SnakeState_Y_2[36] == vertical_addr[8:2]) begin
+                if (score >= 5'd9) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[36] && SnakeState_Y_2[0] == SnakeState_Y_2[36])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[37] == horizontal_addr[9:2] && SnakeState_Y_2[37] == vertical_addr[8:2]) begin
+                if (score >= 5'd9) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[37] && SnakeState_Y_2[0] == SnakeState_Y_2[37])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[38] == horizontal_addr[9:2] && SnakeState_Y_2[38] == vertical_addr[8:2]) begin
+                if (score >= 5'd9) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[38] && SnakeState_Y_2[0] == SnakeState_Y_2[38])
+                        crashed <= 1'b1; else crashed <= 1'b0;
+                end else
+                    colour <= 12'h000;
+            end
+            else if (SnakeState_X_2[39] == horizontal_addr[9:2] && SnakeState_Y_2[39] == vertical_addr[8:2]) begin
+                if (score >= 5'd9) begin
+                    colour <= 12'h00f;
+                    if (SnakeState_X_2[0] == SnakeState_X_2[39] && SnakeState_Y_2[0] == SnakeState_Y_2[39])
                         crashed <= 1'b1; else crashed <= 1'b0;
                 end else
                     colour <= 12'h000;

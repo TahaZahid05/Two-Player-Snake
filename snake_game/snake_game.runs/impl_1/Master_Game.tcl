@@ -136,7 +136,7 @@ OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/Master_Game.dcp}}
 OPTRACE "read constraints: implementation" START { }
-  read_xdc C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/constrs_1/new/Snake_Constr.xdc
+  read_xdc {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc}}
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }

@@ -106,6 +106,7 @@ module Master_Game(
                         .score(score),
                         .state_master(state_master),
                         .state_navigation(state_navigation),
+                        .state_navigation_2(state_navigation_2),
                         .target_address(target_address),
                         .pixel_address(address),
                         .COLOUR_OUT(colour),

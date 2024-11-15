@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date             : Thu Nov 14 20:43:32 2024
+| Date             : Fri Nov 15 16:50:24 2024
 | Host             : Taha running 64-bit major release  (build 9200)
 | Command          : report_power -file Master_Game_power_routed.rpt -pb Master_Game_power_summary_routed.pb -rpx Master_Game_power_routed.rpx
 | Design           : Master_Game
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.991        |
+| Total On-Chip Power (W)  | 1.320        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.917        |
-| Device Static (W)        | 0.074        |
+| Dynamic (W)              | 1.246        |
+| Device Static (W)        | 0.075        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 80.0         |
-| Junction Temperature (C) | 30.0         |
+| Max Ambient (C)          | 78.4         |
+| Junction Temperature (C) | 31.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,17 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.443 |     1772 |       --- |             --- |
-|   LUT as Logic |     0.395 |      867 |     20800 |            4.17 |
-|   Register     |     0.027 |      749 |     41600 |            1.80 |
+| Slice Logic    |     0.586 |     3003 |       --- |             --- |
+|   LUT as Logic |     0.537 |     1460 |     20800 |            7.02 |
+|   Register     |     0.027 |     1351 |     41600 |            3.25 |
 |   CARRY4       |     0.015 |       10 |      8150 |            0.12 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   F7/F8 Muxes  |    <0.001 |        2 |     32600 |           <0.01 |
-|   Others       |     0.000 |       22 |       --- |             --- |
-| Signals        |     0.384 |     1647 |       --- |             --- |
-| I/O            |     0.090 |       17 |       106 |           16.04 |
-| Static Power   |     0.074 |          |           |                 |
-| Total          |     0.991 |          |           |                 |
+|   F7/F8 Muxes  |    <0.001 |        5 |     32600 |            0.02 |
+|   Others       |     0.000 |       24 |       --- |             --- |
+| Signals        |     0.555 |     2858 |       --- |             --- |
+| I/O            |     0.105 |       17 |       106 |           16.04 |
+| Static Power   |     0.075 |          |           |                 |
+| Total          |     1.320 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,9 +72,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.851 |       0.839 |      0.011 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     1.165 |       1.153 |      0.012 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.016 |       0.003 |      0.013 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.023 |       0.022 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.027 |       0.026 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -139,18 +139,18 @@ Table of Contents
 +---------------------+-----------+
 | Name                | Power (W) |
 +---------------------+-----------+
-| Master_Game         |     0.917 |
-|   keyboard_receiver |     0.299 |
-|     db_clk          |     0.060 |
-|     db_data         |     0.070 |
-|   s1                |     0.257 |
-|     moveSnake       |     0.221 |
-|   tg                |     0.008 |
-|   vgai              |     0.195 |
-|     vga             |     0.195 |
-|       CounterTo3    |     0.070 |
-|       CounterTo520  |     0.002 |
-|       CounterTo799  |     0.044 |
+| Master_Game         |     1.246 |
+|   keyboard_receiver |     0.290 |
+|     db_clk          |     0.055 |
+|     db_data         |     0.066 |
+|   s1                |     0.466 |
+|     moveSnake       |     0.353 |
+|   tg                |     0.002 |
+|   vgai              |     0.294 |
+|     vga             |     0.294 |
+|       CounterTo3    |     0.067 |
+|       CounterTo520  |     0.004 |
+|       CounterTo799  |     0.048 |
 +---------------------+-----------+
 
 

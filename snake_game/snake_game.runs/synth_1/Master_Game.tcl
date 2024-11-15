@@ -85,17 +85,17 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Generic_counter.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Master_State_Machine.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Navigation_State_Machine.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/PS2Receiver.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Score_Counter.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Snake_control.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Target_Generator.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Driver.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/VGA_Interface.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/debouncer.v
-  C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/sources_1/new/Master_Game.v
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v}
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -106,8 +106,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/constrs_1/new/Snake_Constr.xdc
-set_property used_in_implementation false [get_files C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game.srcs/constrs_1/new/Snake_Constr.xdc]
+read_xdc {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc}}
+set_property used_in_implementation false [get_files {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc}}]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
