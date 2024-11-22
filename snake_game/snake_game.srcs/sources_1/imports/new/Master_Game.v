@@ -9,19 +9,21 @@ module Master_Game(
         output VS
     );
     
-    wire [5:0] score;
+//    wire [5:0] score;
+    wire [5:0] score_snake_one;
+    wire [5:0] score_snake_two;
     wire [1:0] state_master;
     wire [1:0] state_navigation;
     wire [1:0] state_navigation_2;
     wire [14:0] target_address;
+    wire [14:0] poison_address;
     wire [18:0] address;
-//    wire [18:0] address_2;
     wire [11:0] colour;
-//    wire [11:0] colour_2;
     wire fail;
-//    wire fail_2;
-    wire reached_target;
-//    wire reached_target_2;
+    wire reached_target_one;
+    wire reached_target_two;
+    wire reached_poison_one;
+    wire reached_poison_two;
     wire reset;
     wire [15:0] keycode;
     wire flag;
@@ -75,7 +77,7 @@ module Master_Game(
                                     .BTND_2(BTND_2),
                                     .BTNL_2(BTNL_2),
                                     .BTNR_2(BTNR_2),
-                                    .SCORE(score),
+                                    .SCORE(score_snake_one + score_snake_two),
                                     .fail(fail),
                                     .STATE(state_master)
                                 );
@@ -103,14 +105,19 @@ module Master_Game(
     Snake_control s1 (
                         .CLK(CLK),
                         .RESET(BTNC),
-                        .score(score),
+                        .score_snake_one(score_snake_one),
+                        .score_snake_two(score_snake_two),
                         .state_master(state_master),
                         .state_navigation(state_navigation),
                         .state_navigation_2(state_navigation_2),
                         .target_address(target_address),
+                        .poison_address(poison_address),
                         .pixel_address(address),
                         .COLOUR_OUT(colour),
-                        .reached_target(reached_target),
+                        .reached_target_one(reached_target_one),
+                        .reached_target_two(reached_target_two),
+                        .reached_poison_one(reached_poison_one),
+                        .reached_poison_two(reached_poison_two),
                         .fail(fail)
                     );
                     
@@ -131,9 +138,18 @@ module Master_Game(
     Target_Generator tg (
                             .CLK(CLK),
                             .RESET(BTNC),
-                            .reached_target(reached_target),
-                            .rand_target_address(target_address)
+                            .reached_target(reached_target_one | reached_target_two),
+                            .reached_poison(reached_poison_one | reached_poison_two),
+                            .rand_target_address(target_address),
+                            .rand_poison_address(poison_address)
                         );
+                        
+//    Target_Generator pg (
+//                            .CLK(CLK),
+//                            .RESET(BTNC),
+//                            .reached_target(reached_poison_one | reached_poison_two),
+//                            .rand_target_address(poison_address)
+//                        );
     
     VGA_Interface vgai  (
                             .CLK(CLK),
@@ -147,9 +163,19 @@ module Master_Game(
     Score_Counter sc    (
                             .CLK(CLK),
                             .RESET(BTNC),
-                            .reached_target(reached_target),
+                            .reached_target(reached_target_one),
+                            .reached_poison(reached_poison_one),
                             .master_state(state_master),
-                            .SCORE(score)
+                            .SCORE(score_snake_one)
+                        );
+                        
+    Score_Counter sc2    (
+                            .CLK(CLK),
+                            .RESET(BTNC),
+                            .reached_target(reached_target_two),
+                            .reached_poison(reached_poison_two),
+                            .master_state(state_master),
+                            .SCORE(score_snake_two)
                         );
     
 endmodule
