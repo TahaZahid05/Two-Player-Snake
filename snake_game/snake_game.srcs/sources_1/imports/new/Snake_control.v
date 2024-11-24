@@ -10,6 +10,10 @@ module Snake_control(
     input [14:0] target_address,
     input [14:0] poison_address,
     input [18:0] pixel_address,
+    input [3:0] second_counter_units,
+    input [2:0] second_counter_tens,
+    input [3:0] minute_counter_units,
+    input [2:0] minute_counter_tens,
     output [11:0] COLOUR_OUT,
     output reached_target_one,
     output reached_target_two,
@@ -17,11 +21,6 @@ module Snake_control(
     output reached_poison_two,
     output fail
     );
-    reg [3:0] score;
-    initial
-    begin
-    score <= score_snake_one + score_snake_two;
-    end
     wire [25:0] counter;
     reg crashed;
     reg [11:0] colour;
@@ -65,7 +64,7 @@ module Snake_control(
     assign COLOUR_OUT = colour;
     parameter MaxY = 120;
     parameter MaxX = 160;    
-    parameter SnakeLength = 40;
+    parameter SnakeLength = 27;
     
     reg [7:0] SnakeState_X [0:SnakeLength-1];
     reg [6:0] SnakeState_Y [0:SnakeLength-1];
@@ -180,714 +179,395 @@ module Snake_control(
         end
     end
     
-    always@(posedge CLK) begin
-        if (state_master == 2'd1) begin //PLAY
-            if (target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) //Seed address
-                colour <= 12'h00f;
-            else if (poison_horizontal_addr[7:0] == horizontal_addr[9:2] && poison_vertical_addr[6:0] == vertical_addr[8:2])
-                colour <= 12'h0f0;
-			else if (SnakeState_X[0] == horizontal_addr[9:2] && SnakeState_Y[0] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd0) begin
-                    colour <= 12'h0f0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[1] == horizontal_addr[9:2] && SnakeState_Y[1] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd0) begin
-                    colour <= 12'h0f0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[2] == horizontal_addr[9:2] && SnakeState_Y[2] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd0) begin
-                    colour <= 12'h0f0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[3] == horizontal_addr[9:2] && SnakeState_Y[3] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd1) begin
-                    colour <= 12'h0f0;
-                    if (SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3])
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[4] == horizontal_addr[9:2] && SnakeState_Y[4] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd1) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[5] == horizontal_addr[9:2] && SnakeState_Y[5] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd1) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[6] == horizontal_addr[9:2] && SnakeState_Y[6] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd1) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[7] == horizontal_addr[9:2] && SnakeState_Y[7] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd1) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[8] == horizontal_addr[9:2] && SnakeState_Y[8] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd2) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[9] == horizontal_addr[9:2] && SnakeState_Y[9] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd2) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[10] == horizontal_addr[9:2] && SnakeState_Y[10] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd2) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[11] == horizontal_addr[9:2] && SnakeState_Y[11] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd2) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[12] == horizontal_addr[9:2] && SnakeState_Y[12] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd3) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[13] == horizontal_addr[9:2] && SnakeState_Y[13] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd3) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[14] == horizontal_addr[9:2] && SnakeState_Y[14] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd3) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[15] == horizontal_addr[9:2] && SnakeState_Y[15] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd3) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[16] == horizontal_addr[9:2] && SnakeState_Y[16] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd4) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[17] == horizontal_addr[9:2] && SnakeState_Y[17] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd4) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[18] == horizontal_addr[9:2] && SnakeState_Y[18] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd4) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[19] == horizontal_addr[9:2] && SnakeState_Y[19] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd4) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[20] == horizontal_addr[9:2] && SnakeState_Y[20] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd5) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[21] == horizontal_addr[9:2] && SnakeState_Y[21] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd5) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[22] == horizontal_addr[9:2] && SnakeState_Y[22] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd5) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[23] == horizontal_addr[9:2] && SnakeState_Y[23] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd5) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[24] == horizontal_addr[9:2] && SnakeState_Y[24] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd6) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[25] == horizontal_addr[9:2] && SnakeState_Y[25] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd6) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[26] == horizontal_addr[9:2] && SnakeState_Y[26] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd6) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[27] == horizontal_addr[9:2] && SnakeState_Y[27] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd6) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[28] == horizontal_addr[9:2] && SnakeState_Y[28] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd7) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[29] == horizontal_addr[9:2] && SnakeState_Y[29] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd7) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[30] == horizontal_addr[9:2] && SnakeState_Y[30] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd7) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[31] == horizontal_addr[9:2] && SnakeState_Y[31] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd7) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]))   
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[32] == horizontal_addr[9:2] && SnakeState_Y[32] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd8) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[33] == horizontal_addr[9:2] && SnakeState_Y[33] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd8) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[34] == horizontal_addr[9:2] && SnakeState_Y[34] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd8) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]) | (SnakeState_X[0] == SnakeState_X[34] && SnakeState_Y[0] == SnakeState_Y[34]))   
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[35] == horizontal_addr[9:2] && SnakeState_Y[35] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd8) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]) | (SnakeState_X[0] == SnakeState_X[34] && SnakeState_Y[0] == SnakeState_Y[34]) | (SnakeState_X[0] == SnakeState_X[35] && SnakeState_Y[0] == SnakeState_Y[35]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[36] == horizontal_addr[9:2] && SnakeState_Y[36] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd9) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]) | (SnakeState_X[0] == SnakeState_X[34] && SnakeState_Y[0] == SnakeState_Y[34]) | (SnakeState_X[0] == SnakeState_X[35] && SnakeState_Y[0] == SnakeState_Y[35]) | (SnakeState_X[0] == SnakeState_X[36] && SnakeState_Y[0] == SnakeState_Y[36])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[37] == horizontal_addr[9:2] && SnakeState_Y[37] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd9) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]) | (SnakeState_X[0] == SnakeState_X[34] && SnakeState_Y[0] == SnakeState_Y[34]) | (SnakeState_X[0] == SnakeState_X[35] && SnakeState_Y[0] == SnakeState_Y[35]) | (SnakeState_X[0] == SnakeState_X[36] && SnakeState_Y[0] == SnakeState_Y[36]) | (SnakeState_X[0] == SnakeState_X[37] && SnakeState_Y[0] == SnakeState_Y[37]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[38] == horizontal_addr[9:2] && SnakeState_Y[38] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd9) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]) | (SnakeState_X[0] == SnakeState_X[34] && SnakeState_Y[0] == SnakeState_Y[34]) | (SnakeState_X[0] == SnakeState_X[35] && SnakeState_Y[0] == SnakeState_Y[35]) | (SnakeState_X[0] == SnakeState_X[36] && SnakeState_Y[0] == SnakeState_Y[36]) | (SnakeState_X[0] == SnakeState_X[37] && SnakeState_Y[0] == SnakeState_Y[37]) | (SnakeState_X[0] == SnakeState_X[38] && SnakeState_Y[0] == SnakeState_Y[38])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X[39] == horizontal_addr[9:2] && SnakeState_Y[39] == vertical_addr[8:2]) begin
-                if (score_snake_one >= 5'd9) begin
-                    colour <= 12'h0f0;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]) | (SnakeState_X[0] == SnakeState_X[34] && SnakeState_Y[0] == SnakeState_Y[34]) | (SnakeState_X[0] == SnakeState_X[35] && SnakeState_Y[0] == SnakeState_Y[35]) | (SnakeState_X[0] == SnakeState_X[36] && SnakeState_Y[0] == SnakeState_Y[36]) | (SnakeState_X[0] == SnakeState_X[37] && SnakeState_Y[0] == SnakeState_Y[37]) | (SnakeState_X[0] == SnakeState_X[38] && SnakeState_Y[0] == SnakeState_Y[38]) | (SnakeState_X[0] == SnakeState_X[39] && SnakeState_Y[0] == SnakeState_Y[39]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[0] == horizontal_addr[9:2] && SnakeState_Y_2[0] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd0) begin
-                    colour <= 12'h00f;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[1] == horizontal_addr[9:2] && SnakeState_Y_2[1] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd0) begin
-                    colour <= 12'h00f;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[2] == horizontal_addr[9:2] && SnakeState_Y_2[2] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd0) begin
-                    colour <= 12'h00f;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[3] == horizontal_addr[9:2] && SnakeState_Y_2[3] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd1) begin
-                    colour <= 12'h00f;
-                    if (SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3])
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[4] == horizontal_addr[9:2] && SnakeState_Y_2[4] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd1) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[5] == horizontal_addr[9:2] && SnakeState_Y_2[5] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd1) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[6] == horizontal_addr[9:2] && SnakeState_Y_2[6] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd1) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[7] == horizontal_addr[9:2] && SnakeState_Y_2[7] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd1) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[8] == horizontal_addr[9:2] && SnakeState_Y_2[8] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd2) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[9] == horizontal_addr[9:2] && SnakeState_Y_2[9] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd2) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[10] == horizontal_addr[9:2] && SnakeState_Y_2[10] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd2) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y[10]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[11] == horizontal_addr[9:2] && SnakeState_Y_2[11] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd2) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[12] == horizontal_addr[9:2] && SnakeState_Y_2[12] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd3) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[13] == horizontal_addr[9:2] && SnakeState_Y_2[13] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd3) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[14] == horizontal_addr[9:2] && SnakeState_Y_2[14] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd3) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[15] == horizontal_addr[9:2] && SnakeState_Y_2[15] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd3) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[16] == horizontal_addr[9:2] && SnakeState_Y_2[16] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd4) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[17] == horizontal_addr[9:2] && SnakeState_Y_2[17] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd4) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[18] == horizontal_addr[9:2] && SnakeState_Y_2[18] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd4) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[19] == horizontal_addr[9:2] && SnakeState_Y_2[19] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd4) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[20] == horizontal_addr[9:2] && SnakeState_Y_2[20] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd5) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[21] == horizontal_addr[9:2] && SnakeState_Y_2[21] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd5) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[22] == horizontal_addr[9:2] && SnakeState_Y_2[22] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd5) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[23] == horizontal_addr[9:2] && SnakeState_Y_2[23] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd5) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[24] == horizontal_addr[9:2] && SnakeState_Y_2[24] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd6) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y[24])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[25] == horizontal_addr[9:2] && SnakeState_Y_2[25] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd6) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[26] == horizontal_addr[9:2] && SnakeState_Y_2[26] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd6) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[27] == horizontal_addr[9:2] && SnakeState_Y_2[27] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd6) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[28] == horizontal_addr[9:2] && SnakeState_Y_2[28] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd7) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[29] == horizontal_addr[9:2] && SnakeState_Y_2[29] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd7) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[30] == horizontal_addr[9:2] && SnakeState_Y_2[30] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd7) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[31] == horizontal_addr[9:2] && SnakeState_Y_2[31] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd7) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]))   
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[32] == horizontal_addr[9:2] && SnakeState_Y_2[32] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd8) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[33] == horizontal_addr[9:2] && SnakeState_Y_2[33] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd8) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X[0] == SnakeState_X[3] && SnakeState_Y[0] == SnakeState_Y[3]) | (SnakeState_X[0] == SnakeState_X[4] && SnakeState_Y[0] == SnakeState_Y[4]) | (SnakeState_X[0] == SnakeState_X[5] && SnakeState_Y[0] == SnakeState_Y[5]) |  (SnakeState_X[0] == SnakeState_X[6] && SnakeState_Y[0] == SnakeState_Y[6]) | (SnakeState_X[0] == SnakeState_X[7] && SnakeState_Y[0] == SnakeState_Y[7]) | (SnakeState_X[0] == SnakeState_X[8] && SnakeState_Y[0] == SnakeState_Y[8]) | (SnakeState_X[0] == SnakeState_X[9] && SnakeState_Y[0] == SnakeState_Y[9]) | (SnakeState_X[0] == SnakeState_X[10] && SnakeState_Y[0] == SnakeState_Y[10]) | (SnakeState_X[0] == SnakeState_X[11] && SnakeState_Y[0] == SnakeState_Y[11]) | (SnakeState_X[0] == SnakeState_X[12] && SnakeState_Y[0] == SnakeState_Y[12]) | (SnakeState_X[0] == SnakeState_X[13] && SnakeState_Y[0] == SnakeState_Y[13]) | (SnakeState_X[0] == SnakeState_X[14] && SnakeState_Y[0] == SnakeState_Y[14]) | (SnakeState_X[0] == SnakeState_X[15] && SnakeState_Y[0] == SnakeState_Y[15]) | (SnakeState_X[0] == SnakeState_X[16] && SnakeState_Y[0] == SnakeState_Y[16]) | (SnakeState_X[0] == SnakeState_X[17] && SnakeState_Y[0] == SnakeState_Y[17]) | (SnakeState_X[0] == SnakeState_X[18] && SnakeState_Y[0] == SnakeState_Y[18]) | (SnakeState_X[0] == SnakeState_X[19] && SnakeState_Y[0] == SnakeState_Y[19]) | (SnakeState_X[0] == SnakeState_X[20] && SnakeState_Y[0] == SnakeState_Y[20]) | (SnakeState_X[0] == SnakeState_X[21] && SnakeState_Y[0] == SnakeState_Y[21]) | (SnakeState_X[0] == SnakeState_X[22] && SnakeState_Y[0] == SnakeState_Y[22]) | (SnakeState_X[0] == SnakeState_X[23] && SnakeState_Y[0] == SnakeState_Y[23]) | (SnakeState_X[0] == SnakeState_X[24] && SnakeState_Y[0] == SnakeState_Y[24]) | (SnakeState_X[0] == SnakeState_X[25] && SnakeState_Y[0] == SnakeState_Y[25]) | (SnakeState_X[0] == SnakeState_X[26] && SnakeState_Y[0] == SnakeState_Y[26]) | (SnakeState_X[0] == SnakeState_X[27] && SnakeState_Y[0] == SnakeState_Y[27]) | (SnakeState_X[0] == SnakeState_X[28] && SnakeState_Y[0] == SnakeState_Y[28]) | (SnakeState_X[0] == SnakeState_X[29] && SnakeState_Y[0] == SnakeState_Y[29]) | (SnakeState_X[0] == SnakeState_X[30] && SnakeState_Y[0] == SnakeState_Y[30]) | (SnakeState_X[0] == SnakeState_X[31] && SnakeState_Y[0] == SnakeState_Y[31]) | (SnakeState_X[0] == SnakeState_X[32] && SnakeState_Y[0] == SnakeState_Y[32]) | (SnakeState_X[0] == SnakeState_X[33] && SnakeState_Y[0] == SnakeState_Y[33]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[34] == horizontal_addr[9:2] && SnakeState_Y_2[34] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd8) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]) | (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33]) | (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[35] == horizontal_addr[9:2] && SnakeState_Y_2[35] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd8) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]) | (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33]) | (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34]) | (SnakeState_X_2[0] == SnakeState_X_2[35] && SnakeState_Y_2[0] == SnakeState_Y_2[35]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[36] == horizontal_addr[9:2] && SnakeState_Y_2[36] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd9) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]) | (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33]) | (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34]) | (SnakeState_X_2[0] == SnakeState_X_2[35] && SnakeState_Y_2[0] == SnakeState_Y_2[35]) | (SnakeState_X_2[0] == SnakeState_X_2[36] && SnakeState_Y_2[0] == SnakeState_Y_2[36])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[37] == horizontal_addr[9:2] && SnakeState_Y_2[37] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd9) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]) | (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33]) | (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34]) | (SnakeState_X_2[0] == SnakeState_X_2[35] && SnakeState_Y_2[0] == SnakeState_Y_2[35]) | (SnakeState_X_2[0] == SnakeState_X_2[36] && SnakeState_Y_2[0] == SnakeState_Y_2[36]) | (SnakeState_X_2[0] == SnakeState_X_2[37] && SnakeState_Y_2[0] == SnakeState_Y_2[37]))  
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[38] == horizontal_addr[9:2] && SnakeState_Y_2[38] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd9) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]) | (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33]) | (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34]) | (SnakeState_X_2[0] == SnakeState_X_2[35] && SnakeState_Y_2[0] == SnakeState_Y_2[35]) | (SnakeState_X_2[0] == SnakeState_X_2[36] && SnakeState_Y_2[0] == SnakeState_Y_2[36]) | (SnakeState_X_2[0] == SnakeState_X_2[37] && SnakeState_Y_2[0] == SnakeState_Y_2[37]) | (SnakeState_X_2[0] == SnakeState_X_2[38] && SnakeState_Y_2[0] == SnakeState_Y_2[38])) 
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else if (SnakeState_X_2[39] == horizontal_addr[9:2] && SnakeState_Y_2[39] == vertical_addr[8:2]) begin
-                if (score_snake_two >= 5'd9) begin
-                    colour <= 12'h00f;
-                    if ((SnakeState_X_2[0] == SnakeState_X_2[3] && SnakeState_Y_2[0] == SnakeState_Y_2[3]) | (SnakeState_X_2[0] == SnakeState_X_2[4] && SnakeState_Y_2[0] == SnakeState_Y_2[4]) | (SnakeState_X_2[0] == SnakeState_X_2[5] && SnakeState_Y_2[0] == SnakeState_Y_2[5]) |  (SnakeState_X_2[0] == SnakeState_X_2[6] && SnakeState_Y_2[0] == SnakeState_Y_2[6]) | (SnakeState_X_2[0] == SnakeState_X_2[7] && SnakeState_Y_2[0] == SnakeState_Y_2[7]) | (SnakeState_X_2[0] == SnakeState_X_2[8] && SnakeState_Y_2[0] == SnakeState_Y_2[8]) | (SnakeState_X_2[0] == SnakeState_X_2[9] && SnakeState_Y_2[0] == SnakeState_Y_2[9]) | (SnakeState_X_2[0] == SnakeState_X_2[10] && SnakeState_Y_2[0] == SnakeState_Y_2[10]) | (SnakeState_X_2[0] == SnakeState_X_2[11] && SnakeState_Y_2[0] == SnakeState_Y_2[11]) | (SnakeState_X_2[0] == SnakeState_X_2[12] && SnakeState_Y_2[0] == SnakeState_Y_2[12]) | (SnakeState_X_2[0] == SnakeState_X_2[13] && SnakeState_Y_2[0] == SnakeState_Y_2[13]) | (SnakeState_X_2[0] == SnakeState_X_2[14] && SnakeState_Y_2[0] == SnakeState_Y_2[14]) | (SnakeState_X_2[0] == SnakeState_X_2[15] && SnakeState_Y_2[0] == SnakeState_Y_2[15]) | (SnakeState_X_2[0] == SnakeState_X_2[16] && SnakeState_Y_2[0] == SnakeState_Y_2[16]) | (SnakeState_X_2[0] == SnakeState_X_2[17] && SnakeState_Y_2[0] == SnakeState_Y_2[17]) | (SnakeState_X_2[0] == SnakeState_X_2[18] && SnakeState_Y_2[0] == SnakeState_Y_2[18]) | (SnakeState_X_2[0] == SnakeState_X_2[19] && SnakeState_Y_2[0] == SnakeState_Y_2[19]) | (SnakeState_X_2[0] == SnakeState_X_2[20] && SnakeState_Y_2[0] == SnakeState_Y_2[20]) | (SnakeState_X_2[0] == SnakeState_X_2[21] && SnakeState_Y_2[0] == SnakeState_Y_2[21]) | (SnakeState_X_2[0] == SnakeState_X_2[22] && SnakeState_Y_2[0] == SnakeState_Y_2[22]) | (SnakeState_X_2[0] == SnakeState_X_2[23] && SnakeState_Y_2[0] == SnakeState_Y_2[23]) | (SnakeState_X_2[0] == SnakeState_X_2[24] && SnakeState_Y_2[0] == SnakeState_Y_2[24]) | (SnakeState_X_2[0] == SnakeState_X_2[25] && SnakeState_Y_2[0] == SnakeState_Y_2[25]) | (SnakeState_X_2[0] == SnakeState_X_2[26] && SnakeState_Y_2[0] == SnakeState_Y_2[26]) | (SnakeState_X_2[0] == SnakeState_X_2[27] && SnakeState_Y_2[0] == SnakeState_Y_2[27]) | (SnakeState_X_2[0] == SnakeState_X_2[28] && SnakeState_Y_2[0] == SnakeState_Y_2[28]) | (SnakeState_X_2[0] == SnakeState_X_2[29] && SnakeState_Y_2[0] == SnakeState_Y_2[29]) | (SnakeState_X_2[0] == SnakeState_X_2[30] && SnakeState_Y_2[0] == SnakeState_Y_2[30]) | (SnakeState_X_2[0] == SnakeState_X_2[31] && SnakeState_Y_2[0] == SnakeState_Y_2[31]) | (SnakeState_X_2[0] == SnakeState_X_2[32] && SnakeState_Y_2[0] == SnakeState_Y_2[32]) | (SnakeState_X_2[0] == SnakeState_X_2[33] && SnakeState_Y_2[0] == SnakeState_Y_2[33]) | (SnakeState_X_2[0] == SnakeState_X_2[34] && SnakeState_Y_2[0] == SnakeState_Y_2[34]) | (SnakeState_X_2[0] == SnakeState_X_2[35] && SnakeState_Y_2[0] == SnakeState_Y_2[35]) | (SnakeState_X_2[0] == SnakeState_X_2[36] && SnakeState_Y_2[0] == SnakeState_Y_2[36]) | (SnakeState_X_2[0] == SnakeState_X_2[37] && SnakeState_Y_2[0] == SnakeState_Y_2[37]) | (SnakeState_X_2[0] == SnakeState_X_2[38] && SnakeState_Y_2[0] == SnakeState_Y_2[38]) | (SnakeState_X_2[0] == SnakeState_X_2[39] && SnakeState_Y_2[0] == SnakeState_Y_2[39]))
-                        crashed <= 1'b1; else crashed <= 1'b0;
-                end else
-                    colour <= 12'h000;
-            end
-            else begin //Background
-                colour <= 12'h000;
+        integer i;
+    integer j;
+
+    always @(posedge CLK) begin
+        if (state_master == 2'd1) begin // PLAY
+            colour <= 12'h000; // Default color
+            crashed <= 1'b0;
+
+            // Check for collisions between snake one and snake two
+            for (i = 0; i < 27; i = i + 1) begin
+                if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
+                    for (j = 0; j < 27; j = j + 1) begin
+                        if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
+                            // Check if snake one collides with snake two
+                            if ((SnakeState_X[i] == SnakeState_X_2[j]) && 
+                                (SnakeState_Y[i] == SnakeState_Y_2[j])) begin
+                                crashed <= 1'b1;
+                            end
+                            // Check if snake two collides with snake one
+                            if ((SnakeState_X_2[j] == SnakeState_X[i]) && 
+                                (SnakeState_Y_2[j] == SnakeState_Y[i])) begin
+                                crashed <= 1'b1;
+                            end
+                        end
+                    end
                 end
+            end
+
+            // Check for seed and poison addresses
+            if (target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) begin
+                colour <= 12'h00f; // Seed color
+            end else if (poison_horizontal_addr[7:0] == horizontal_addr[9:2] && poison_vertical_addr[6:0] == vertical_addr[8:2]) begin
+                colour <= 12'h0f0; // Poison color
+            end else begin
+                // Check for snake one segments
+                for (i = 0; i < 27; i = i + 1) begin
+                    if (SnakeState_X[i] == horizontal_addr[9:2] && SnakeState_Y[i] == vertical_addr[8:2]) begin
+                        if (score_snake_one >= (i / 3)) begin
+                            colour <= 12'h0f0; // Snake one color
+                            for (j = 3; j <= i; j = j + 1) begin
+                                if (SnakeState_X[0] == SnakeState_X[j] && SnakeState_Y[0] == SnakeState_Y[j]) begin
+                                    crashed <= 1'b1;
+                                end
+                            end
+                        end
+                    end
+                end
+
+                // Check for snake two segments
+                for (i = 0; i < 27; i = i + 1) begin
+                    if (SnakeState_X_2[i] == horizontal_addr[9:2] && SnakeState_Y_2[i] == vertical_addr[8:2]) begin
+                        if (score_snake_two >= (i / 3)) begin
+                            colour <= 12'h00f; // Snake two color
+                            for (j = 3; j <= i; j = j + 1) begin
+                                if (SnakeState_X_2[0] == SnakeState_X_2[j] && SnakeState_Y_2[0] == SnakeState_Y_2[j]) begin
+                                    crashed <= 1'b1;
+                                end
+                            end
+                        end
+                    end
+                end
+            end
             if ((horizontal_addr[9:2] >= 30 && horizontal_addr[9:2] <= 40) || (horizontal_addr[9:2] >= MaxX - 10 && horizontal_addr[9:2] <= MaxX) || (vertical_addr[8:2] >= 0 && vertical_addr[8:2] <= 10 && horizontal_addr[9:2] >= 30) || (vertical_addr[8:2] >= MaxY - 10 && vertical_addr[8:2] <= MaxY && horizontal_addr[9:2] >= 30))
                 colour <= 12'hf00; 
-            if (score_snake_one + score_snake_two == 5'd0) begin
+            if (score_snake_one + score_snake_two == 4'd0) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                     (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 57)) || // Top and bottom horizontal lines
+                        (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 57)) || // Top and bottom horizontal lines
                     ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                     (vertical_addr[8:2] > 47 && vertical_addr[8:2] < 57))) begin // Left and right vertical lines
+                        (vertical_addr[8:2] > 47 && vertical_addr[8:2] < 57))) begin // Left and right vertical lines
                     colour <= 12'h00f;
                 end
             end 
-            else if (score_snake_one + score_snake_two == 5'd2) begin
+            else if (score_snake_one + score_snake_two == 4'd1) begin
                 if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 50) || (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 49)
                     || (horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57)) begin
                     colour <= 12'h00f;
                 end
             end
-            else if (score_snake_one + score_snake_two == 5'd4) begin
+            else if (score_snake_one + score_snake_two == 4'd2) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                         ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 52)) || // Top right vertical
-                         ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom left vertical
+                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 52)) || // Top right vertical
+                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom left vertical
                     colour <= 12'h00f;
                 end
             end
 
-            else if (score_snake_one + score_snake_two == 5'd6) begin
+            else if (score_snake_one + score_snake_two == 4'd3) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                         (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] < 57)) begin // Right vertical line
+                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
+                            (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] < 57)) begin // Right vertical line
                     colour <= 12'h00f;
                 end  
             end
-            else if (score_snake_one + score_snake_two == 5'd8) begin
+            else if (score_snake_one + score_snake_two == 4'd4) begin
                 if (((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                          (vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 52)) || // Left and right vertical lines (top half)
-                         ((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 52)) || (horizontal_addr[9:2] == 12 &&
-                           vertical_addr[8:2] > 52 && vertical_addr[8:2] <= 58)) begin // Middle horizontal line
+                            (vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 52)) || // Left and right vertical lines (top half)
+                            ((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
+                            (vertical_addr[8:2] == 52)) || (horizontal_addr[9:2] == 12 &&
+                            vertical_addr[8:2] > 52 && vertical_addr[8:2] <= 58)) begin // Middle horizontal line
                     colour <= 12'h00f;
                 end
             end
-            else if (score_snake_one + score_snake_two == 5'd10) begin
+            else if (score_snake_one + score_snake_two == 4'd5) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                         ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 52)) || // Top left vertical
-                         ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom right vertical
+                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 52)) || // Top left vertical
+                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom right vertical
                     colour <= 12'h00f;
                 end
             end
-            else if (score_snake_one + score_snake_two == 5'd12) begin
+            else if (score_snake_one + score_snake_two == 4'd6) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                         ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57)) || // Left vertical line
-                         ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom right vertical
+                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57)) || // Left vertical line
+                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom right vertical
                     colour <= 12'h00f;
                 end
             end
-            else if (score_snake_one + score_snake_two == 5'd14) begin
+            else if (score_snake_one + score_snake_two == 4'd7) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 47)) || // Top horizontal line
-                         (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 57)) begin // Right vertical line
+                            (vertical_addr[8:2] == 47)) || // Top horizontal line
+                            (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 57)) begin // Right vertical line
                     colour <= 12'h00f;
                 end
             end
-            else if (score_snake_one + score_snake_two == 5'd16) begin
+            else if (score_snake_one + score_snake_two == 4'd8) begin
                 if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                          (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                         ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                          (vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57))) begin // Left and right vertical lines
+                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
+                            (vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57))) begin // Left and right vertical lines
                     colour <= 12'h00f;
                 end 
+            end
+            if (second_counter_units == 4'd0) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
+                    ((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
+                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
+                    colour <= 12'h00f;
+                end
+            end 
+            else if (second_counter_units == 4'd1) begin
+                if ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 25 && vertical_addr[8:2] == 79)
+                    || (horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_units == 4'd2) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 26 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
+                            ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
+                    colour <= 12'h00f;
+                end
+            end
+
+            else if (second_counter_units == 4'd3) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            (horizontal_addr[9:2] == 26 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
+                    colour <= 12'h00f;
+                end  
+            end
+            else if (second_counter_units == 4'd4) begin
+                if (((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
+                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
+                            ((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 26 &&
+                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_units == 4'd5) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
+                            ((horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_units == 4'd6) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) || // Left vertical line
+                            ((horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_units == 4'd7) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 77)) || // Top horizontal line
+                            (horizontal_addr[9:2] == 26 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 87)) begin // Right vertical line
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_units == 4'd8) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
+                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87))) begin // Left and right vertical lines
+                    colour <= 12'h00f;
+                end 
+            end
+            else if (second_counter_units == 4'd9) begin
+                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
+                    (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                    ((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
+                    (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
+                    (horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] <= 87)) begin // Right vertical line (bottom half)
+                    colour <= 12'h00f;
+                end 
+            end
+            if (second_counter_tens == 4'd0) begin
+                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
+                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
+                    ((horizontal_addr[9:2] == 20 || horizontal_addr[9:2] == 22) && 
+                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
+                    colour <= 12'h00f;
+                end
+            end 
+            else if (second_counter_tens == 4'd1) begin
+                if ((horizontal_addr[9:2] == 20 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 21 && vertical_addr[8:2] == 79)
+                    || (horizontal_addr[9:2] == 22 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_tens == 4'd2) begin
+                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 22 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
+                            ((horizontal_addr[9:2] == 20 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
+                    colour <= 12'h00f;
+                end
+            end
+
+            else if (second_counter_tens == 4'd3) begin
+                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            (horizontal_addr[9:2] == 22 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
+                    colour <= 12'h00f;
+                end  
+            end
+            else if (second_counter_tens == 4'd4) begin
+                if (((horizontal_addr[9:2] == 20 || horizontal_addr[9:2] == 22) && 
+                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
+                            ((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
+                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 22 &&
+                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
+                    colour <= 12'h00f;
+                end
+            end
+            else if (second_counter_tens == 4'd5) begin
+                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 20 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
+                            ((horizontal_addr[9:2] == 22 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
+                    colour <= 12'h00f;
+                end
+            end
+            if (minute_counter_units == 4'd0) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
+                    ((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
+                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
+                    colour <= 12'h00f;
+                end
+            end 
+            else if (minute_counter_units == 4'd1) begin
+                if ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 15 && vertical_addr[8:2] == 79)
+                    || (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_units == 4'd2) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
+                            ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
+                    colour <= 12'h00f;
+                end
+            end
+
+            else if (minute_counter_units == 4'd3) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            (horizontal_addr[9:2] == 16 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
+                    colour <= 12'h00f;
+                end  
+            end
+            else if (minute_counter_units == 4'd4) begin
+                if (((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
+                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
+                            ((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 16 &&
+                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_units == 4'd5) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
+                            ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_units == 4'd6) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) || // Left vertical line
+                            ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_units == 4'd7) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 77)) || // Top horizontal line
+                            (horizontal_addr[9:2] == 16 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 87)) begin // Right vertical line
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_units == 4'd8) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
+                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87))) begin // Left and right vertical lines
+                    colour <= 12'h00f;
+                end 
+            end
+            else if (minute_counter_units == 4'd9) begin
+                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
+                    (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                    ((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
+                    (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
+                    (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] <= 87)) begin // Right vertical line (bottom half)
+                    colour <= 12'h00f;
+                end  
+            end
+            if (minute_counter_tens == 4'd0) begin
+                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
+                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
+                    ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
+                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
+                    colour <= 12'h00f;
+                end
+            end 
+            else if (minute_counter_tens == 4'd1) begin
+                if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 79)
+                    || (horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_tens == 4'd2) begin
+                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
+                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
+                    colour <= 12'h00f;
+                end
+            end
+
+            else if (minute_counter_tens == 4'd3) begin
+                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
+                    colour <= 12'h00f;
+                end  
+            end
+            else if (minute_counter_tens == 4'd4) begin
+                if (((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
+                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
+                            ((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
+                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 12 &&
+                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
+                    colour <= 12'h00f;
+                end
+            end
+            else if (minute_counter_tens == 4'd5) begin
+                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
+                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
+                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
+                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
+                    colour <= 12'h00f;
+                end
+            end
+            if ((horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 80) || // Top dot of colon
+                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 82)) begin // Bottom dot of colon
+                colour <= 12'h00f;
             end
         end
         else if (state_master == 2'd0) begin //IDLE
@@ -1004,7 +684,7 @@ module Snake_control(
                 else begin
                     colour <= 12'h000;
                 end 
-            end
+            end 
         end
         else if (state_master == 2'd2) begin
             crashed <= 1'b0;
@@ -1142,9 +822,5 @@ module Snake_control(
         else //OTHER
             colour <= 12'h000;
     end
-    
-//    always@(posedge CLK) begin
-//        crashed <= 1'b0;
-//    end
     
 endmodule

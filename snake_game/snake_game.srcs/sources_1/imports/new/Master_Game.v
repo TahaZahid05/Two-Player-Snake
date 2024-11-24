@@ -10,8 +10,12 @@ module Master_Game(
     );
     
 //    wire [5:0] score;
-    wire [5:0] score_snake_one;
-    wire [5:0] score_snake_two;
+    wire [3:0] second_counter_units;
+    wire [3:0] minute_counter_units;
+    wire [2:0] second_counter_tens;
+    wire [2:0] minute_counter_tens;
+    wire [3:0] score_snake_one;
+    wire [3:0] score_snake_two;
     wire [1:0] state_master;
     wire [1:0] state_navigation;
     wire [1:0] state_navigation_2;
@@ -113,6 +117,10 @@ module Master_Game(
                         .target_address(target_address),
                         .poison_address(poison_address),
                         .pixel_address(address),
+                        .second_counter_units(second_counter_units),
+                        .second_counter_tens(second_counter_tens),
+                        .minute_counter_units(minute_counter_units),
+                        .minute_counter_tens(minute_counter_tens),
                         .COLOUR_OUT(colour),
                         .reached_target_one(reached_target_one),
                         .reached_target_two(reached_target_two),
@@ -177,5 +185,14 @@ module Master_Game(
                             .master_state(state_master),
                             .SCORE(score_snake_two)
                         );
+                        
+    timer t1 (
+                .CLK(CLK),
+                .RESET(BTNC),
+                .SECONDS_UNITS(second_counter_units),
+                .SECONDS_TENS(second_counter_tens),
+                .MINUTES_UNITS(minute_counter_units),
+                .MINUTES_TENS(minute_counter_tens)
+             );
     
 endmodule

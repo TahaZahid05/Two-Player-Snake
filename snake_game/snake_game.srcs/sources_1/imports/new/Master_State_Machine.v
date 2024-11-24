@@ -10,7 +10,7 @@ module Master_State_Machine(
         input BTND_2,
         input BTNL_2,
         input BTNR_2,
-        input [5:0] SCORE,
+        input [3:0] SCORE,
         input fail,
         output [1:0] STATE
     );
@@ -24,7 +24,7 @@ module Master_State_Machine(
             state_game <= 2'd1;
         else if ((state_game == 2'd2 | state_game == 2'd3) && BTNC)
             state_game <= 2'd0;
-        else if (state_game == 2'd1 && SCORE == 5'b10000)
+        else if (state_game == 2'd1 && SCORE == 4'd8)
             state_game <= 2'd2;
         else if (state_game == 2'd1 && fail)
             state_game <= 2'd3;
