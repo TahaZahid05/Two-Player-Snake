@@ -2,8 +2,8 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Sun Nov 24 20:36:47 2024
-# Process ID: 21888
+# Start of session at: Wed Nov 27 00:33:28 2024
+# Process ID: 3792
 # Current directory: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1
 # Command line: vivado.exe -log Master_Game.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Master_Game.tcl
 # Log file: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/Master_Game.vds
@@ -17,18 +17,18 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 9024
+INFO: [Synth 8-7075] Helper process launched with PID 2860
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1027.848 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1024.328 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'Master_Game' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
-INFO: [Synth 8-6157] synthesizing module 'PS2Receiver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:23]
-INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:23]
+INFO: [Synth 8-6157] synthesizing module 'PS2Receiver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:2]
+INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:2]
 	Parameter COUNT_MAX bound to: 19 - type: integer 
 	Parameter COUNT_WIDTH bound to: 5 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'debouncer' (1#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:23]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:55]
-INFO: [Synth 8-6155] done synthesizing module 'PS2Receiver' (2#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'debouncer' (1#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:2]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:34]
+INFO: [Synth 8-6155] done synthesizing module 'PS2Receiver' (2#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:2]
 INFO: [Synth 8-6157] synthesizing module 'Master_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v:2]
 INFO: [Synth 8-6155] done synthesizing module 'Master_State_Machine' (3#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v:2]
 INFO: [Synth 8-6157] synthesizing module 'Navigation_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:2]
@@ -44,9 +44,13 @@ INFO: [Synth 8-6157] synthesizing module 'Generic_counter' [C:/Users/ddddd/OneDr
 INFO: [Synth 8-6155] done synthesizing module 'Generic_counter' (5#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'moveSnake' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:32]
 WARNING: [Synth 8-7023] instance 'moveSnake' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:32]
-INFO: [Synth 8-6155] done synthesizing module 'Snake_control' (6#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Target_Generator' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:83]
-INFO: [Synth 8-6155] done synthesizing module 'Target_Generator' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:83]
+INFO: [Synth 8-6157] synthesizing module 'scoreDisplay' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'scoreDisplay' (6#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:1]
+INFO: [Synth 8-6157] synthesizing module 'alphabetGen' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'alphabetGen' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'Snake_control' (8#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Target_Generator' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'Target_Generator' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:1]
 INFO: [Synth 8-6157] synthesizing module 'VGA_Interface' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
 INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
 	Parameter VertTimeToPulseWeidthEnd bound to: 10'b0000000010 
@@ -60,40 +64,40 @@ INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [C:/Users/ddddd/OneDrive/D
 INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized0' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 	Parameter COUNTER_WIDTH bound to: 2 - type: integer 
 	Parameter COUNTER_MAX bound to: 3 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized0' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized0' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 WARNING: [Synth 8-7071] port 'COUNT' of module 'Generic_counter' is unconnected for instance 'CounterTo3' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:39]
 WARNING: [Synth 8-7023] instance 'CounterTo3' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:39]
 INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized1' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 	Parameter COUNTER_WIDTH bound to: 10 - type: integer 
 	Parameter COUNTER_MAX bound to: 10'b1100011111 
-INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized1' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized1' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized2' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 	Parameter COUNTER_WIDTH bound to: 10 - type: integer 
 	Parameter COUNTER_MAX bound to: 10'b1000001000 
-INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized2' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized2' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'CounterTo520' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:62]
 WARNING: [Synth 8-7023] instance 'CounterTo520' of module 'Generic_counter' has 5 connections declared, but only 4 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:62]
-INFO: [Synth 8-6155] done synthesizing module 'VGA_Driver' (8#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Driver' (10#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
 WARNING: [Synth 8-689] width (9) of port connection 'ADDRV' does not match port width (10) of module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:23]
-INFO: [Synth 8-6155] done synthesizing module 'VGA_Interface' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Score_Counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:36]
-INFO: [Synth 8-6155] done synthesizing module 'Score_Counter' (10#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Interface' (11#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Score_Counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Score_Counter' (12#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:2]
 INFO: [Synth 8-6157] synthesizing module 'timer' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'timer' (11#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'Master_Game' (12#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'timer' (13#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Master_Game' (14#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished RTL Elaboration : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.079 . Memory (MB): peak = 1251.316 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.268 . Memory (MB): peak = 1241.270 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -206,26 +210,26 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/Master_Game_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1251.316 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1241.270 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 1251.316 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.068 . Memory (MB): peak = 1241.270 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished Constraint Validation : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_snake_reg' in module 'Navigation_State_Machine'
 ---------------------------------------------------------------------------------------------------
@@ -237,62 +241,67 @@ INFO: [Synth 8-802] inferred FSM for state register 'state_snake_reg' in module 
                  iSTATE0 |                               11 |                               10
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_snake_reg' using encoding 'sequential' in module 'Navigation_State_Machine'
+WARNING: [Synth 8-327] inferring latch for variable 'colour_reg' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:20]
+WARNING: [Synth 8-327] inferring latch for variable 'colour_reg' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:19]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 1251.316 ; gain = 223.469
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:46 ; elapsed = 00:00:47 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-223] decloning instance 's1/P_E' (alphabetGen) to 's1/LOSE_E'
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input   32 Bit       Adders := 1     
-	   2 Input   26 Bit       Adders := 2     
-	   2 Input   10 Bit       Adders := 4     
-	   2 Input    8 Bit       Adders := 7     
+	   4 Input   32 Bit       Adders := 30    
+	   2 Input   27 Bit       Adders := 1     
+	   2 Input   26 Bit       Adders := 1     
+	   2 Input   10 Bit       Adders := 250   
+	   2 Input    9 Bit       Adders := 378   
+	   4 Input    9 Bit       Adders := 30    
+	   2 Input    8 Bit       Adders := 6     
 	   2 Input    7 Bit       Adders := 6     
 	   2 Input    5 Bit       Adders := 2     
-	   2 Input    4 Bit       Adders := 9     
+	   2 Input    4 Bit       Adders := 15    
 	   2 Input    3 Bit       Adders := 2     
 	   2 Input    2 Bit       Adders := 1     
 +---XORs : 
 	   2 Input      1 Bit         XORs := 4     
 +---Registers : 
-	               26 Bit    Registers := 2     
+	               27 Bit    Registers := 1     
+	               26 Bit    Registers := 1     
 	               16 Bit    Registers := 1     
 	               12 Bit    Registers := 2     
 	               10 Bit    Registers := 4     
 	                8 Bit    Registers := 60    
 	                7 Bit    Registers := 58    
 	                5 Bit    Registers := 2     
-	                4 Bit    Registers := 5     
-	                3 Bit    Registers := 2     
+	                4 Bit    Registers := 7     
+	                3 Bit    Registers := 4     
 	                2 Bit    Registers := 2     
 	                1 Bit    Registers := 29    
 +---Muxes : 
-	   2 Input   26 Bit        Muxes := 2     
-	   4 Input   12 Bit        Muxes := 2     
-	   2 Input   12 Bit        Muxes := 39    
-	  13 Input    8 Bit        Muxes := 1     
+	   2 Input   27 Bit        Muxes := 1     
+	   2 Input   26 Bit        Muxes := 1     
+	   5 Input   12 Bit        Muxes := 1     
+	   2 Input   12 Bit        Muxes := 1207  
 	   2 Input    8 Bit        Muxes := 100   
 	   4 Input    8 Bit        Muxes := 4     
-	   8 Input    8 Bit        Muxes := 1     
-	   9 Input    8 Bit        Muxes := 1     
 	   4 Input    7 Bit        Muxes := 2     
-	   2 Input    4 Bit        Muxes := 9     
-	   2 Input    3 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 19    
+	   2 Input    3 Bit        Muxes := 4     
+	  27 Input    2 Bit        Muxes := 30    
 	   2 Input    2 Bit        Muxes := 20    
 	   4 Input    2 Bit        Muxes := 4     
-	   2 Input    1 Bit        Muxes := 482   
-	   3 Input    1 Bit        Muxes := 1     
-	  12 Input    1 Bit        Muxes := 4     
-	   4 Input    1 Bit        Muxes := 222   
+	   4 Input    1 Bit        Muxes := 251   
+	   2 Input    1 Bit        Muxes := 497   
+	  10 Input    1 Bit        Muxes := 26    
 	   6 Input    1 Bit        Muxes := 2     
-	   5 Input    1 Bit        Muxes := 3     
-	   7 Input    1 Bit        Muxes := 2     
+	   5 Input    1 Bit        Muxes := 2     
+	   7 Input    1 Bit        Muxes := 3     
 	   8 Input    1 Bit        Muxes := 2     
 	   9 Input    1 Bit        Muxes := 2     
-	  10 Input    1 Bit        Muxes := 20    
 	  11 Input    1 Bit        Muxes := 2     
+	  12 Input    1 Bit        Muxes := 4     
 	  13 Input    1 Bit        Muxes := 2     
 	  14 Input    1 Bit        Muxes := 2     
 	  15 Input    1 Bit        Muxes := 2     
@@ -305,7 +314,8 @@ Detailed RTL Component Info :
 	  22 Input    1 Bit        Muxes := 2     
 	  23 Input    1 Bit        Muxes := 2     
 	  24 Input    1 Bit        Muxes := 2     
-	  25 Input    1 Bit        Muxes := 1     
+	  25 Input    1 Bit        Muxes := 2     
+	   3 Input    1 Bit        Muxes := 5     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -321,26 +331,270 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-7129] Port horizontal_addr[1] in module scoreDisplay__4 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[0] in module scoreDisplay__4 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[1] in module scoreDisplay__4 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[0] in module scoreDisplay__4 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[1] in module scoreDisplay__3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[0] in module scoreDisplay__3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[1] in module scoreDisplay__3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[0] in module scoreDisplay__3 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[1] in module scoreDisplay__2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[0] in module scoreDisplay__2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[1] in module scoreDisplay__2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[0] in module scoreDisplay__2 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[1] in module scoreDisplay__1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[0] in module scoreDisplay__1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[1] in module scoreDisplay__1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[0] in module scoreDisplay__1 is either unconnected or has no load
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'LOSE_S/colour_reg[4]' (LD) to 'LOSE_S/colour_reg[5]'
+INFO: [Synth 8-3886] merging instance 'LOSE_S/colour_reg[5]' (LD) to 'LOSE_S/colour_reg[6]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_S/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'LOSE_S/colour_reg[6]' (LD) to 'LOSE_S/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'LOSE_L/colour_reg[4]' (LD) to 'LOSE_L/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'LOSE_L/colour_reg[5]' (LD) to 'LOSE_L/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\LOSE_L/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'LOSE_L/colour_reg[6]' (LD) to 'LOSE_L/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'WIN_N/colour_reg[4]' (LD) to 'WIN_N/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'WIN_N/colour_reg[5]' (LD) to 'WIN_N/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_N/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'WIN_N/colour_reg[6]' (LD) to 'WIN_N/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'WIN_W/colour_reg[4]' (LD) to 'WIN_W/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'WIN_W/colour_reg[5]' (LD) to 'WIN_W/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_W/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'WIN_W/colour_reg[6]' (LD) to 'WIN_W/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'WIN_U/colour_reg[4]' (LD) to 'WIN_U/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'WIN_U/colour_reg[5]' (LD) to 'WIN_U/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_U/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'WIN_U/colour_reg[6]' (LD) to 'WIN_U/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'WIN_O/colour_reg[4]' (LD) to 'WIN_O/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'WIN_O/colour_reg[5]' (LD) to 'WIN_O/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_O/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'WIN_O/colour_reg[6]' (LD) to 'WIN_O/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'WIN_Y/colour_reg[4]' (LD) to 'WIN_Y/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'WIN_Y/colour_reg[5]' (LD) to 'WIN_Y/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\WIN_Y/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'WIN_Y/colour_reg[6]' (LD) to 'WIN_Y/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[1] )
+INFO: [Synth 8-3886] merging instance 's5/colour_reg[9]' (LD) to 's5/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 's5/colour_reg[11]' (LD) to 's5/colour_reg[10]'
+INFO: [Synth 8-3886] merging instance 's5/colour_reg[10]' (LD) to 's5/colour_reg[8]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s5/\colour_reg[7] )
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[3]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[4]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[5]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[2]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[0]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[1]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[9]' (LD) to 's4/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[11]' (LD) to 's4/colour_reg[10]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[10]' (LD) to 's4/colour_reg[8]'
+INFO: [Synth 8-3886] merging instance 's4/colour_reg[6]' (LD) to 's4/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s4/\colour_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[1] )
+INFO: [Synth 8-3886] merging instance 's3/colour_reg[9]' (LD) to 's3/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 's3/colour_reg[11]' (LD) to 's3/colour_reg[10]'
+INFO: [Synth 8-3886] merging instance 's3/colour_reg[10]' (LD) to 's3/colour_reg[8]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s3/\colour_reg[7] )
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[3]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[4]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[5]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[2]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[0]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[1]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[9]' (LD) to 's2/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[11]' (LD) to 's2/colour_reg[10]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[10]' (LD) to 's2/colour_reg[8]'
+INFO: [Synth 8-3886] merging instance 's2/colour_reg[6]' (LD) to 's2/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (s2/\colour_reg[7] )
+WARNING: [Synth 8-3332] Sequential element (colour_reg[7]) is unused and will be removed from module scoreDisplay__1.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[8]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[7]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[6]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[5]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[4]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[3]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[2]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[1]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[0]) is unused and will be removed from module scoreDisplay__2.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[7]) is unused and will be removed from module scoreDisplay__3.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[8]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[7]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[6]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[5]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[4]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[3]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[2]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[1]) is unused and will be removed from module scoreDisplay__4.
+WARNING: [Synth 8-3332] Sequential element (colour_reg[0]) is unused and will be removed from module scoreDisplay__4.
+INFO: [Synth 8-3886] merging instance 'M/colour_reg[8]' (LD) to 'M/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 'M/colour_reg[9]' (LD) to 'M/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 'M/colour_reg[10]' (LD) to 'M/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 'T_E/colour_reg[8]' (LD) to 'T_E/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 'T_E/colour_reg[9]' (LD) to 'T_E/colour_reg[11]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'P_P_E/colour_reg[4]' (LD) to 'P_P_E/colour_reg[5]'
+INFO: [Synth 8-3886] merging instance 'P_P_E/colour_reg[5]' (LD) to 'P_P_E/colour_reg[6]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_P_E/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'P_P_E/colour_reg[6]' (LD) to 'P_P_E/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'K/colour_reg[4]' (LD) to 'K/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'K/colour_reg[5]' (LD) to 'K/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\K/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'K/colour_reg[6]' (LD) to 'K/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'N/colour_reg[4]' (LD) to 'N/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'N/colour_reg[5]' (LD) to 'N/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\N/colour_reg[8] )
+INFO: [Synth 8-3886] merging instance 'N/colour_reg[6]' (LD) to 'N/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_E/colour_reg[3] )
+INFO: [Synth 8-3886] merging instance 'P_E/colour_reg[4]' (LD) to 'P_E/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'P_E/colour_reg[5]' (LD) to 'P_E/colour_reg[7]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\P_E/colour_reg[2] )
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'P_E/colour_reg[6]' (LD) to 'P_E/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'Y/colour_reg[4]' (LD) to 'Y/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'Y/colour_reg[5]' (LD) to 'Y/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'Y/colour_reg[6]' (LD) to 'Y/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'A/colour_reg[4]' (LD) to 'A/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'A/colour_reg[5]' (LD) to 'A/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'A/colour_reg[6]' (LD) to 'A/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'L/colour_reg[4]' (LD) to 'L/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'L/colour_reg[5]' (LD) to 'L/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'L/colour_reg[6]' (LD) to 'L/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'P/colour_reg[4]' (LD) to 'P/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'P/colour_reg[5]' (LD) to 'P/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'P/colour_reg[6]' (LD) to 'P/colour_reg[7]'
+WARNING: [Synth 8-7129] Port horizontal_addr[1] in module scoreDisplay is either unconnected or has no load
+WARNING: [Synth 8-7129] Port horizontal_addr[0] in module scoreDisplay is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[1] in module scoreDisplay is either unconnected or has no load
+WARNING: [Synth 8-7129] Port vertical_addr[0] in module scoreDisplay is either unconnected or has no load
+INFO: [Synth 8-3886] merging instance 'I/colour_reg[8]' (LD) to 'I/colour_reg[9]'
+INFO: [Synth 8-3886] merging instance 'I/colour_reg[9]' (LD) to 'I/colour_reg[10]'
+INFO: [Synth 8-3886] merging instance 'I/colour_reg[10]' (LD) to 'I/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 's6/colour_reg[4]' (LD) to 's6/colour_reg[5]'
+INFO: [Synth 8-3886] merging instance 's6/colour_reg[5]' (LD) to 's6/colour_reg[6]'
+INFO: [Synth 8-3886] merging instance 's6/colour_reg[6]' (LD) to 's6/colour_reg[7]'
+INFO: [Synth 8-3886] merging instance 'T/colour_reg[10]' (LD) to 'T/colour_reg[11]'
+INFO: [Synth 8-3886] merging instance 'T/colour_reg[11]' (LD) to 'T/colour_reg[9]'
+INFO: [Synth 8-3886] merging instance 'T/colour_reg[9]' (LD) to 'T/colour_reg[8]'
+INFO: [Synth 8-3886] merging instance 'E/colour_reg[3]' (LD) to 'E/colour_reg[2]'
+INFO: [Synth 8-3886] merging instance 'E/colour_reg[2]' (LD) to 'E/colour_reg[1]'
+INFO: [Synth 8-3886] merging instance 'E/colour_reg[1]' (LD) to 'E/colour_reg[0]'
+INFO: [Synth 8-3886] merging instance 'R/colour_reg[3]' (LD) to 'R/colour_reg[2]'
+INFO: [Synth 8-3886] merging instance 'R/colour_reg[2]' (LD) to 'R/colour_reg[1]'
+INFO: [Synth 8-3886] merging instance 'R/colour_reg[1]' (LD) to 'R/colour_reg[0]'
+INFO: [Synth 8-3886] merging instance 'O/colour_reg[3]' (LD) to 'O/colour_reg[2]'
+INFO: [Synth 8-3886] merging instance 'O/colour_reg[2]' (LD) to 'O/colour_reg[1]'
+INFO: [Synth 8-3886] merging instance 'O/colour_reg[1]' (LD) to 'O/colour_reg[0]'
+INFO: [Synth 8-3886] merging instance 'C/colour_reg[3]' (LD) to 'C/colour_reg[2]'
+INFO: [Synth 8-3886] merging instance 'C/colour_reg[2]' (LD) to 'C/colour_reg[1]'
+INFO: [Synth 8-3886] merging instance 'C/colour_reg[1]' (LD) to 'C/colour_reg[0]'
+INFO: [Synth 8-3886] merging instance 'S/colour_reg[3]' (LD) to 'S/colour_reg[2]'
+INFO: [Synth 8-3886] merging instance 'S/colour_reg[2]' (LD) to 'S/colour_reg[1]'
+INFO: [Synth 8-3886] merging instance 'S/colour_reg[1]' (LD) to 'S/colour_reg[0]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:48 ; elapsed = 00:01:51 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:52 ; elapsed = 00:02:19 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:55 ; elapsed = 00:01:59 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:01 ; elapsed = 00:02:27 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:57 ; elapsed = 00:02:00 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Timing Optimization : Time (s): cpu = 00:02:03 ; elapsed = 00:02:30 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:02:00 ; elapsed = 00:02:04 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Technology Mapping : Time (s): cpu = 00:02:04 ; elapsed = 00:02:34 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -358,37 +612,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:02:04 ; elapsed = 00:02:08 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished IO Insertion : Time (s): cpu = 00:02:10 ; elapsed = 00:02:40 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:02:04 ; elapsed = 00:02:08 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:10 ; elapsed = 00:02:40 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:05 ; elapsed = 00:02:08 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:10 ; elapsed = 00:02:40 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:05 ; elapsed = 00:02:08 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:10 ; elapsed = 00:02:40 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:05 ; elapsed = 00:02:09 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:10 ; elapsed = 00:02:41 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:05 ; elapsed = 00:02:09 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:10 ; elapsed = 00:02:41 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -405,42 +659,43 @@ Report Cell Usage:
 |      |Cell   |Count |
 +------+-------+------+
 |1     |BUFG   |     1|
-|2     |CARRY4 |    27|
-|3     |LUT1   |    18|
-|4     |LUT2   |   143|
-|5     |LUT3   |    55|
-|6     |LUT4   |  1182|
-|7     |LUT5   |   425|
-|8     |LUT6   |  4718|
-|9     |MUXF7  |     1|
-|10    |FDCE   |    75|
+|2     |CARRY4 |   104|
+|3     |LUT1   |    45|
+|4     |LUT2   |   421|
+|5     |LUT3   |   168|
+|6     |LUT4   |  1690|
+|7     |LUT5   |   408|
+|8     |LUT6   |  4526|
+|9     |MUXF7  |     2|
+|10    |FDCE   |    90|
 |11    |FDPE   |    35|
-|12    |FDRE   |   628|
-|13    |FDSE   |   312|
-|14    |IBUF   |     3|
-|15    |OBUF   |    14|
+|12    |FDRE   |   600|
+|13    |FDSE   |   364|
+|14    |LD     |     3|
+|15    |IBUF   |     3|
+|16    |OBUF   |    14|
 +------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:05 ; elapsed = 00:02:09 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:10 ; elapsed = 00:02:41 . Memory (MB): peak = 1241.270 ; gain = 216.941
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:39 ; elapsed = 00:02:06 . Memory (MB): peak = 1726.070 ; gain = 698.223
-Synthesis Optimization Complete : Time (s): cpu = 00:02:05 ; elapsed = 00:02:09 . Memory (MB): peak = 1726.070 ; gain = 698.223
+Synthesis finished with 0 errors, 0 critical warnings and 42 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:42 ; elapsed = 00:02:37 . Memory (MB): peak = 1241.270 ; gain = 216.941
+Synthesis Optimization Complete : Time (s): cpu = 00:02:11 ; elapsed = 00:02:42 . Memory (MB): peak = 1241.270 ; gain = 216.941
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.074 . Memory (MB): peak = 1726.070 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 28 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.083 . Memory (MB): peak = 1241.270 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 109 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
-WARNING: [Netlist 29-101] Netlist 'Master_Game' is not ideal for floorplanning, since the cellview 'Snake_control' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1726.070 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1241.270 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 3 instances were transformed.
+  LD => LDCE: 3 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-48 Infos, 43 Warnings, 34 Critical Warnings and 0 Errors encountered.
+257 Infos, 84 Warnings, 34 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:12 ; elapsed = 00:02:17 . Memory (MB): peak = 1726.070 ; gain = 698.223
+synth_design: Time (s): cpu = 00:02:17 ; elapsed = 00:02:49 . Memory (MB): peak = 1241.270 ; gain = 216.941
 INFO: [Common 17-1381] The checkpoint 'C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/Master_Game.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file Master_Game_utilization_synth.rpt -pb Master_Game_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Nov 24 20:39:09 2024...
+INFO: [Common 17-206] Exiting Vivado at Wed Nov 27 00:36:23 2024...

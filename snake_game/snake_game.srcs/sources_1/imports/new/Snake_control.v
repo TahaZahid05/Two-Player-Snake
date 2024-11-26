@@ -85,14 +85,16 @@ module Snake_control(
                     SnakeState_Y_2[PixNo+1] <= SnakeState_Y_2[PixNo];
                 end
                 else if(RESET) begin
-                    SnakeState_X[PixNo + 1] <= 80;
-                    SnakeState_Y[PixNo + 1] <= 100;
-                    SnakeState_X_2[PixNo + 1] <= 150;
-                    SnakeState_Y_2[PixNo + 1] <= 50;
+                    SnakeState_X[PixNo + 1] <= 50;
+                    SnakeState_Y[PixNo + 1] <= 30;
+                    SnakeState_X_2[PixNo + 1] <= 140;
+                    SnakeState_Y_2[PixNo + 1] <= 90;
                 end
             end
         end
     endgenerate
+    
+    
     
     
     
@@ -160,6 +162,8 @@ module Snake_control(
         end
     end    
     
+    
+    
     always@(posedge CLK) begin
         if (SnakeState_X[0] == target_horizontal_addr[7:0] && SnakeState_Y[0] == target_vertical_addr[6:0])
             reached_one <= 1'b1;
@@ -178,34 +182,94 @@ module Snake_control(
             reached_p_two <= 1'b0;
         end
     end
-    
-        integer i;
-    integer j;
 
+    integer i;
+    integer j;
+    
+   wire [11:0] score_colour;
+   wire [11:0] second_units_colour;
+   wire [11:0] second_tens_colour;
+   wire [11:0] minute_units_colour;
+   wire [11:0] minute_tens_colour;
+   wire [11:0] S_colour;
+   wire [11:0] C_colour;
+   wire [11:0] O_colour;
+   wire [11:0] R_colour;
+   wire [11:0] E_colour;
+   wire [11:0] T_colour;
+   wire [11:0] I_colour;
+   wire [11:0] M_colour;
+   wire [11:0] T_E_colour;
+   wire [11:0] T_R_colour;
+   wire [11:0] TWO_colour;
+   wire [11:0] P_colour;
+   wire [11:0] L_colour;
+   wire [11:0] A_colour; 
+   wire [11:0] Y_colour;
+   wire [11:0] P_E_colour;
+   wire [11:0] P_R_colour;
+   wire [11:0] P_S_colour;
+   wire [11:0] N_colour;
+   wire [11:0] P_A_colour;
+   wire [11:0] K_colour;
+   wire [11:0] P_P_E_colour;
+   wire [11:0] WIN_Y_colour;
+   wire [11:0] WIN_O_colour;
+   wire [11:0] WIN_U_colour;
+   wire [11:0] WIN_W_colour;
+   wire [11:0] WIN_I_colour;
+   wire [11:0] WIN_N_colour;
+   wire [11:0] LOSE_L_colour;
+   wire [11:0] LOSE_O_colour;
+   wire [11:0] LOSE_S_colour;
+   wire [11:0] LOSE_E_colour;
+   scoreDisplay s1(horizontal_addr,vertical_addr,score_snake_one,score_snake_two,13,15,49,59,12'h00f,score_colour);
+   scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,22,24,83,93,12'hf00,second_units_colour);
+   scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,18,20,83,93,12'hf00,second_tens_colour);
+   scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,12,14,83,93,12'hf00,minute_units_colour);
+   scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,8,10,83,93,12'hf00,minute_tens_colour);
+   
+   alphabetGen S(6'd18,horizontal_addr,vertical_addr,5,40,12'h00f,0,S_colour);
+   alphabetGen C(6'd2,horizontal_addr,vertical_addr,9,40,12'h00f,0,C_colour);
+   alphabetGen O(6'd14,horizontal_addr,vertical_addr,13,40,12'h00f,0,O_colour);
+   alphabetGen R(6'd17,horizontal_addr,vertical_addr,17,40,12'h00f,0,R_colour);
+   alphabetGen E(6'd4,horizontal_addr,vertical_addr,23,40,12'h00f,0,E_colour);
+   
+   alphabetGen T(6'd19,horizontal_addr,vertical_addr,4,70,12'hf00,0,T_colour);
+   alphabetGen I(6'd8,horizontal_addr,vertical_addr,10,70,12'hf00,0,I_colour);
+   alphabetGen M(6'd12,horizontal_addr,vertical_addr,12,70,12'hf00,0,M_colour);
+   alphabetGen T_E(6'd4,horizontal_addr,vertical_addr,18,70,12'hf00,0,T_E_colour);
+   alphabetGen T_R(6'd17,horizontal_addr,vertical_addr,22,70,12'hf00,0,T_R_colour);
+   
+   scoreDisplay s6(horizontal_addr,vertical_addr,4'd2,0,10,16,11,22,12'h0f0,TWO_colour);
+   alphabetGen P(6'd15,horizontal_addr,vertical_addr,25,10,12'h0f0,1,P_colour);
+   alphabetGen L(6'd11,horizontal_addr,vertical_addr,40,10,12'h0f0,1,L_colour);
+   alphabetGen A(6'd0,horizontal_addr,vertical_addr,55,10,12'h0f0,1,A_colour);
+   alphabetGen Y(6'd24,horizontal_addr,vertical_addr,70,10,12'h0f0,1,Y_colour);
+   alphabetGen P_E(6'd4,horizontal_addr,vertical_addr,85,10,12'h0f0,1,P_E_colour);
+   alphabetGen P_R(6'd17,horizontal_addr,vertical_addr,100,10,12'h0f0,1,P_R_colour);
+   alphabetGen P_S(6'd18,horizontal_addr,vertical_addr,10,40,12'h0f0,1,P_S_colour);
+   alphabetGen N(6'd13,horizontal_addr,vertical_addr,20,40,12'h0f0,1,N_colour);
+   alphabetGen P_A(6'd0,horizontal_addr,vertical_addr,37,40,12'h0f0,1,P_A_colour);
+   alphabetGen K(6'd10,horizontal_addr, vertical_addr,48,40,12'h0f0,1,K_colour);
+   alphabetGen P_P_E(6'd4,horizontal_addr,vertical_addr,60,40,12'h0f0,1,P_P_E_colour);
+   
+   alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,10,10,12'h0f0,1,WIN_Y_colour);
+   alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,19,10,12'h0f0,1,WIN_O_colour);
+   alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,30,10,12'h0f0,1,WIN_U_colour);
+   alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,45,10,12'h0f0,1,WIN_W_colour);
+   alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,56,10,12'h0f0,1,WIN_I_colour);
+   alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,63,10,12'h0f0,1,WIN_N_colour);
+   
+   alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,45,10,12'h0f0,1,LOSE_L_colour);
+   alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,55,10,12'h0f0,1,LOSE_O_colour);
+   alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,70,10,12'h0f0,1,LOSE_S_colour);
+   alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,85,10,12'h0f0,1,LOSE_E_colour);
+   
     always @(posedge CLK) begin
-        if (state_master == 2'd1) begin // PLAY
+        if (state_master == 2'd1) begin // 
             colour <= 12'h000; // Default color
             crashed <= 1'b0;
-
-            // Check for collisions between snake one and snake two
-            for (i = 0; i < 27; i = i + 1) begin
-                if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
-                    for (j = 0; j < 27; j = j + 1) begin
-                        if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
-                            // Check if snake one collides with snake two
-                            if ((SnakeState_X[i] == SnakeState_X_2[j]) && 
-                                (SnakeState_Y[i] == SnakeState_Y_2[j])) begin
-                                crashed <= 1'b1;
-                            end
-                            // Check if snake two collides with snake one
-                            if ((SnakeState_X_2[j] == SnakeState_X[i]) && 
-                                (SnakeState_Y_2[j] == SnakeState_Y[i])) begin
-                                crashed <= 1'b1;
-                            end
-                        end
-                    end
-                end
-            end
 
             // Check for seed and poison addresses
             if (target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) begin
@@ -240,333 +304,66 @@ module Snake_control(
                         end
                     end
                 end
+                
+            end
+                // Check for collisions between snake one and snake two
+            for (i = 0; i < 27; i = i + 1) begin
+                if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
+                    for (j = 0; j < 27; j = j + 1) begin
+                        if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
+                            // Check if snake one collides with snake two
+                            if ((SnakeState_X[i] == SnakeState_X_2[j]) && 
+                                (SnakeState_Y[i] == SnakeState_Y_2[j])) begin
+                                crashed <= 1'b1;
+                            end
+                            // Check if snake two collides with snake one
+                            if ((SnakeState_X_2[j] == SnakeState_X[i]) && 
+                                (SnakeState_Y_2[j] == SnakeState_Y[i])) begin
+                                crashed <= 1'b1;
+                            end
+                        end
+                    end
+                end
             end
             if ((horizontal_addr[9:2] >= 30 && horizontal_addr[9:2] <= 40) || (horizontal_addr[9:2] >= MaxX - 10 && horizontal_addr[9:2] <= MaxX) || (vertical_addr[8:2] >= 0 && vertical_addr[8:2] <= 10 && horizontal_addr[9:2] >= 30) || (vertical_addr[8:2] >= MaxY - 10 && vertical_addr[8:2] <= MaxY && horizontal_addr[9:2] >= 30))
-                colour <= 12'hf00; 
-            if (score_snake_one + score_snake_two == 4'd0) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                        (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 57)) || // Top and bottom horizontal lines
-                    ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                        (vertical_addr[8:2] > 47 && vertical_addr[8:2] < 57))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end
-            end 
-            else if (score_snake_one + score_snake_two == 4'd1) begin
-                if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 50) || (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 49)
-                    || (horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57)) begin
-                    colour <= 12'h00f;
-                end
-            end
-            else if (score_snake_one + score_snake_two == 4'd2) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 52)) || // Top right vertical
-                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom left vertical
-                    colour <= 12'h00f;
-                end
-            end
-
-            else if (score_snake_one + score_snake_two == 4'd3) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                            (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] < 57)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end  
-            end
-            else if (score_snake_one + score_snake_two == 4'd4) begin
-                if (((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                            (vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 52)) || // Left and right vertical lines (top half)
-                            ((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 52)) || (horizontal_addr[9:2] == 12 &&
-                            vertical_addr[8:2] > 52 && vertical_addr[8:2] <= 58)) begin // Middle horizontal line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (score_snake_one + score_snake_two == 4'd5) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 52)) || // Top left vertical
-                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            else if (score_snake_one + score_snake_two == 4'd6) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57)) || // Left vertical line
-                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 52 && vertical_addr[8:2] < 57))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            else if (score_snake_one + score_snake_two == 4'd7) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 47)) || // Top horizontal line
-                            (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 47 && vertical_addr[8:2] <= 57)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (score_snake_one + score_snake_two == 4'd8) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 47 || vertical_addr[8:2] == 52 || vertical_addr[8:2] == 57)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                            (vertical_addr[8:2] >= 47 && vertical_addr[8:2] <= 57))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end 
-            end
-            if (second_counter_units == 4'd0) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
-                    ((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
-                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end
-            end 
-            else if (second_counter_units == 4'd1) begin
-                if ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 25 && vertical_addr[8:2] == 79)
-                    || (horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_units == 4'd2) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 26 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
-                            ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
-                    colour <= 12'h00f;
+                colour <= 12'hf00;
+            else begin
+                if(score_colour != 12'h000) begin
+                    colour <= score_colour;
+                end else if (second_units_colour != 12'h000) begin
+                    colour <= second_units_colour;
+                end else if (second_tens_colour != 12'h000) begin
+                    colour <= second_tens_colour;
+                end else if (minute_units_colour != 12'h000) begin
+                    colour <= minute_units_colour;
+                end else if (minute_tens_colour != 12'h000) begin
+                    colour <= minute_tens_colour;
+                end else if (S_colour != 12'h000) begin
+                    colour <= S_colour;
+                end else if (C_colour != 12'h000) begin
+                    colour <= C_colour;
+                end else if (O_colour != 12'h000) begin
+                    colour <= O_colour;
+                end else if (R_colour != 12'h000) begin
+                    colour <= R_colour; 
+                end else if (E_colour != 12'h000) begin
+                    colour <= E_colour;
+                end else if (T_colour != 12'h000) begin 
+                    colour <= T_colour;
+                end else if (I_colour != 12'h000) begin 
+                    colour <= I_colour;
+                end else if (M_colour != 12'h000) begin
+                    colour <= M_colour;
+                end else if (T_E_colour != 12'h000) begin
+                    colour <= T_E_colour;
+                end else if (T_R_colour != 12'h000) begin
+                    colour <= T_R_colour;
                 end
             end
 
-            else if (second_counter_units == 4'd3) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            (horizontal_addr[9:2] == 26 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end  
-            end
-            else if (second_counter_units == 4'd4) begin
-                if (((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
-                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
-                            ((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 26 &&
-                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_units == 4'd5) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
-                            ((horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_units == 4'd6) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 24 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) || // Left vertical line
-                            ((horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_units == 4'd7) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 77)) || // Top horizontal line
-                            (horizontal_addr[9:2] == 26 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 87)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_units == 4'd8) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
-                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end 
-            end
-            else if (second_counter_units == 4'd9) begin
-                if (((horizontal_addr[9:2] >= 24 && horizontal_addr[9:2] <= 26) && 
-                    (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                    ((horizontal_addr[9:2] == 24 || horizontal_addr[9:2] == 26) && 
-                    (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
-                    (horizontal_addr[9:2] == 26 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] <= 87)) begin // Right vertical line (bottom half)
-                    colour <= 12'h00f;
-                end 
-            end
-            if (second_counter_tens == 4'd0) begin
-                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
-                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
-                    ((horizontal_addr[9:2] == 20 || horizontal_addr[9:2] == 22) && 
-                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end
-            end 
-            else if (second_counter_tens == 4'd1) begin
-                if ((horizontal_addr[9:2] == 20 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 21 && vertical_addr[8:2] == 79)
-                    || (horizontal_addr[9:2] == 22 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_tens == 4'd2) begin
-                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 22 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
-                            ((horizontal_addr[9:2] == 20 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
-                    colour <= 12'h00f;
-                end
-            end
-
-            else if (second_counter_tens == 4'd3) begin
-                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            (horizontal_addr[9:2] == 22 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end  
-            end
-            else if (second_counter_tens == 4'd4) begin
-                if (((horizontal_addr[9:2] == 20 || horizontal_addr[9:2] == 22) && 
-                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
-                            ((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
-                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 22 &&
-                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (second_counter_tens == 4'd5) begin
-                if (((horizontal_addr[9:2] >= 20 && horizontal_addr[9:2] <= 22) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 20 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
-                            ((horizontal_addr[9:2] == 22 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            if (minute_counter_units == 4'd0) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
-                    ((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
-                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end
-            end 
-            else if (minute_counter_units == 4'd1) begin
-                if ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 15 && vertical_addr[8:2] == 79)
-                    || (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_units == 4'd2) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
-                            ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
-                    colour <= 12'h00f;
-                end
-            end
-
-            else if (minute_counter_units == 4'd3) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            (horizontal_addr[9:2] == 16 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end  
-            end
-            else if (minute_counter_units == 4'd4) begin
-                if (((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
-                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
-                            ((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 16 &&
-                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_units == 4'd5) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
-                            ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_units == 4'd6) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) || // Left vertical line
-                            ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_units == 4'd7) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 77)) || // Top horizontal line
-                            (horizontal_addr[9:2] == 16 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 87)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_units == 4'd8) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
-                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end 
-            end
-            else if (minute_counter_units == 4'd9) begin
-                if (((horizontal_addr[9:2] >= 14 && horizontal_addr[9:2] <= 16) && 
-                    (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                    ((horizontal_addr[9:2] == 14 || horizontal_addr[9:2] == 16) && 
-                    (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
-                    (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] <= 87)) begin // Right vertical line (bottom half)
-                    colour <= 12'h00f;
-                end  
-            end
-            if (minute_counter_tens == 4'd0) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                        (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 87)) || // Top and bottom horizontal lines
-                    ((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                        (vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87))) begin // Left and right vertical lines
-                    colour <= 12'h00f;
-                end
-            end 
-            else if (minute_counter_tens == 4'd1) begin
-                if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 80) || (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 79)
-                    || (horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 87)) begin
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_tens == 4'd2) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top right vertical
-                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom left vertical
-                    colour <= 12'h00f;
-                end
-            end
-
-            else if (minute_counter_tens == 4'd3) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            (horizontal_addr[9:2] == 12 && vertical_addr[8:2] > 77 && vertical_addr[8:2] < 87)) begin // Right vertical line
-                    colour <= 12'h00f;
-                end  
-            end
-            else if (minute_counter_tens == 4'd4) begin
-                if (((horizontal_addr[9:2] == 10 || horizontal_addr[9:2] == 12) && 
-                            (vertical_addr[8:2] >= 77 && vertical_addr[8:2] <= 82)) || // Left and right vertical lines (top half)
-                            ((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 82)) || (horizontal_addr[9:2] == 12 &&
-                            vertical_addr[8:2] > 82 && vertical_addr[8:2] <= 87)) begin // Middle horizontal line
-                    colour <= 12'h00f;
-                end
-            end
-            else if (minute_counter_tens == 4'd5) begin
-                if (((horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 12) && 
-                            (vertical_addr[8:2] == 77 || vertical_addr[8:2] == 82 || vertical_addr[8:2] == 87)) || // Top, middle, bottom lines
-                            ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] > 77 && vertical_addr[8:2] <= 82)) || // Top left vertical
-                            ((horizontal_addr[9:2] == 12 && vertical_addr[8:2] >= 82 && vertical_addr[8:2] < 87))) begin // Bottom right vertical
-                    colour <= 12'h00f;
-                end
-            end
-            if ((horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 80) || // Top dot of colon
-                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 82)) begin // Bottom dot of colon
+            
+            if ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 86) || // Top dot of colon
+                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
                 colour <= 12'h00f;
             end
         end
@@ -574,253 +371,146 @@ module Snake_control(
             // Coordinates for displaying "2 PLAYER SNAKE" at a specific position
             // Example coordinates (adjust these based on screen resolution and grid size)
             crashed <= 1'b0;
-            if (horizontal_addr[9:2] >= 0 && horizontal_addr[9:2] <= 160 &&
-                vertical_addr[8:2] >= 0 && vertical_addr[8:2] <= 120) begin
-                if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 11) ||
-                    (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 11 && vertical_addr[8:2] <= 14) ||
-                    (horizontal_addr[9:2] >= 11 && horizontal_addr[9:2] <= 15 && vertical_addr[8:2] == 10) || 
-                    (horizontal_addr[9:2] == 15 && vertical_addr[8:2] == 15) || 
-                    (horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 16) ||
-                    (horizontal_addr[9:2] == 13 && vertical_addr[8:2] == 17) ||
-                    (horizontal_addr[9:2] == 12 && vertical_addr[8:2] == 18) ||
-                    (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 19) ||
-                    (horizontal_addr[9:2] == 10 && vertical_addr[8:2] >= 20 && vertical_addr[8:2] <= 22) ||
-                    (horizontal_addr[9:2] >= 10 && horizontal_addr[9:2] <= 16 && vertical_addr[8:2] == 22))begin
-                    colour <= 12'h0f0;
-                end
-                else if ((horizontal_addr[9:2] == 25 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||  // Vertical line
-                         (horizontal_addr[9:2] >= 26 && horizontal_addr[9:2] <= 30 && vertical_addr[8:2] == 10) || // Top horizontal line
-                         (horizontal_addr[9:2] >= 26 && horizontal_addr[9:2] <= 30 && vertical_addr[8:2] == 16) || // Middle horizontal line
-                         (horizontal_addr[9:2] == 31 && vertical_addr[8:2] >= 11 && vertical_addr[8:2] <= 15)) begin // Right vertical line (top half)
-                    colour <= 12'h0f0;
-                end
-                else if ((horizontal_addr[9:2] == 40 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) || // Vertical line
-                         (horizontal_addr[9:2] >= 41 && horizontal_addr[9:2] <= 45 && vertical_addr[8:2] == 22)) begin // Bottom horizontal line
-                    colour <= 12'h0f0;
-                end
-                // "A" at X=55, Y=10
-                else if ((horizontal_addr[9:2] == 55 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                         (horizontal_addr[9:2] >= 56 && horizontal_addr[9:2] <= 60 && vertical_addr[8:2] == 10) ||
-                         (horizontal_addr[9:2] == 61 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                         (horizontal_addr[9:2] >= 56 && horizontal_addr[9:2] <= 60 && vertical_addr[8:2] == 16)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "Y" at X=70, Y=10
-                else if ((horizontal_addr[9:2] == 70 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 15) ||
-                         (horizontal_addr[9:2] == 74 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 15) ||
-                         (horizontal_addr[9:2] >= 71 && horizontal_addr[9:2] <= 73 && vertical_addr[8:2] == 16) ||
-                         (horizontal_addr[9:2] == 72 && vertical_addr[8:2] >= 17 && vertical_addr[8:2] <= 22)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "E" at X=85, Y=10
-                else if ((horizontal_addr[9:2] == 85 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                         (horizontal_addr[9:2] >= 86 && horizontal_addr[9:2] <= 90 && vertical_addr[8:2] == 10) ||
-                         (horizontal_addr[9:2] >= 86 && horizontal_addr[9:2] <= 90 && vertical_addr[8:2] == 16) ||
-                         (horizontal_addr[9:2] >= 86 && horizontal_addr[9:2] <= 90 && vertical_addr[8:2] == 22)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "R" at X=100, Y=10
-                else if ((horizontal_addr[9:2] == 100 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                         (horizontal_addr[9:2] >= 101 && horizontal_addr[9:2] <= 105 && vertical_addr[8:2] == 10) ||
-                         (horizontal_addr[9:2] >= 101 && horizontal_addr[9:2] <= 105 && vertical_addr[8:2] == 16) ||
-                         (horizontal_addr[9:2] == 106 && vertical_addr[8:2] >= 11 && vertical_addr[8:2] <= 15) ||
-                         (horizontal_addr[9:2] == 105 && vertical_addr[8:2] == 17) ||
-                         (horizontal_addr[9:2] == 106 && vertical_addr[8:2] >= 18 && vertical_addr[8:2] <= 22)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "S" at X=115, Y=10
-                else if ((horizontal_addr[9:2] >= 115-105 && horizontal_addr[9:2] <= 120-105 && vertical_addr[8:2] == 10+30) ||
-                         (horizontal_addr[9:2] == 115-105 && vertical_addr[8:2] >= 11+30 && vertical_addr[8:2] <= 16+30) ||
-                         (horizontal_addr[9:2] >= 115-105 && horizontal_addr[9:2] <= 120-105 && vertical_addr[8:2] == 16+30) ||
-                         (horizontal_addr[9:2] == 120-105 && vertical_addr[8:2] >= 17+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] >= 115-105 && horizontal_addr[9:2] <= 120-105 && vertical_addr[8:2] == 22+30)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "N" at X=130, Y=10
-                else if ((horizontal_addr[9:2] == 130-105 && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] == 142-105 && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] == (130-105 + vertical_addr[8:2] - (10 + 30)) && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "A" at X=150, Y=10
-                else if ((horizontal_addr[9:2] == 150-105 && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] >= 151-105 && horizontal_addr[9:2] <= 155-105 && vertical_addr[8:2] == 10+30) ||
-                         (horizontal_addr[9:2] == 156-105 && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] >= 151-105 && horizontal_addr[9:2] <= 155-105 && vertical_addr[8:2] == 16+30)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "K" at X=165, Y=10
-                else if ((horizontal_addr[9:2] == 165-105 && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] == 166-105 && vertical_addr[8:2] == 16+30) ||
-                         (horizontal_addr[9:2] == 167-105 && vertical_addr[8:2] == 17+30) ||
-                         (horizontal_addr[9:2] == 168-105 && vertical_addr[8:2] == 18+30) ||
-                         (horizontal_addr[9:2] == 167-105 && vertical_addr[8:2] == 15+30) ||
-                         (horizontal_addr[9:2] == 168-105 && vertical_addr[8:2] == 14+30) ||
-                         (horizontal_addr[9:2] == 169-105 && vertical_addr[8:2] == 19+30) ||
-                         (horizontal_addr[9:2] == 170-105 && vertical_addr[8:2] == 20+30) ||
-                         (horizontal_addr[9:2] == 171-105 && vertical_addr[8:2] == 21+30) ||
-                         (horizontal_addr[9:2] == 172-105 && vertical_addr[8:2] == 22+30) ||
-                         (horizontal_addr[9:2] == 169-105 && vertical_addr[8:2] == 13+30) ||
-                         (horizontal_addr[9:2] == 170-105 && vertical_addr[8:2] == 12+30) ||
-                         (horizontal_addr[9:2] == 171-105 && vertical_addr[8:2] == 11+30) ||
-                         (horizontal_addr[9:2] == 172-105 && vertical_addr[8:2] == 10+30)) begin
-                    colour <= 12'h0f0;
-                end
-            
-                // "E" at X=185, Y=10
-                else if ((horizontal_addr[9:2] == 180-105 && vertical_addr[8:2] >= 10+30 && vertical_addr[8:2] <= 22+30) ||
-                         (horizontal_addr[9:2] >= 181-105 && horizontal_addr[9:2] <= 185-105 && vertical_addr[8:2] == 10+30) ||
-                         (horizontal_addr[9:2] >= 181-105 && horizontal_addr[9:2] <= 185-105 && vertical_addr[8:2] == 16+30) ||
-                         (horizontal_addr[9:2] >= 181-105 && horizontal_addr[9:2] <= 185-105 && vertical_addr[8:2] == 22+30)) begin
-                    colour <= 12'h0f0;
-                end
-                else begin
-                    colour <= 12'h000;
-                end 
-            end 
+            colour <= 12'h000;
+            if(TWO_colour != 12'h000)
+                colour <= TWO_colour;
+            else if(P_colour != 12'h000) 
+                colour <= P_colour;
+            else if(L_colour != 12'h000)
+                colour <= L_colour;
+            else if(A_colour != 12'h000)
+                colour <= A_colour;
+            else if(Y_colour != 12'h000)
+                colour <= Y_colour;
+            else if(P_E_colour != 12'h000)
+                colour <= P_E_colour;
+            else if(P_R_colour != 12'h000)
+                colour <= P_R_colour;
+            else if(P_S_colour != 12'h000)
+                colour <= P_S_colour;
+            else if(N_colour != 12'h000)
+                colour <= N_colour;
+            else if(P_A_colour != 12'h000)
+                colour <= P_A_colour;
+            else if(K_colour != 12'h000)
+                colour <= K_colour;
+            else if(P_P_E_colour != 12'h000)
+                colour <= P_P_E_colour;
         end
         else if (state_master == 2'd2) begin
             crashed <= 1'b0;
-            // "Y" at X=10, Y=10
-            if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 10) ||
-                (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 11) ||
-                (horizontal_addr[9:2] == 12 && vertical_addr[8:2] == 12) ||
-                (horizontal_addr[9:2] == 13 && vertical_addr[8:2] == 13) ||
-                (horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 14) ||
-                (horizontal_addr[9:2] == 15 && vertical_addr[8:2] == 15) ||
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 16) ||
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 17 && vertical_addr[8:2] <= 22) ||
-                (horizontal_addr[9:2] == 17 && vertical_addr[8:2] == 15) ||
-                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 14) ||
-                (horizontal_addr[9:2] == 19 && vertical_addr[8:2] == 13) ||
-                (horizontal_addr[9:2] == 20 && vertical_addr[8:2] == 12) ||
-                (horizontal_addr[9:2] == 21 && vertical_addr[8:2] == 11) ||
-                (horizontal_addr[9:2] == 22 && vertical_addr[8:2] == 10)) begin
-                colour <= 12'h0f0;  // Colour for "Y"
-            end
+            colour <= 12'h000;
             
-            // "O" at X=25, Y=10
-            else if ((horizontal_addr[9:2] >= 28 && horizontal_addr[9:2] <= 32 && vertical_addr[8:2] == 22) ||
-                     (horizontal_addr[9:2] == 33 && vertical_addr[8:2] <= 21 && vertical_addr[8:2] >= 11) ||
-                     (horizontal_addr[9:2] >= 28 && horizontal_addr[9:2] <= 32 && vertical_addr[8:2] == 10) ||
-                     (horizontal_addr[9:2] == 27 && vertical_addr[8:2] >= 11 && vertical_addr[8:2] <= 21)) begin
-                colour <= 12'h0f0;  // Colour for "O"
-            end
-            
-            // "U" at X=40, Y=10
-            else if ((horizontal_addr[9:2] == 38 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 21) ||
-                     (horizontal_addr[9:2] == 43 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 21) ||
-                     (horizontal_addr[9:2] >= 39 && horizontal_addr[9:2] <= 42 && vertical_addr[8:2] == 22)) begin
-                colour <= 12'h0f0;  // Colour for "U"
-            end
-            
-            // "W" at X=55, Y=10
-            else if ((horizontal_addr[9:2] == 60 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 21) ||
-                     (vertical_addr[8:2] == 22 && (horizontal_addr[9:2] == 61 || horizontal_addr[9:2] == 65)) ||
-                     (horizontal_addr[9:2] >= 62 && horizontal_addr[9:2] <= 64 && vertical_addr[8:2] == 21) ||
-                     (horizontal_addr[9:2] == 63 && vertical_addr[8:2] <= 20 && vertical_addr[8:2] >= 19) ||
-                     (horizontal_addr[9:2] == 66 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 21)) begin
-                colour <= 12'h0f0;  // Colour for "W"
-            end
-            
-            // "I" at X=75, Y=10
-            else if ((horizontal_addr[9:2] == 72 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (horizontal_addr[9:2] == 71 && (vertical_addr[8:2] == 10 || vertical_addr[8:2] == 22)) ||
-                     (horizontal_addr[9:2] == 73 && (vertical_addr[8:2] == 10 || vertical_addr[8:2] == 22))) begin
-                colour <= 12'h0f0;  // Colour for "I"
-            end
-            
-            // "N" at X=85, Y=10
-            else if ((horizontal_addr[9:2] == 78 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (horizontal_addr[9:2] == 90 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (horizontal_addr[9:2] == (78 + vertical_addr[8:2] - 10 ) && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22)) begin
-                colour <= 12'h0f0;
-            end
-            
+            if ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 86) || // Top dot of colon
+                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
+                colour <= 12'h00f;
+            end 
             else begin
-                colour <= 12'h000;  // Background color
+                if(score_colour != 12'h000) begin
+                    colour <= score_colour;
+                end else if (second_units_colour != 12'h000) begin
+                    colour <= second_units_colour;
+                end else if (second_tens_colour != 12'h000) begin
+                    colour <= second_tens_colour;
+                end else if (minute_units_colour != 12'h000) begin
+                    colour <= minute_units_colour;
+                end else if (minute_tens_colour != 12'h000) begin
+                    colour <= minute_tens_colour;
+                end else if (S_colour != 12'h000) begin
+                    colour <= S_colour;
+                end else if (C_colour != 12'h000) begin
+                    colour <= C_colour;
+                end else if (O_colour != 12'h000) begin
+                    colour <= O_colour;
+                end else if (R_colour != 12'h000) begin
+                    colour <= R_colour; 
+                end else if (E_colour != 12'h000) begin
+                    colour <= E_colour;
+                end else if (T_colour != 12'h000) begin 
+                    colour <= T_colour;
+                end else if (I_colour != 12'h000) begin 
+                    colour <= I_colour;
+                end else if (M_colour != 12'h000) begin
+                    colour <= M_colour;
+                end else if (T_E_colour != 12'h000) begin
+                    colour <= T_E_colour;
+                end else if (T_R_colour != 12'h000) begin
+                    colour <= T_R_colour;
+                end else if (WIN_Y_colour != 12'h000) begin
+                    colour <= WIN_Y_colour;
+                end else if (WIN_O_colour != 12'h000) begin
+                    colour <= WIN_O_colour;
+                end else if (WIN_U_colour != 12'h000) begin
+                    colour <= WIN_U_colour;
+                end else if (WIN_W_colour != 12'h000) begin
+                    colour <= WIN_W_colour;
+                end else if (WIN_I_colour != 12'h000) begin
+                    colour <= WIN_I_colour;
+                end else if (WIN_N_colour != 12'h000) begin 
+                    colour <= WIN_N_colour;
+                end
             end
+
         end
         else if (state_master == 2'd3) begin //losing screen
             crashed <= 1'b0;
-            // "Y" at X=10, Y=10
-            if ((horizontal_addr[9:2] == 10 && vertical_addr[8:2] == 10) ||
-                (horizontal_addr[9:2] == 11 && vertical_addr[8:2] == 11) ||
-                (horizontal_addr[9:2] == 12 && vertical_addr[8:2] == 12) ||
-                (horizontal_addr[9:2] == 13 && vertical_addr[8:2] == 13) ||
-                (horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 14) ||
-                (horizontal_addr[9:2] == 15 && vertical_addr[8:2] == 15) ||
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 16) ||
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] >= 17 && vertical_addr[8:2] <= 22) ||
-                (horizontal_addr[9:2] == 17 && vertical_addr[8:2] == 15) ||
-                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 14) ||
-                (horizontal_addr[9:2] == 19 && vertical_addr[8:2] == 13) ||
-                (horizontal_addr[9:2] == 20 && vertical_addr[8:2] == 12) ||
-                (horizontal_addr[9:2] == 21 && vertical_addr[8:2] == 11) ||
-                (horizontal_addr[9:2] == 22 && vertical_addr[8:2] == 10)) begin
-                colour <= 12'h0f0;  // Colour for "Y"
-            end
+            colour <= 12'h000;
             
-            // "O" at X=25, Y=10
-            else if ((horizontal_addr[9:2] >= 28 && horizontal_addr[9:2] <= 32 && vertical_addr[8:2] == 22) ||
-                     (horizontal_addr[9:2] == 33 && vertical_addr[8:2] <= 21 && vertical_addr[8:2] >= 11) ||
-                     (horizontal_addr[9:2] >= 28 && horizontal_addr[9:2] <= 32 && vertical_addr[8:2] == 10) ||
-                     (horizontal_addr[9:2] == 27 && vertical_addr[8:2] >= 11 && vertical_addr[8:2] <= 21)) begin
-                colour <= 12'h0f0;  // Colour for "O"
+            if ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 86) || // Top dot of colon
+                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
+                colour <= 12'h00f;
             end
-            
-            // "U" at X=40, Y=10
-            else if ((horizontal_addr[9:2] == 38 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 21) ||
-                     (horizontal_addr[9:2] == 43 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 21) ||
-                     (horizontal_addr[9:2] >= 39 && horizontal_addr[9:2] <= 42 && vertical_addr[8:2] == 22)) begin
-                colour <= 12'h0f0;  // Colour for "U"
-            end
-            
-            // "L" at X=55, Y=10
-            else if ((horizontal_addr[9:2] == 60 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (vertical_addr[8:2] == 22 && horizontal_addr[9:2] >= 60 && horizontal_addr[9:2] <= 65)) begin
-                colour <= 12'h0f0;  // Colour for "L"
-            end
-            
-            // "O" at X=70, Y=10
-            else if ((horizontal_addr[9:2] == 70 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (horizontal_addr[9:2] == 77 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (vertical_addr[8:2] == 10 && horizontal_addr[9:2] >= 70 && horizontal_addr[9:2] <= 77) ||
-                     (vertical_addr[8:2] == 22 && horizontal_addr[9:2] >= 70 && horizontal_addr[9:2] <= 77)) begin
-                colour <= 12'h0f0;  // Colour for "O"
-            end
-            
-            // "S" at X=85, Y=10
-            else if ((vertical_addr[8:2] == 10 && horizontal_addr[9:2] >= 85 && horizontal_addr[9:2] <= 92) ||
-                     (vertical_addr[8:2] == 16 && horizontal_addr[9:2] >= 85 && horizontal_addr[9:2] <= 92) ||
-                     (vertical_addr[8:2] == 22 && horizontal_addr[9:2] >= 85 && horizontal_addr[9:2] <= 92) ||
-                     (horizontal_addr[9:2] == 85 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 16) ||
-                     (horizontal_addr[9:2] == 92 && vertical_addr[8:2] >= 16 && vertical_addr[8:2] <= 22)) begin
-                colour <= 12'h0f0;  // Colour for "S"
-            end
-            
-            // "E" at X=100, Y=10
-            else if ((horizontal_addr[9:2] == 100 && vertical_addr[8:2] >= 10 && vertical_addr[8:2] <= 22) ||
-                     (vertical_addr[8:2] == 10 && horizontal_addr[9:2] >= 100 && horizontal_addr[9:2] <= 107) ||
-                     (vertical_addr[8:2] == 16 && horizontal_addr[9:2] >= 100 && horizontal_addr[9:2] <= 105) ||
-                     (vertical_addr[8:2] == 22 && horizontal_addr[9:2] >= 100 && horizontal_addr[9:2] <= 107)) begin
-                colour <= 12'h0f0;  // Colour for "E"
-            end 
-
             
             else begin
-                colour <= 12'h000;  // Background color
+                if(score_colour != 12'h000) begin
+                    colour <= score_colour;
+                end else if (second_units_colour != 12'h000) begin
+                    colour <= second_units_colour;
+                end else if (second_tens_colour != 12'h000) begin
+                    colour <= second_tens_colour;
+                end else if (minute_units_colour != 12'h000) begin
+                    colour <= minute_units_colour;
+                end else if (minute_tens_colour != 12'h000) begin
+                    colour <= minute_tens_colour;
+                 end else if (S_colour != 12'h000) begin
+                    colour <= S_colour;
+                end else if (C_colour != 12'h000) begin
+                    colour <= C_colour;
+                end else if (O_colour != 12'h000) begin
+                    colour <= O_colour;
+                end else if (R_colour != 12'h000) begin
+                    colour <= R_colour; 
+                end else if (E_colour != 12'h000) begin
+                    colour <= E_colour;
+                end else if (T_colour != 12'h000) begin 
+                    colour <= T_colour;
+                end else if (I_colour != 12'h000) begin 
+                    colour <= I_colour;
+                end else if (M_colour != 12'h000) begin
+                    colour <= M_colour;
+                end else if (T_E_colour != 12'h000) begin
+                    colour <= T_E_colour;
+                end else if (T_R_colour != 12'h000) begin
+                    colour <= T_R_colour;
+                end else if (WIN_Y_colour != 12'h000) begin
+                    colour <= WIN_Y_colour;
+                end else if (WIN_O_colour != 12'h000) begin
+                    colour <= WIN_O_colour;
+                end else if (WIN_U_colour != 12'h000) begin
+                    colour <= WIN_U_colour;
+                end else if (LOSE_L_colour != 12'h000) begin
+                    colour <= LOSE_L_colour;
+                end else if (LOSE_O_colour != 12'h000) begin
+                    colour <= LOSE_O_colour;
+                end else if (LOSE_S_colour != 12'h000) begin
+                    colour <= LOSE_S_colour;
+                end else if (LOSE_E_colour != 12'h000) begin
+                    colour <= LOSE_E_colour;
+                end    
             end
+              
         end
         else //OTHER
             colour <= 12'h000;
-    end
-    
+    end 
 endmodule

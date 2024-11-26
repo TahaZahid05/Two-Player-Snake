@@ -72,7 +72,6 @@ proc create_report { reportName command } {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 2
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -97,7 +96,9 @@ read_verilog -library xil_defaultlib {
   {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v}
   {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v}
   {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v}
   {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v}
+  {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v}
   {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/timer.v}
   {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v}
 }

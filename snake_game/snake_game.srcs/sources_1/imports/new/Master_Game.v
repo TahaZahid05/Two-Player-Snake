@@ -129,18 +129,6 @@ module Master_Game(
                         .fail(fail)
                     );
                     
-//   Snake_control s2 (
-//                        .CLK(CLK),
-//                        .RESET(BTNC),
-//                        .score(score),
-//                        .state_master(state_master),
-//                        .state_navigation(state_navigation_2),
-//                        .target_address(target_address),
-//                        .pixel_address(address_2),
-//                        .COLOUR_OUT(colour_2),
-//                        .reached_target(reached_target_2),
-//                        .fail(fail_2)
-//                    );
                     
     
     Target_Generator tg (
@@ -152,12 +140,6 @@ module Master_Game(
                             .rand_poison_address(poison_address)
                         );
                         
-//    Target_Generator pg (
-//                            .CLK(CLK),
-//                            .RESET(BTNC),
-//                            .reached_target(reached_poison_one | reached_poison_two),
-//                            .rand_target_address(poison_address)
-//                        );
     
     VGA_Interface vgai  (
                             .CLK(CLK),
@@ -171,24 +153,20 @@ module Master_Game(
     Score_Counter sc    (
                             .CLK(CLK),
                             .RESET(BTNC),
-                            .reached_target(reached_target_one),
-                            .reached_poison(reached_poison_one),
+                            .reached_target_one(reached_target_one),
+                            .reached_poison_one(reached_poison_one),
+                            .reached_target_two(reached_target_two),
+                            .reached_poison_two(reached_poison_two),
                             .master_state(state_master),
-                            .SCORE(score_snake_one)
+                            .SCORE_SNAKE_ONE(score_snake_one),
+                            .SCORE_SNAKE_TWO(score_snake_two)
                         );
                         
-    Score_Counter sc2    (
-                            .CLK(CLK),
-                            .RESET(BTNC),
-                            .reached_target(reached_target_two),
-                            .reached_poison(reached_poison_two),
-                            .master_state(state_master),
-                            .SCORE(score_snake_two)
-                        );
                         
     timer t1 (
                 .CLK(CLK),
                 .RESET(BTNC),
+                .STATE(state_master),
                 .SECONDS_UNITS(second_counter_units),
                 .SECONDS_TENS(second_counter_tens),
                 .MINUTES_UNITS(minute_counter_units),
