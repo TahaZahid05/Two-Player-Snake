@@ -2,8 +2,8 @@
 module Snake_control(
     input CLK,
     input RESET,
-    input [3:0] score_snake_one,
-    input [3:0] score_snake_two,
+    input signed [3:0] score_snake_one,
+    input signed [3:0] score_snake_two,
     input [1:0] state_master,
     input [1:0] state_navigation,
     input [1:0] state_navigation_2,
@@ -224,10 +224,10 @@ module Snake_control(
    wire [11:0] LOSE_S_colour;
    wire [11:0] LOSE_E_colour;
    scoreDisplay s1(horizontal_addr,vertical_addr,score_snake_one,score_snake_two,13,15,49,59,12'h00f,score_colour);
-   scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,22,24,83,93,12'hf00,second_units_colour);
-   scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,18,20,83,93,12'hf00,second_tens_colour);
-   scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,12,14,83,93,12'hf00,minute_units_colour);
-   scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,8,10,83,93,12'hf00,minute_tens_colour);
+   scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,20,22,83,93,12'hf00,second_units_colour);
+   scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,16,18,83,93,12'hf00,second_tens_colour);
+   scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,10,12,83,93,12'hf00,minute_units_colour);
+   scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,6,8,83,93,12'hf00,minute_tens_colour);
    
    alphabetGen S(6'd18,horizontal_addr,vertical_addr,5,40,12'h00f,0,S_colour);
    alphabetGen C(6'd2,horizontal_addr,vertical_addr,9,40,12'h00f,0,C_colour);
@@ -254,25 +254,27 @@ module Snake_control(
    alphabetGen K(6'd10,horizontal_addr, vertical_addr,48,40,12'h0f0,1,K_colour);
    alphabetGen P_P_E(6'd4,horizontal_addr,vertical_addr,60,40,12'h0f0,1,P_P_E_colour);
    
-   alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,10,10,12'h0f0,1,WIN_Y_colour);
-   alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,19,10,12'h0f0,1,WIN_O_colour);
-   alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,30,10,12'h0f0,1,WIN_U_colour);
-   alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,45,10,12'h0f0,1,WIN_W_colour);
-   alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,56,10,12'h0f0,1,WIN_I_colour);
-   alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,63,10,12'h0f0,1,WIN_N_colour);
+   alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,5,10,12'h0f0,1,WIN_Y_colour);
+   alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,14,10,12'h0f0,1,WIN_O_colour);
+   alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,25,10,12'h0f0,1,WIN_U_colour);
+   alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,40,10,12'h0f0,1,WIN_W_colour);
+   alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,51,10,12'h0f0,1,WIN_I_colour);
+   alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,58,10,12'h0f0,1,WIN_N_colour);
    
-   alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,45,10,12'h0f0,1,LOSE_L_colour);
-   alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,55,10,12'h0f0,1,LOSE_O_colour);
-   alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,70,10,12'h0f0,1,LOSE_S_colour);
-   alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,85,10,12'h0f0,1,LOSE_E_colour);
+   alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,40,10,12'h0f0,1,LOSE_L_colour);
+   alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,50,10,12'h0f0,1,LOSE_O_colour);
+   alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,61,10,12'h0f0,1,LOSE_S_colour);
+   alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,71,10,12'h0f0,1,LOSE_E_colour);
    
     always @(posedge CLK) begin
         if (state_master == 2'd1) begin // 
             colour <= 12'h000; // Default color
             crashed <= 1'b0;
-
+            
+            if((reached_p_one || reached_p_two)&&((score_snake_one == -4'd1) && (score_snake_two == -4'd1)))
+                crashed <= 1'b1;
             // Check for seed and poison addresses
-            if (target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) begin
+            else if (target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) begin
                 colour <= 12'h00f; // Seed color
             end else if (poison_horizontal_addr[7:0] == horizontal_addr[9:2] && poison_vertical_addr[6:0] == vertical_addr[8:2]) begin
                 colour <= 12'h0f0; // Poison color
@@ -362,8 +364,8 @@ module Snake_control(
             end
 
             
-            if ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 86) || // Top dot of colon
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
+            if ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 86) || // Top dot of colon
+                (horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
                 colour <= 12'h00f;
             end
         end
@@ -401,8 +403,8 @@ module Snake_control(
             crashed <= 1'b0;
             colour <= 12'h000;
             
-            if ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 86) || // Top dot of colon
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
+            if ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 86) || // Top dot of colon
+                (horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
                 colour <= 12'h00f;
             end 
             else begin
@@ -456,8 +458,8 @@ module Snake_control(
             crashed <= 1'b0;
             colour <= 12'h000;
             
-            if ((horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 86) || // Top dot of colon
-                (horizontal_addr[9:2] == 16 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
+            if ((horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 86) || // Top dot of colon
+                (horizontal_addr[9:2] == 14 && vertical_addr[8:2] == 90)) begin // Bottom dot of colon
                 colour <= 12'h00f;
             end
             

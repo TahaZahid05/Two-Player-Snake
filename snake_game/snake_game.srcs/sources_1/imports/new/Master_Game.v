@@ -9,7 +9,6 @@ module Master_Game(
         output VS
     );
     
-//    wire [5:0] score;
     wire [3:0] second_counter_units;
     wire [3:0] minute_counter_units;
     wire [2:0] second_counter_tens;

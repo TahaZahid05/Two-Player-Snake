@@ -7,8 +7,8 @@ module Score_Counter(
     input reached_target_two,
     input reached_poison_two,
     input [1:0] master_state,
-    output reg [3:0] SCORE_SNAKE_ONE,
-    output reg [3:0] SCORE_SNAKE_TWO
+    output reg signed [3:0] SCORE_SNAKE_ONE,
+    output reg signed [3:0] SCORE_SNAKE_TWO
     );
 
     reg target_reached_flag;
@@ -43,7 +43,12 @@ module Score_Counter(
                     else begin
                         SCORE_SNAKE_TWO <= SCORE_SNAKE_TWO - 4'd1;
                     end
+                    
                     poison_reached_flag <= 1'b1;
+                end
+                else begin
+                    SCORE_SNAKE_ONE <= -4'd1;
+                    SCORE_SNAKE_TWO <= -4'd1;
                 end
             end
             else if (reached_poison_two && !poison_reached_flag) begin
@@ -55,6 +60,10 @@ module Score_Counter(
                         SCORE_SNAKE_ONE <= SCORE_SNAKE_ONE - 4'd1;
                     end
                     poison_reached_flag <= 1'b1;
+                end
+                else begin
+                    SCORE_SNAKE_ONE <= -4'd1;
+                    SCORE_SNAKE_TWO <= -4'd1;
                 end
             end
             else if (!reached_poison_one) begin

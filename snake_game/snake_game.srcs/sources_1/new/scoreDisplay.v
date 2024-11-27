@@ -1,8 +1,8 @@
 module scoreDisplay (
     input wire [9:0] horizontal_addr,
     input wire [8:0] vertical_addr,
-    input wire [3:0] score_snake_one,
-    input wire [3:0] score_snake_two,
+    input wire signed [3:0] score_snake_one,
+    input wire signed [3:0] score_snake_two,
     input wire [8:0] pos_x_start,
     input wire [8:0] pos_x_end,
     input wire [7:0] pos_y_start,
@@ -108,6 +108,16 @@ always @(*) begin
             (horizontal_addr[9:2] == pos_x_end && vertical_addr[8:2] >= (pos_y_start + 5) && vertical_addr[8:2] <= pos_y_end)) begin // Right vertical line (bottom half)
             colour <= colour_in;
         end 
+        else
+            colour <= 12'h000;
+    end
+    else begin
+        if (((horizontal_addr[9:2] >= pos_x_start && horizontal_addr[9:2] <= pos_x_end) && 
+                (vertical_addr[8:2] == pos_y_start || vertical_addr[8:2] == pos_y_end)) || // Top and bottom horizontal lines
+            ((horizontal_addr[9:2] == pos_x_start || horizontal_addr[9:2] == pos_x_end) && 
+                (vertical_addr[8:2] > pos_y_start && vertical_addr[8:2] < pos_y_end))) begin // Left and right vertical lines
+            colour <= colour_in;
+        end
         else
             colour <= 12'h000;
     end
