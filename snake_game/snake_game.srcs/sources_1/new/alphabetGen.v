@@ -12,13 +12,23 @@ module alphabetGen(
     );
     always @(*) begin
         if(alph_input == 6'd0) begin
-            if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||
-                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == pos_y_start) ||
-                (horizontal_addr[9:2] == (pos_x_start + 6) && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||
-                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == (pos_y_start + 6)))
-                colour <= colour_in;
-            else
-                colour <= 12'h000;
+            if(heading) begin
+                if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||
+                    (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == pos_y_start) ||
+                    (horizontal_addr[9:2] == (pos_x_start + 6) && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||
+                    (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == (pos_y_start + 6)))
+                    colour <= colour_in;
+                else
+                    colour <= 12'h000;
+            end
+            else begin
+                if ((vertical_addr[8:2] == pos_y_start && horizontal_addr[9:2] >= pos_x_start && horizontal_addr[9:2] <= (pos_x_start + 3))
+                    || ((horizontal_addr[9:2] == pos_x_start || horizontal_addr[9:2] == (pos_x_start + 3)) && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 6))
+                    || (vertical_addr[8:2] == (pos_y_start + 3) && horizontal_addr[9:2] >= pos_x_start && horizontal_addr[9:2] <= (pos_x_start + 3)))
+                        colour <= colour_in;
+                else 
+                    colour <= 12'h000;
+            end
         end else if(alph_input == 6'd1) begin
             // Code for 'B'
             if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||
@@ -72,10 +82,11 @@ module alphabetGen(
         end
         else if(alph_input == 6'd6) begin
             // Code for 'G'
-            if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||
-                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 6) && (vertical_addr[8:2] == pos_y_start || vertical_addr[8:2] == (pos_y_start + 12))) ||
-                (horizontal_addr[9:2] == (pos_x_start + 6) && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 6) || vertical_addr[8:2] >= (pos_y_start + 6) && vertical_addr[8:2] <= (pos_y_start + 12)) ||
-                (horizontal_addr[9:2] >= (pos_x_start + 3) && horizontal_addr[9:2] <= (pos_x_start + 6) && vertical_addr[8:2] == (pos_y_start + 6)))
+            if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 6)) ||
+                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 3) && (vertical_addr[8:2] == pos_y_start)) ||
+                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 3) && (vertical_addr[8:2] == (pos_y_start+ 6))) ||
+                (horizontal_addr[9:2] == (pos_x_start + 3) && (vertical_addr[8:2] == (pos_y_start + 5) || vertical_addr[8:2] == (pos_y_start + 4))) ||
+                (horizontal_addr[9:2] == (pos_x_start + 2) && vertical_addr[8:2] == (pos_y_start + 4)))
                 colour <= colour_in;
             else 
                 colour <= 12'h000;
@@ -186,13 +197,23 @@ module alphabetGen(
         end
         else if(alph_input == 6'd15) begin
             // Code for 'P'
-            if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||  // Vertical line
-                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == pos_y_start) || // Top horizontal line
-                (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == (pos_y_start + 6)) || // Middle horizontal line
-                (horizontal_addr[9:2] == (pos_x_start + 6) && vertical_addr[8:2] >= (pos_y_start + 1) && vertical_addr[8:2] <= (pos_y_start + 5))) // Right vertical line (top half)
-                colour <= colour_in;
-            else
-                colour <= 12'h000;
+            if (heading) begin
+                if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 12)) ||  // Vertical line
+                    (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == pos_y_start) || // Top horizontal line
+                    (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 5) && vertical_addr[8:2] == (pos_y_start + 6)) || // Middle horizontal line
+                    (horizontal_addr[9:2] == (pos_x_start + 6) && vertical_addr[8:2] >= (pos_y_start + 1) && vertical_addr[8:2] <= (pos_y_start + 5))) // Right vertical line (top half)
+                    colour <= colour_in;
+                else
+                    colour <= 12'h000;
+            end
+            else begin
+                if ((horizontal_addr[9:2] == pos_x_start && vertical_addr[8:2] >= pos_y_start && vertical_addr[8:2] <= (pos_y_start + 10)) ||
+                    (horizontal_addr[9:2] >= (pos_x_start + 1) && horizontal_addr[9:2] <= (pos_x_start + 2) && (vertical_addr[8:2] == pos_y_start || vertical_addr[8:2] == (pos_y_start + 4))) ||
+                    (horizontal_addr[9:2] == (pos_x_start + 3) && vertical_addr[8:2] >= (pos_y_start + 1) && vertical_addr[8:2] <= (pos_y_start + 3)))
+                    colour <= colour_in;
+                else
+                    colour <= 12'h000;
+            end
         end
         else if(alph_input == 6'd16) begin
             // Code for 'Q'

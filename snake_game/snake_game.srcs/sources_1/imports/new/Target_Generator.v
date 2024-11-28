@@ -41,13 +41,13 @@ module Target_Generator(
 
             if (reached_target) begin
                 // Map LFSR outputs to valid ranges for target
-                mapped_x <= (lfsr_h % (130 - 50 + 1)) + 50; // x-range: 50 to 130
+                mapped_x <= (lfsr_h % (130 - 60 + 1)) + 50; // x-range: 50 to 130
                 mapped_y <= (lfsr_v % (90 - 20 + 1)) + 20;  // y-range: 20 to 90
             end
 
             if (reached_poison) begin
                 // Map LFSR outputs to valid ranges for poison
-                mapped_poison_x <= (lfsr_poison_h % (130 - 50 + 1)) + 50;
+                mapped_poison_x <= (lfsr_poison_h % (130 - 60 + 1)) + 50;
                 mapped_poison_y <= (lfsr_poison_v % (90 - 20 + 1)) + 20;
             end
         end
