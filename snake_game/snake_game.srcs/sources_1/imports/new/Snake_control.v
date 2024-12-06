@@ -14,6 +14,7 @@ module Snake_control(
     input [2:0] second_counter_tens,
     input [3:0] minute_counter_units,
     input [2:0] minute_counter_tens,
+    input [1:0] lives,
     output [11:0] COLOUR_OUT,
     output reached_target_one,
     output reached_target_two,
@@ -103,58 +104,58 @@ module Snake_control(
         if (counter == 5000000) begin
             case(state_navigation)
                 2'd0: begin
-                    if (SnakeState_X[0] == MaxX-10)
-                        SnakeState_X[0] <= 50;
+                    if (SnakeState_X[0] == MaxX-5)
+                        SnakeState_X[0] <= 5;
                     else
                         SnakeState_X[0] <= SnakeState_X[0] + 1;
                 end
                 
                 2'd1: begin
-                    if (SnakeState_Y[0] == MaxY-10)
-                        SnakeState_Y[0] <= 10;
+                    if (SnakeState_Y[0] == MaxY-5)
+                        SnakeState_Y[0] <= 40;
                     else
                         SnakeState_Y[0] <= SnakeState_Y[0] + 1;
                 end
                 
                 2'd2: begin
-                    if (SnakeState_Y[0] == 10)
-                        SnakeState_Y[0] <= MaxY-10;
+                    if (SnakeState_Y[0] == 40)
+                        SnakeState_Y[0] <= MaxY-5;
                     else
                         SnakeState_Y[0] <= SnakeState_Y[0] - 1;
                 end
                 
                 2'd3: begin
-                    if (SnakeState_X[0] == 50)
-                        SnakeState_X[0] <= MaxX-10;
+                    if (SnakeState_X[0] == 5)
+                        SnakeState_X[0] <= MaxX-5;
                     else
                         SnakeState_X[0] <= SnakeState_X[0] - 1;
                 end
             endcase
             case(state_navigation_2)
                 2'd0: begin
-                    if (SnakeState_X_2[0] == MaxX-10)
-                        SnakeState_X_2[0] <= 50;
+                    if (SnakeState_X_2[0] == MaxX-5)
+                        SnakeState_X_2[0] <= 5;
                     else
                         SnakeState_X_2[0] <= SnakeState_X_2[0] + 1;
                 end
                 
                 2'd1: begin
-                    if (SnakeState_Y_2[0] == MaxY-10)
-                        SnakeState_Y_2[0] <= 10;
+                    if (SnakeState_Y_2[0] == MaxY-5)
+                        SnakeState_Y_2[0] <= 40;
                     else
                         SnakeState_Y_2[0] <= SnakeState_Y_2[0] + 1;
                 end
                 
                 2'd2: begin
-                    if (SnakeState_Y_2[0] == 10)
-                        SnakeState_Y_2[0] <= MaxY-10;
+                    if (SnakeState_Y_2[0] == 40)
+                        SnakeState_Y_2[0] <= MaxY-5;
                     else
                         SnakeState_Y_2[0] <= SnakeState_Y_2[0] - 1;
                 end
                 
                 2'd3: begin
-                    if (SnakeState_X_2[0] == 50)
-                        SnakeState_X_2[0] <= MaxX-10;
+                    if (SnakeState_X_2[0] == 5)
+                        SnakeState_X_2[0] <= MaxX-5;
                     else
                         SnakeState_X_2[0] <= SnakeState_X_2[0] - 1;
                 end
@@ -236,33 +237,42 @@ module Snake_control(
    wire [11:0] P2_P_colour;
    wire [11:0] P2_2_colour;
    wire [11:0] P2_score_colour;
+   wire [11:0] LIVES_L_colour;
+   wire [11:0] LIVES_I_colour;
+   wire [11:0] LIVES_V_colour;
+   wire [11:0] LIVES_E_colour;
+   wire [11:0] LIVES_S_colour;
+//   wire [11:0] LIVES_score_colour;
+   wire [11:0] LIVES_heart_colour_1;
+   wire [11:0] LIVES_heart_colour_2;
+   wire [11:0] LIVES_heart_colour_3;
    
-   alphabetGen TARGET_T(6'd19,horizontal_addr,vertical_addr,4,0,12'h0f0,0,TARGET_T_colour);
-   alphabetGen TARGET_A(6'd0,horizontal_addr,vertical_addr,10,0,12'h0f0,0,TARGET_A_colour);
-   alphabetGen TARGET_R(6'd17,horizontal_addr,vertical_addr,15,0,12'h0f0,0,TARGET_R_colour);
-   alphabetGen TARGET_G(6'd6,horizontal_addr,vertical_addr,20,0,12'h0f0,0,TARGET_G_colour);
-   alphabetGen TARGET_E(6'd4,horizontal_addr,vertical_addr,25,0,12'h0f0,0,TARGET_E_colour);
-   alphabetGen TARGET_T_2(6'd19,horizontal_addr,vertical_addr,29,0,12'h0f0,0,TARGET_T_2_colour);
-   scoreDisplay TARGET_s(horizontal_addr,vertical_addr,4'd8,0,16,18,9,19,12'h0f0,TARGET_s_colour);
+   alphabetGen TARGET_T(6'd19,horizontal_addr,vertical_addr,4,10,12'h0f0,0,TARGET_T_colour);
+   alphabetGen TARGET_A(6'd0,horizontal_addr,vertical_addr,10,10,12'h0f0,0,TARGET_A_colour);
+   alphabetGen TARGET_R(6'd17,horizontal_addr,vertical_addr,15,10,12'h0f0,0,TARGET_R_colour);
+   alphabetGen TARGET_G(6'd6,horizontal_addr,vertical_addr,20,10,12'h0f0,0,TARGET_G_colour);
+   alphabetGen TARGET_E(6'd4,horizontal_addr,vertical_addr,25,10,12'h0f0,0,TARGET_E_colour);
+   alphabetGen TARGET_T_2(6'd19,horizontal_addr,vertical_addr,29,10,12'h0f0,0,TARGET_T_2_colour);
+   scoreDisplay TARGET_s(horizontal_addr,vertical_addr,4'd8,0,16,18,19,29,12'h0f0,TARGET_s_colour);
    
-   scoreDisplay s1(horizontal_addr,vertical_addr,score_snake_one,score_snake_two,16,18,33,43,12'h00f,score_colour);
-   scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,24,26,56,66,12'hf00,second_units_colour);
-   scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,20,22,56,66,12'hf00,second_tens_colour);
-   scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,14,16,56,66,12'hf00,minute_units_colour);
-   scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,10,12,56,66,12'hf00,minute_tens_colour);
+   scoreDisplay s1(horizontal_addr,vertical_addr,score_snake_one,score_snake_two,47,49,19,29,12'h00f,score_colour);
+   scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,82,84,19,29,12'hf00,second_units_colour);
+   scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,78,80,19,29,12'hf00,second_tens_colour);
+   scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,72,74,19,29,12'hf00,minute_units_colour);
+   scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,68,70,19,29,12'hf00,minute_tens_colour);
    
-   alphabetGen S(6'd18,horizontal_addr,vertical_addr,7,24,12'h00f,0,S_colour);
-   alphabetGen C(6'd2,horizontal_addr,vertical_addr,11,24,12'h00f,0,C_colour);
-   alphabetGen O(6'd14,horizontal_addr,vertical_addr,15,24,12'h00f,0,O_colour);
-   alphabetGen R(6'd17,horizontal_addr,vertical_addr,19,24,12'h00f,0,R_colour);
-   alphabetGen E(6'd4,horizontal_addr,vertical_addr,24,24,12'h00f,0,E_colour);
+   alphabetGen S(6'd18,horizontal_addr,vertical_addr,38,10,12'h00f,0,S_colour);
+   alphabetGen C(6'd2,horizontal_addr,vertical_addr,42,10,12'h00f,0,C_colour);
+   alphabetGen O(6'd14,horizontal_addr,vertical_addr,46,10,12'h00f,0,O_colour);
+   alphabetGen R(6'd17,horizontal_addr,vertical_addr,50,10,12'h00f,0,R_colour);
+   alphabetGen E(6'd4,horizontal_addr,vertical_addr,55,10,12'h00f,0,E_colour);
    
    
-   alphabetGen T(6'd19,horizontal_addr,vertical_addr,7,47,12'hf00,0,T_colour);
-   alphabetGen I(6'd8,horizontal_addr,vertical_addr,13,47,12'hf00,0,I_colour);
-   alphabetGen M(6'd12,horizontal_addr,vertical_addr,15,47,12'hf00,0,M_colour);
-   alphabetGen T_E(6'd4,horizontal_addr,vertical_addr,21,47,12'hf00,0,T_E_colour);
-   alphabetGen T_R(6'd17,horizontal_addr,vertical_addr,25,47,12'hf00,0,T_R_colour);
+   alphabetGen T(6'd19,horizontal_addr,vertical_addr,65,10,12'hf00,0,T_colour);
+   alphabetGen I(6'd8,horizontal_addr,vertical_addr,71,10,12'hf00,0,I_colour);
+   alphabetGen M(6'd12,horizontal_addr,vertical_addr,73,10,12'hf00,0,M_colour);
+   alphabetGen T_E(6'd4,horizontal_addr,vertical_addr,79,10,12'hf00,0,T_E_colour);
+   alphabetGen T_R(6'd17,horizontal_addr,vertical_addr,83,10,12'hf00,0,T_R_colour);
    
    scoreDisplay s6(horizontal_addr,vertical_addr,4'd2,0,10,16,11,22,12'h0f0,TWO_colour);
    alphabetGen P(6'd15,horizontal_addr,vertical_addr,25,10,12'h0f0,1,P_colour);
@@ -277,25 +287,37 @@ module Snake_control(
    alphabetGen K(6'd10,horizontal_addr, vertical_addr,48,40,12'h0f0,1,K_colour);
    alphabetGen P_P_E(6'd4,horizontal_addr,vertical_addr,60,40,12'h0f0,1,P_P_E_colour);
    
-   alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,5,5,12'h0f0,1,WIN_Y_colour);
-   alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,14,5,12'h0f0,1,WIN_O_colour);
-   alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,25,5,12'h0f0,1,WIN_U_colour);
-   alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,40,5,12'h0f0,1,WIN_W_colour);
-   alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,51,5,12'h0f0,1,WIN_I_colour);
-   alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,58,5,12'h0f0,1,WIN_N_colour);
+   alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,5,39,12'h0f0,1,WIN_Y_colour);
+   alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,14,39,12'h0f0,1,WIN_O_colour);
+   alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,25,39,12'h0f0,1,WIN_U_colour);
+   alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,40,39,12'h0f0,1,WIN_W_colour);
+   alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,51,39,12'h0f0,1,WIN_I_colour);
+   alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,58,39,12'h0f0,1,WIN_N_colour);
    
-   alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,40,5,12'h0f0,1,LOSE_L_colour);
-   alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,50,5,12'h0f0,1,LOSE_O_colour);
-   alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,61,5,12'h0f0,1,LOSE_S_colour);
-   alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,71,5,12'h0f0,1,LOSE_E_colour);
+   alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,40,39,12'h0f0,1,LOSE_L_colour);
+   alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,50,39,12'h0f0,1,LOSE_O_colour);
+   alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,61,39,12'h0f0,1,LOSE_S_colour);
+   alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,71,39,12'h0f0,1,LOSE_E_colour);
    
-   alphabetGen P1_P(6'd15,horizontal_addr,vertical_addr,7,71,12'h0ff,1,P1_P_colour);
-   scoreDisplay P1_1(horizontal_addr,vertical_addr,4'd1,4'd0,15,17,71,81,12'h0ff,P1_1_colour);
-   scoreDisplay P1_score(horizontal_addr,vertical_addr,score_snake_one,4'd0,11,13,91,101,12'h0ff,P1_score_colour);
+   alphabetGen P1_P(6'd15,horizontal_addr,vertical_addr,94,10,12'h0ff,0,P1_P_colour);
+   alphabetGen P1_1(6'd26,horizontal_addr,vertical_addr,100,10,12'h0ff,1,P1_1_colour);
+//   scoreDisplay P1_1(horizontal_addr,vertical_addr,4'd1,4'd0,100,102,10,14,12'h0ff,P1_1_colour);
+   scoreDisplay P1_score(horizontal_addr,vertical_addr,score_snake_one,4'd0,97,99,19,29,12'h0ff,P1_score_colour);
    
-   alphabetGen P2_P(6'd15,horizontal_addr,vertical_addr,20,71,12'h04f,1,P2_P_colour);
-   scoreDisplay P2_1(horizontal_addr,vertical_addr,4'd2,4'd0,28,30,71,81,12'h04f,P2_2_colour);
-   scoreDisplay P2_score(horizontal_addr,vertical_addr,score_snake_two,4'd0,24,26,91,101,12'h04f,P2_score_colour);
+   alphabetGen P2_P(6'd15,horizontal_addr,vertical_addr,106,10,12'h04f,0,P2_P_colour);
+   alphabetGen P2_2(6'd27,horizontal_addr,vertical_addr,112,10,12'h04f,1,P2_2_colour);
+//   scoreDisplay P2_1(horizontal_addr,vertical_addr,4'd2,4'd0,112,114,10,15,12'h04f,P2_2_colour);
+   scoreDisplay P2_score(horizontal_addr,vertical_addr,score_snake_two,4'd0,109,111,19,29,12'h04f,P2_score_colour);
+   
+   alphabetGen LIVES_L(6'd11,horizontal_addr,vertical_addr,120,10,12'hf0f,0,LIVES_L_colour);
+   alphabetGen LIVES_I(6'd8,horizontal_addr,vertical_addr,125,10,12'hf0f,0,LIVES_I_colour); 
+   alphabetGen LIVES_V(6'd21,horizontal_addr,vertical_addr,127,10,12'hf0f,0,LIVES_V_colour);
+   alphabetGen LIVES_E(6'd4,horizontal_addr,vertical_addr,134,10,12'hf0f,0,LIVES_E_colour);
+   alphabetGen LIVES_S(6'd18,horizontal_addr,vertical_addr,138,10,12'hf0f,0,LIVES_S_colour);
+   alphabetGen LIVES_heart_1(6'd28,horizontal_addr,vertical_addr,120,19,12'hf0f,0,LIVES_heart_colour_1);
+   alphabetGen LIVES_heart_2(6'd28,horizontal_addr,vertical_addr,130,19,12'hf0f,0,LIVES_heart_colour_2);
+   alphabetGen LIVES_heart_3(6'd28,horizontal_addr,vertical_addr,140,19,12'hf0f,0,LIVES_heart_colour_3);
+//   scoreDisplay LIVES_score(horizontal_addr,vertical_addr,(2'd3 - lives),4'd0,128,130,19,29,12'hf0f,LIVES_score_colour);
    
     always @(posedge CLK) begin
         if (state_master == 2'd1) begin // 
@@ -356,10 +378,43 @@ module Snake_control(
                             end
                         end
                     end
+                    // Check if snake one collides with the hollow box
+                if ((SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
+                    (SnakeState_Y[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y[i] == ((MaxY+52) >> 1) + 15)) begin
+                    crashed <= 1'b1;
+                end
+                if ((SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
+                    (SnakeState_X[i] == 50)) begin
+                    crashed <= 1'b1;
                 end
             end
-            if ((horizontal_addr[9:2] >= 40 && horizontal_addr[9:2] <= 50) || (horizontal_addr[9:2] >= MaxX - 10 && horizontal_addr[9:2] <= MaxX) || (vertical_addr[8:2] >= 0 && vertical_addr[8:2] <= 10 && horizontal_addr[9:2] >= 40) || (vertical_addr[8:2] >= MaxY - 10 && vertical_addr[8:2] <= MaxY && horizontal_addr[9:2] >= 40))
+
+                if ((i / 3) <= score_snake_two) begin // Check if the segment is active for snake two
+                    // Check if snake two collides with the hollow box
+                    if ((SnakeState_X_2[i] >= 5 && SnakeState_X_2[i] <= 50) &&
+                        (SnakeState_Y_2[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y_2[i] == ((MaxY+52) >> 1) + 15)) begin
+                        crashed <= 1'b1;
+                    end
+                    if ((SnakeState_Y_2[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y_2[i] <= ((MaxY+52) >> 1) + 15) &&
+                        (SnakeState_X_2[i] == 50)) begin
+                        crashed <= 1'b1;
+                    end
+                end
+            end
+
+    
+            if ((horizontal_addr[9:2] >= 0 && horizontal_addr[9:2] <= 5 && vertical_addr[8:2] >= 35) || 
+                (horizontal_addr[9:2] >= MaxX - 5 && horizontal_addr[9:2] <= MaxX && vertical_addr[8:2] >= 35) || 
+                (vertical_addr[8:2] >= 35 && vertical_addr[8:2] <= 40) || 
+                (vertical_addr[8:2] >= MaxY - 5 && vertical_addr[8:2] <= MaxY) || 
+                // Hollow smaller box in the center
+                ((horizontal_addr[9:2] >= 5 && horizontal_addr[9:2] <= 50) &&
+                 (vertical_addr[8:2] == ((MaxY+52) >> 1) - 15 || vertical_addr[8:2] == ((MaxY+52) >> 1) + 15)) || 
+                ((vertical_addr[8:2] >= ((MaxY+52) >> 1) - 15 && vertical_addr[8:2] <= ((MaxY+52) >> 1) + 15) &&
+                 (horizontal_addr[9:2] == 50))
+                )
                 colour <= 12'hf00;
+
             else begin
                 if(score_colour != 12'h000) begin
                     colour <= score_colour;
@@ -417,12 +472,29 @@ module Snake_control(
                     colour <= P2_2_colour;
                 end else if (P2_score_colour != 12'h000) begin
                     colour <= P2_score_colour;
+                end else if (LIVES_L_colour != 12'h000) begin
+                    colour <= LIVES_L_colour;
+                end else if (LIVES_I_colour != 12'h000) begin
+                    colour <= LIVES_I_colour;
+                end else if (LIVES_V_colour != 12'h000) begin
+                    colour <= LIVES_V_colour;
+                end else if (LIVES_E_colour != 12'h000) begin
+                    colour <= LIVES_E_colour;
+                end else if (LIVES_S_colour != 12'h000) begin
+                    colour <= LIVES_S_colour;
+                end else if (LIVES_heart_colour_1 != 12'h000 && (2'd3 - lives) == 2'd3) begin
+                    colour <= LIVES_heart_colour_1;
+                end else if (LIVES_heart_colour_2 != 12'h000 && (2'd3 - lives) >= 2'd2) begin
+                    colour <= LIVES_heart_colour_2;
+                end else if (LIVES_heart_colour_3 != 12'h000 && (2'd3 - lives) >= 2'd1) begin
+                    colour <= LIVES_heart_colour_3;
                 end
+                   
             end
 
             
-            if ((horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 60) || // Top dot of colon
-                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 62)) begin // Bottom dot of colon
+            if ((horizontal_addr[9:2] == 76 && vertical_addr[8:2] == 23) || // Top dot of colon
+                (horizontal_addr[9:2] == 76 && vertical_addr[8:2] == 25)) begin // Bottom dot of colon
                 colour <= 12'hf00;
             end
         end
@@ -460,8 +532,8 @@ module Snake_control(
             crashed <= 1'b0;
             colour <= 12'h000;
             
-            if ((horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 60) || // Top dot of colon
-                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 62)) begin // Bottom dot of colon
+            if ((horizontal_addr[9:2] == 76 && vertical_addr[8:2] == 23) || // Top dot of colon
+                (horizontal_addr[9:2] == 76 && vertical_addr[8:2] == 25)) begin // Bottom dot of colon
                 colour <= 12'hf00;
             end 
             else begin
@@ -519,6 +591,20 @@ module Snake_control(
                     colour <= P2_2_colour;
                 end else if (P2_score_colour != 12'h000) begin
                     colour <= P2_score_colour;
+                end else if (TARGET_s_colour != 12'h000) begin
+                    colour <= TARGET_s_colour;
+                end else if (TARGET_T_colour != 12'h000) begin
+                    colour <= TARGET_T_colour;
+                end else if (TARGET_A_colour != 12'h000) begin
+                    colour <= TARGET_A_colour;
+                end else if (TARGET_R_colour != 12'h000) begin
+                    colour <= TARGET_R_colour;
+                end else if (TARGET_G_colour != 12'h000) begin
+                    colour <= TARGET_G_colour;
+                end else if (TARGET_E_colour != 12'h000) begin
+                    colour <= TARGET_E_colour;
+                end else if (TARGET_T_2_colour != 12'h000) begin
+                    colour <= TARGET_T_2_colour;
                 end
             end
 
@@ -527,8 +613,8 @@ module Snake_control(
             crashed <= 1'b0;
             colour <= 12'h000;
             
-            if ((horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 60) || // Top dot of colon
-                (horizontal_addr[9:2] == 18 && vertical_addr[8:2] == 62)) begin // Bottom dot of colon
+            if ((horizontal_addr[9:2] == 76 && vertical_addr[8:2] == 23) || // Top dot of colon
+                (horizontal_addr[9:2] == 76 && vertical_addr[8:2] == 25)) begin // Bottom dot of colon
                 colour <= 12'hf00;
             end
             
@@ -589,7 +675,21 @@ module Snake_control(
                     colour <= P2_2_colour;
                 end else if (P2_score_colour != 12'h000) begin
                     colour <= P2_score_colour;
-                end  
+                end else if (TARGET_s_colour != 12'h000) begin
+                    colour <= TARGET_s_colour;
+                end else if (TARGET_T_colour != 12'h000) begin
+                    colour <= TARGET_T_colour;
+                end else if (TARGET_A_colour != 12'h000) begin
+                    colour <= TARGET_A_colour;
+                end else if (TARGET_R_colour != 12'h000) begin
+                    colour <= TARGET_R_colour;
+                end else if (TARGET_G_colour != 12'h000) begin
+                    colour <= TARGET_G_colour;
+                end else if (TARGET_E_colour != 12'h000) begin
+                    colour <= TARGET_E_colour;
+                end else if (TARGET_T_2_colour != 12'h000) begin
+                    colour <= TARGET_T_2_colour;
+                end
             end
               
         end

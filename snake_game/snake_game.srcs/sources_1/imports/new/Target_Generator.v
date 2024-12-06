@@ -31,7 +31,7 @@ module Target_Generator(
             mapped_x <= 8'd80; 
             mapped_y <= 7'd60;
             mapped_poison_x <= 8'd110;
-            mapped_poison_y <= 7'd30;
+            mapped_poison_y <= 7'd55;
         end else begin
             // Update LFSR values
             lfsr_h <= {lfsr_h[6:0], lfsr_h[7] ^ lfsr_h[5]};
@@ -41,14 +41,14 @@ module Target_Generator(
 
             if (reached_target) begin
                 // Map LFSR outputs to valid ranges for target
-                mapped_x <= (lfsr_h % (130 - 60 + 1)) + 50; // x-range: 50 to 130
-                mapped_y <= (lfsr_v % (90 - 20 + 1)) + 20;  // y-range: 20 to 90
+                mapped_x <= (lfsr_h % (145 - 15 + 1)) + 15; // x-range: 50 to 130
+                mapped_y <= (lfsr_v % (105 - 50 + 1)) + 50;  // y-range: 20 to 90
             end
 
             if (reached_poison) begin
                 // Map LFSR outputs to valid ranges for poison
-                mapped_poison_x <= (lfsr_poison_h % (130 - 60 + 1)) + 50;
-                mapped_poison_y <= (lfsr_poison_v % (90 - 20 + 1)) + 20;
+                mapped_poison_x <= (lfsr_poison_h % (145 - 15 + 1)) + 15;
+                mapped_poison_y <= (lfsr_poison_v % (105 - 50 + 1)) + 50;
             end
         end
     end

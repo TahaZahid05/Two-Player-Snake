@@ -16,8 +16,10 @@ module Master_State_Machine(
     );
     
     reg [1:0] state_game;
+    reg [1:0] live_game;
 
     assign STATE = state_game;
+    assign lives = live_game;
     
     always@(posedge CLK) begin
         if (state_game == 2'd0 && (BTNU || BTND || BTNL || BTNR || BTNU_2 || BTND_2 || BTNL_2 || BTNR_2))

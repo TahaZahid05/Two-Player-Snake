@@ -8,7 +8,7 @@ module Master_Game(
         output HS,
         output VS
     );
-    
+    wire [1:0] lives;
     wire [3:0] second_counter_units;
     wire [3:0] minute_counter_units;
     wire [2:0] second_counter_tens;
@@ -120,6 +120,7 @@ module Master_Game(
                         .second_counter_tens(second_counter_tens),
                         .minute_counter_units(minute_counter_units),
                         .minute_counter_tens(minute_counter_tens),
+                        .lives(lives),
                         .COLOUR_OUT(colour),
                         .reached_target_one(reached_target_one),
                         .reached_target_two(reached_target_two),
@@ -158,7 +159,8 @@ module Master_Game(
                             .reached_poison_two(reached_poison_two),
                             .master_state(state_master),
                             .SCORE_SNAKE_ONE(score_snake_one),
-                            .SCORE_SNAKE_TWO(score_snake_two)
+                            .SCORE_SNAKE_TWO(score_snake_two),
+                            .lives(lives)
                         );
                         
                         

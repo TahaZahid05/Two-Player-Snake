@@ -8,7 +8,8 @@ module Score_Counter(
     input reached_poison_two,
     input [1:0] master_state,
     output reg signed [3:0] SCORE_SNAKE_ONE,
-    output reg signed [3:0] SCORE_SNAKE_TWO
+    output reg signed [3:0] SCORE_SNAKE_TWO,
+    output reg [1:0] lives
     );
 
     reg target_reached_flag;
@@ -44,12 +45,18 @@ module Score_Counter(
                         SCORE_SNAKE_TWO <= SCORE_SNAKE_TWO - 4'd1;
                     end
                     
-                    poison_reached_flag <= 1'b1;
+                    
                 end
                 else begin
-                    SCORE_SNAKE_ONE <= -4'd1;
-                    SCORE_SNAKE_TWO <= -4'd1;
+                    if(lives < 2'd2) begin
+                        lives <= lives + 2'd1;
+                    end 
+                    else begin
+                        SCORE_SNAKE_ONE <= -4'd1;
+                        SCORE_SNAKE_TWO <= -4'd1;
+                    end
                 end
+                poison_reached_flag <= 1'b1;
             end
             else if (reached_poison_two && !poison_reached_flag) begin
                 if (SCORE_SNAKE_ONE + SCORE_SNAKE_TWO > 4'd0) begin
@@ -59,12 +66,18 @@ module Score_Counter(
                     else begin
                         SCORE_SNAKE_ONE <= SCORE_SNAKE_ONE - 4'd1;
                     end
-                    poison_reached_flag <= 1'b1;
+                    
                 end
                 else begin
-                    SCORE_SNAKE_ONE <= -4'd1;
-                    SCORE_SNAKE_TWO <= -4'd1;
+                    if(lives < 2'd2) begin
+                        lives <= lives + 2'd1;
+                    end 
+                    else begin
+                        SCORE_SNAKE_ONE <= -4'd1;
+                        SCORE_SNAKE_TWO <= -4'd1;
+                    end
                 end
+                poison_reached_flag <= 1'b1;
             end
             else if (!reached_poison_one) begin
                 poison_reached_flag <= 1'b0;
@@ -73,6 +86,7 @@ module Score_Counter(
             if (master_state == 2'd0) begin
                 SCORE_SNAKE_ONE <= 4'd0;
                 SCORE_SNAKE_TWO <= 4'd0;
+                lives <= 2'd0;
             end
             target_reached_flag <= 1'b0;
             poison_reached_flag <= 1'b0;
