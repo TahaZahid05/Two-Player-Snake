@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="49" Path="C:/Users/ddddd/OneDrive/Desktop/Final_SnakeGame/snake_game/snake_game.xpr">
+<Project Version="7" Minor="49" Path="C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="a402c642bbf5465bb59191436a212a8f"/>

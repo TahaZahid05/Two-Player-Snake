@@ -73,23 +73,29 @@ module Snake_control(
     reg [7:0] SnakeState_X_2 [0:SnakeLength-1];
     reg [6:0] SnakeState_Y_2 [0:SnakeLength-1];
     
+    reg executed_once;
+    
     //Create snake pixels
     genvar PixNo;
     generate
         for (PixNo = 0; PixNo < SnakeLength - 1; PixNo = PixNo + 1)
         begin: PixShift
             always@(posedge CLK) begin
+                if(RESET) begin
+                    executed_once <= 0;
+                end
+                if(~executed_once) begin
+                    SnakeState_X[PixNo + 1] <= 5;
+                    SnakeState_Y[PixNo + 1] <= 45;
+                    SnakeState_X_2[PixNo + 1] <= MaxX-5;
+                    SnakeState_Y_2[PixNo + 1] <= 105;
+                    executed_once <= 1;
+                end
                 if (counter == 5000000) begin
                     SnakeState_X[PixNo + 1] <= SnakeState_X[PixNo];
                     SnakeState_Y[PixNo + 1] <= SnakeState_Y[PixNo];
                     SnakeState_X_2[PixNo+1] <= SnakeState_X_2[PixNo];
                     SnakeState_Y_2[PixNo+1] <= SnakeState_Y_2[PixNo];
-                end
-                else if(RESET) begin
-                    SnakeState_X[PixNo + 1] <= 50;
-                    SnakeState_Y[PixNo + 1] <= 30;
-                    SnakeState_X_2[PixNo + 1] <= 140;
-                    SnakeState_Y_2[PixNo + 1] <= 90;
                 end
             end
         end
@@ -319,6 +325,8 @@ module Snake_control(
    alphabetGen LIVES_heart_3(6'd28,horizontal_addr,vertical_addr,140,19,12'hf0f,0,LIVES_heart_colour_3);
 //   scoreDisplay LIVES_score(horizontal_addr,vertical_addr,(2'd3 - lives),4'd0,128,130,19,29,12'hf0f,LIVES_score_colour);
    
+   reg [25:0] timer;
+   
     always @(posedge CLK) begin
         if (state_master == 2'd1) begin // 
             colour <= 12'h000; // Default color
@@ -361,45 +369,51 @@ module Snake_control(
                 end
                 
             end
-                // Check for collisions between snake one and snake two
-            for (i = 0; i < 27; i = i + 1) begin
-                if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
-                    for (j = 0; j < 27; j = j + 1) begin
-                        if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
-                            // Check if snake one collides with snake two
-                            if ((SnakeState_X[i] == SnakeState_X_2[j]) && 
-                                (SnakeState_Y[i] == SnakeState_Y_2[j])) begin
-                                crashed <= 1'b1;
-                            end
-                            // Check if snake two collides with snake one
-                            if ((SnakeState_X_2[j] == SnakeState_X[i]) && 
-                                (SnakeState_Y_2[j] == SnakeState_Y[i])) begin
-                                crashed <= 1'b1;
+            
+            if(timer <= 26'd15000000) begin
+                timer <= timer + 26'd1;
+            end 
+            else begin
+                    // Check for collisions between snake one and snake two
+                for (i = 0; i < 27; i = i + 1) begin
+                    if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
+                        for (j = 0; j < 27; j = j + 1) begin
+                            if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
+                                // Check if snake one collides with snake two
+                                if ((SnakeState_X[i] == SnakeState_X_2[j]) && 
+                                    (SnakeState_Y[i] == SnakeState_Y_2[j])) begin
+                                    crashed <= 1'b1;
+                                end
+                                // Check if snake two collides with snake one
+                                if ((SnakeState_X_2[j] == SnakeState_X[i]) && 
+                                    (SnakeState_Y_2[j] == SnakeState_Y[i])) begin
+                                    crashed <= 1'b1;
+                                end
                             end
                         end
-                    end
-                    // Check if snake one collides with the hollow box
-                if ((SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
-                    (SnakeState_Y[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y[i] == ((MaxY+52) >> 1) + 15)) begin
-                    crashed <= 1'b1;
-                end
-                if ((SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
-                    (SnakeState_X[i] == 50)) begin
-                    crashed <= 1'b1;
-                end
-            end
-
-                if ((i / 3) <= score_snake_two) begin // Check if the segment is active for snake two
-                    // Check if snake two collides with the hollow box
-                    if ((SnakeState_X_2[i] >= 5 && SnakeState_X_2[i] <= 50) &&
-                        (SnakeState_Y_2[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y_2[i] == ((MaxY+52) >> 1) + 15)) begin
+                        // Check if snake one collides with the hollow box
+                    if ((SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
+                        (SnakeState_Y[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y[i] == ((MaxY+52) >> 1) + 15)) begin
                         crashed <= 1'b1;
                     end
-                    if ((SnakeState_Y_2[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y_2[i] <= ((MaxY+52) >> 1) + 15) &&
-                        (SnakeState_X_2[i] == 50)) begin
+                    if ((SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
+                        (SnakeState_X[i] == 50)) begin
                         crashed <= 1'b1;
                     end
                 end
+    
+                    if ((i / 3) <= score_snake_two) begin // Check if the segment is active for snake two
+                        // Check if snake two collides with the hollow box
+                        if ((SnakeState_X_2[i] >= 5 && SnakeState_X_2[i] <= 50) &&
+                            (SnakeState_Y_2[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y_2[i] == ((MaxY+52) >> 1) + 15)) begin
+                            crashed <= 1'b1;
+                        end
+                        if ((SnakeState_Y_2[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y_2[i] <= ((MaxY+52) >> 1) + 15) &&
+                            (SnakeState_X_2[i] == 50)) begin
+                            crashed <= 1'b1;
+                        end
+                    end
+                end 
             end
 
     

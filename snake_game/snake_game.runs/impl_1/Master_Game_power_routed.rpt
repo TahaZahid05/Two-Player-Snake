@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date             : Sat Dec  7 01:26:03 2024
+| Date             : Sat Dec  7 21:30:15 2024
 | Host             : Taha running 64-bit major release  (build 9200)
 | Command          : report_power -file Master_Game_power_routed.rpt -pb Master_Game_power_summary_routed.pb -rpx Master_Game_power_routed.rpx
 | Design           : Master_Game
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 2.967        |
+| Total On-Chip Power (W)  | 3.000        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 2.887        |
+| Dynamic (W)              | 2.920        |
 | Device Static (W)        | 0.080        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 70.2         |
-| Junction Temperature (C) | 39.8         |
+| Max Ambient (C)          | 70.0         |
+| Junction Temperature (C) | 40.0         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,17 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     1.488 |    10348 |       --- |             --- |
-|   LUT as Logic |     1.365 |     7763 |     20800 |           37.32 |
-|   Register     |     0.059 |     1040 |     41600 |            2.50 |
-|   CARRY4       |     0.057 |      573 |      8150 |            7.03 |
+| Slice Logic    |     1.501 |    10455 |       --- |             --- |
+|   LUT as Logic |     1.362 |     7835 |     20800 |           37.67 |
+|   CARRY4       |     0.070 |      579 |      8150 |            7.10 |
+|   Register     |     0.060 |     1066 |     41600 |            2.56 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   F7/F8 Muxes  |     0.001 |        1 |     32600 |           <0.01 |
-|   Others       |     0.000 |      128 |       --- |             --- |
-| Signals        |     1.241 |     7511 |       --- |             --- |
-| I/O            |     0.158 |       17 |       106 |           16.04 |
+|   F7/F8 Muxes  |     0.004 |        4 |     32600 |            0.01 |
+|   Others       |     0.000 |      127 |       --- |             --- |
+| Signals        |     1.261 |     7611 |       --- |             --- |
+| I/O            |     0.159 |       17 |       106 |           16.04 |
 | Static Power   |     0.080 |          |           |                 |
-| Total          |     2.967 |          |           |                 |
+| Total          |     3.000 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,9 +72,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     2.758 |       2.741 |      0.017 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     2.790 |       2.773 |      0.017 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.019 |       0.005 |      0.013 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.042 |       0.041 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.043 |       0.042 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -139,36 +139,35 @@ Table of Contents
 +---------------------+-----------+
 | Name                | Power (W) |
 +---------------------+-----------+
-| Master_Game         |     2.887 |
-|   keyboard_receiver |     0.290 |
-|     db_clk          |     0.054 |
-|     db_data         |     0.064 |
-|   msm               |     0.004 |
-|   s1                |     0.461 |
+| Master_Game         |     2.920 |
+|   keyboard_receiver |     0.309 |
+|     db_clk          |     0.067 |
+|     db_data         |     0.066 |
+|   msm               |     0.005 |
+|   s1                |     0.521 |
 |     C               |     0.010 |
 |     LIVES_heart_1   |     0.002 |
-|     LIVES_heart_2   |     0.001 |
 |     LOSE_E          |     0.002 |
 |     LOSE_L          |     0.002 |
 |     LOSE_O          |     0.002 |
-|     M               |     0.001 |
-|     O               |     0.004 |
+|     N               |     0.001 |
+|     O               |     0.003 |
 |     P1_1            |     0.002 |
 |     R               |     0.001 |
 |     T               |     0.017 |
-|     TARGET_T        |     0.002 |
+|     TARGET_T        |     0.001 |
 |     T_R             |     0.005 |
 |     WIN_N           |     0.002 |
 |     WIN_Y           |     0.001 |
-|     moveSnake       |     0.348 |
-|   sc                |     0.158 |
-|   t1                |     0.171 |
-|   tg                |     0.934 |
-|   vgai              |     0.617 |
-|     vga             |     0.617 |
-|       CounterTo3    |     0.065 |
-|       CounterTo520  |     0.003 |
-|       CounterTo799  |     0.080 |
+|     moveSnake       |     0.354 |
+|   sc                |     0.083 |
+|   t1                |     0.179 |
+|   tg                |     0.960 |
+|   vgai              |     0.605 |
+|     vga             |     0.605 |
+|       CounterTo3    |     0.074 |
+|       CounterTo520  |     0.002 |
+|       CounterTo799  |     0.075 |
 +---------------------+-----------+
 
 

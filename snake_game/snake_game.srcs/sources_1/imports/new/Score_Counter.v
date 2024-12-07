@@ -23,6 +23,7 @@ module Score_Counter(
             SCORE_SNAKE_TWO <= 4'd0;
             target_reached_flag <= 1'b0;
             poison_reached_flag <= 1'b0;
+            lives <= 2'd0;
         end else if (master_state == 2'd1) begin
             // Increment score if target is reached and master_state is 1
             if (reached_target_one && !target_reached_flag) begin
