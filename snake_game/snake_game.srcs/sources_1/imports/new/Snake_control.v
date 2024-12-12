@@ -23,11 +23,22 @@ module Snake_control(
     output reached_poison_two,
     output fail
     );
-    wire [25:0] counter;
-    reg crashed;
-    reg [11:0] colour;
+
+    parameter MaxY = 120; parameter MaxX = 160; parameter SnakeLength = 27;
+    
+    wire [25:0] counter; wire [6:0] target_vertical_addr; wire [7:0] target_horizontal_addr; wire [6:0] poison_vertical_addr; wire [7:0] poison_horizontal_addr; 
+    wire [9:0] horizontal_addr; wire [8:0] vertical_addr;
+    
+    reg crashed; reg [11:0] colour; reg [25:0] counter_max; reg reached_one; reg reached_two; reg reached_p_one; reg reached_p_two; 
+    reg [7:0] SnakeState_X [0:SnakeLength-1]; reg [6:0] SnakeState_Y [0:SnakeLength-1]; reg [7:0] SnakeState_X_2 [0:SnakeLength-1]; 
+    reg [6:0] SnakeState_Y_2 [0:SnakeLength-1];
+    
+    integer i;
+    integer j;
+    
+    wire [11:0] score_colour, second_units_colour, second_tens_colour, minute_units_colour, minute_tens_colour, S_colour, C_colour, O_colour, R_colour, E_colour, T_colour, I_colour, M_colour, T_E_colour, T_R_colour, TWO_colour, P_colour, L_colour, A_colour, Y_colour, P_E_colour, P_R_colour, P_S_colour, N_colour, P_A_colour, K_colour, P_P_E_colour, WIN_Y_colour, WIN_O_colour, WIN_U_colour, WIN_W_colour, WIN_I_colour, WIN_N_colour, LOSE_L_colour, LOSE_O_colour, LOSE_S_colour, LOSE_E_colour, TARGET_T_colour, TARGET_A_colour, TARGET_R_colour, TARGET_G_colour, TARGET_E_colour, TARGET_T_2_colour, TARGET_s_colour, P1_P_colour, P1_1_colour, P1_score_colour, P2_P_colour, P2_2_colour, P2_score_colour, LIVES_L_colour, LIVES_I_colour, LIVES_V_colour, LIVES_E_colour, LIVES_S_colour, LIVES_heart_colour_1, LIVES_heart_colour_2, LIVES_heart_colour_3;
+    
     assign fail = crashed;
-    reg [25:0] counter_max;
     
     always @(*) begin
         if (levels)
@@ -47,24 +58,12 @@ module Snake_control(
                         .COUNT(counter)
                       );
                       
-    reg reached_one;
-    reg reached_two;
     assign reached_target_one = reached_one;
     assign reached_target_two = reached_two;
     
-    reg reached_p_one;
-    reg reached_p_two;
     assign reached_poison_one = reached_p_one;
     assign reached_poison_two = reached_p_two;
-   
-    wire [6:0] target_vertical_addr;
-    wire [7:0] target_horizontal_addr;
-    wire [6:0] poison_vertical_addr;
-    wire [7:0] poison_horizontal_addr;
-    
-    wire [9:0] horizontal_addr;
-    wire [8:0] vertical_addr;
-    
+
     assign target_horizontal_addr = target_address[14:7]; //8bit
     assign target_vertical_addr = target_address[6:0]; //7bit
     assign poison_horizontal_addr = poison_address[14:7]; 
@@ -73,16 +72,7 @@ module Snake_control(
     assign horizontal_addr = pixel_address[18:9]; //10 bit
     
     assign COLOUR_OUT = colour;
-    parameter MaxY = 120;
-    parameter MaxX = 160;    
-    parameter SnakeLength = 27;
-    
-    reg [7:0] SnakeState_X [0:SnakeLength-1];
-    reg [6:0] SnakeState_Y [0:SnakeLength-1];
-    
-    reg [7:0] SnakeState_X_2 [0:SnakeLength-1];
-    reg [6:0] SnakeState_Y_2 [0:SnakeLength-1];
-    
+
     //Create snake pixels
     genvar PixNo;
     generate
@@ -98,10 +88,6 @@ module Snake_control(
             end
         end
     endgenerate
-    
-    
-    
-    
     
     //Determine next position of snake
     always@(posedge CLK) begin
@@ -199,8 +185,6 @@ module Snake_control(
         end
     end      
     
-    
-    
     always@(posedge CLK) begin
         if (SnakeState_X[0] == target_horizontal_addr[7:0] && SnakeState_Y[0] == target_vertical_addr[6:0])
             reached_one <= 1'b1;
@@ -220,142 +204,76 @@ module Snake_control(
         end
     end
 
-    integer i;
-    integer j;
     
-   wire [11:0] score_colour;
-   wire [11:0] second_units_colour;
-   wire [11:0] second_tens_colour;
-   wire [11:0] minute_units_colour;
-   wire [11:0] minute_tens_colour;
-   wire [11:0] S_colour;
-   wire [11:0] C_colour;
-   wire [11:0] O_colour;
-   wire [11:0] R_colour;
-   wire [11:0] E_colour;
-   wire [11:0] T_colour;
-   wire [11:0] I_colour;
-   wire [11:0] M_colour;
-   wire [11:0] T_E_colour;
-   wire [11:0] T_R_colour;
-   wire [11:0] TWO_colour;
-   wire [11:0] P_colour;
-   wire [11:0] L_colour;
-   wire [11:0] A_colour; 
-   wire [11:0] Y_colour;
-   wire [11:0] P_E_colour;
-   wire [11:0] P_R_colour;
-   wire [11:0] P_S_colour;
-   wire [11:0] N_colour;
-   wire [11:0] P_A_colour;
-   wire [11:0] K_colour;
-   wire [11:0] P_P_E_colour;
-   wire [11:0] WIN_Y_colour;
-   wire [11:0] WIN_O_colour;
-   wire [11:0] WIN_U_colour;
-   wire [11:0] WIN_W_colour;
-   wire [11:0] WIN_I_colour;
-   wire [11:0] WIN_N_colour;
-   wire [11:0] LOSE_L_colour;
-   wire [11:0] LOSE_O_colour;
-   wire [11:0] LOSE_S_colour;
-   wire [11:0] LOSE_E_colour;
-   wire [11:0] TARGET_T_colour;
-   wire [11:0] TARGET_A_colour;
-   wire [11:0] TARGET_R_colour;
-   wire [11:0] TARGET_G_colour;
-   wire [11:0] TARGET_E_colour;
-   wire [11:0] TARGET_T_2_colour;
-   wire [11:0] TARGET_s_colour;
-   wire [11:0] P1_P_colour;
-   wire [11:0] P1_1_colour;
-   wire [11:0] P1_score_colour;
-   wire [11:0] P2_P_colour;
-   wire [11:0] P2_2_colour;
-   wire [11:0] P2_score_colour;
-   wire [11:0] LIVES_L_colour;
-   wire [11:0] LIVES_I_colour;
-   wire [11:0] LIVES_V_colour;
-   wire [11:0] LIVES_E_colour;
-   wire [11:0] LIVES_S_colour;
-//   wire [11:0] LIVES_score_colour;
-   wire [11:0] LIVES_heart_colour_1;
-   wire [11:0] LIVES_heart_colour_2;
-   wire [11:0] LIVES_heart_colour_3;
    
-   alphabetGen TARGET_T(6'd19,horizontal_addr,vertical_addr,4,10,12'h0f0,0,TARGET_T_colour);
-   alphabetGen TARGET_A(6'd0,horizontal_addr,vertical_addr,10,10,12'h0f0,0,TARGET_A_colour);
-   alphabetGen TARGET_R(6'd17,horizontal_addr,vertical_addr,15,10,12'h0f0,0,TARGET_R_colour);
-   alphabetGen TARGET_G(6'd6,horizontal_addr,vertical_addr,20,10,12'h0f0,0,TARGET_G_colour);
-   alphabetGen TARGET_E(6'd4,horizontal_addr,vertical_addr,25,10,12'h0f0,0,TARGET_E_colour);
-   alphabetGen TARGET_T_2(6'd19,horizontal_addr,vertical_addr,29,10,12'h0f0,0,TARGET_T_2_colour);
-   scoreDisplay TARGET_s(horizontal_addr,vertical_addr,4'd8,0,16,18,19,29,12'h0f0,TARGET_s_colour);
+    alphabetGen TARGET_T(6'd19,horizontal_addr,vertical_addr,4,10,12'h0f0,0,TARGET_T_colour);
+    alphabetGen TARGET_A(6'd0,horizontal_addr,vertical_addr,10,10,12'h0f0,0,TARGET_A_colour);
+    alphabetGen TARGET_R(6'd17,horizontal_addr,vertical_addr,15,10,12'h0f0,0,TARGET_R_colour);
+    alphabetGen TARGET_G(6'd6,horizontal_addr,vertical_addr,20,10,12'h0f0,0,TARGET_G_colour);
+    alphabetGen TARGET_E(6'd4,horizontal_addr,vertical_addr,25,10,12'h0f0,0,TARGET_E_colour);
+    alphabetGen TARGET_T_2(6'd19,horizontal_addr,vertical_addr,29,10,12'h0f0,0,TARGET_T_2_colour);
+    scoreDisplay TARGET_s(horizontal_addr,vertical_addr,4'd8,0,16,18,19,29,12'h0f0,TARGET_s_colour);
    
-   scoreDisplay s1(horizontal_addr,vertical_addr,score_snake_one,score_snake_two,47,49,19,29,12'h00f,score_colour);
-   scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,82,84,19,29,12'hf00,second_units_colour);
-   scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,78,80,19,29,12'hf00,second_tens_colour);
-   scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,72,74,19,29,12'hf00,minute_units_colour);
-   scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,68,70,19,29,12'hf00,minute_tens_colour);
+    scoreDisplay s1(horizontal_addr,vertical_addr,score_snake_one,score_snake_two,47,49,19,29,12'h00f,score_colour);
+    scoreDisplay s2(horizontal_addr,vertical_addr,second_counter_units,0,82,84,19,29,12'hf00,second_units_colour);
+    scoreDisplay s3(horizontal_addr,vertical_addr,second_counter_tens,0,78,80,19,29,12'hf00,second_tens_colour);
+    scoreDisplay s4(horizontal_addr,vertical_addr,minute_counter_units,0,72,74,19,29,12'hf00,minute_units_colour);
+    scoreDisplay s5(horizontal_addr,vertical_addr,minute_counter_tens,0,68,70,19,29,12'hf00,minute_tens_colour);
    
-   alphabetGen S(6'd18,horizontal_addr,vertical_addr,38,10,12'h00f,0,S_colour);
-   alphabetGen C(6'd2,horizontal_addr,vertical_addr,42,10,12'h00f,0,C_colour);
-   alphabetGen O(6'd14,horizontal_addr,vertical_addr,46,10,12'h00f,0,O_colour);
-   alphabetGen R(6'd17,horizontal_addr,vertical_addr,50,10,12'h00f,0,R_colour);
-   alphabetGen E(6'd4,horizontal_addr,vertical_addr,55,10,12'h00f,0,E_colour);
+    alphabetGen S(6'd18,horizontal_addr,vertical_addr,38,10,12'h00f,0,S_colour);
+    alphabetGen C(6'd2,horizontal_addr,vertical_addr,42,10,12'h00f,0,C_colour);
+    alphabetGen O(6'd14,horizontal_addr,vertical_addr,46,10,12'h00f,0,O_colour);
+    alphabetGen R(6'd17,horizontal_addr,vertical_addr,50,10,12'h00f,0,R_colour);
+    alphabetGen E(6'd4,horizontal_addr,vertical_addr,55,10,12'h00f,0,E_colour);
    
    
-   alphabetGen T(6'd19,horizontal_addr,vertical_addr,65,10,12'hf00,0,T_colour);
-   alphabetGen I(6'd8,horizontal_addr,vertical_addr,71,10,12'hf00,0,I_colour);
-   alphabetGen M(6'd12,horizontal_addr,vertical_addr,73,10,12'hf00,0,M_colour);
-   alphabetGen T_E(6'd4,horizontal_addr,vertical_addr,79,10,12'hf00,0,T_E_colour);
-   alphabetGen T_R(6'd17,horizontal_addr,vertical_addr,83,10,12'hf00,0,T_R_colour);
+    alphabetGen T(6'd19,horizontal_addr,vertical_addr,65,10,12'hf00,0,T_colour);
+    alphabetGen I(6'd8,horizontal_addr,vertical_addr,71,10,12'hf00,0,I_colour);
+    alphabetGen M(6'd12,horizontal_addr,vertical_addr,73,10,12'hf00,0,M_colour);
+    alphabetGen T_E(6'd4,horizontal_addr,vertical_addr,79,10,12'hf00,0,T_E_colour);
+    alphabetGen T_R(6'd17,horizontal_addr,vertical_addr,83,10,12'hf00,0,T_R_colour);
    
-   scoreDisplay s6(horizontal_addr,vertical_addr,4'd2,0,10,16,11,22,12'h0f0,TWO_colour);
-   alphabetGen P(6'd15,horizontal_addr,vertical_addr,25,10,12'h0f0,1,P_colour);
-   alphabetGen L(6'd11,horizontal_addr,vertical_addr,40,10,12'h0f0,1,L_colour);
-   alphabetGen A(6'd0,horizontal_addr,vertical_addr,55,10,12'h0f0,1,A_colour);
-   alphabetGen Y(6'd24,horizontal_addr,vertical_addr,70,10,12'h0f0,1,Y_colour);
-   alphabetGen P_E(6'd4,horizontal_addr,vertical_addr,85,10,12'h0f0,1,P_E_colour);
-   alphabetGen P_R(6'd17,horizontal_addr,vertical_addr,100,10,12'h0f0,1,P_R_colour);
-   alphabetGen P_S(6'd18,horizontal_addr,vertical_addr,10,40,12'h0f0,1,P_S_colour);
-   alphabetGen N(6'd13,horizontal_addr,vertical_addr,20,40,12'h0f0,1,N_colour);
-   alphabetGen P_A(6'd0,horizontal_addr,vertical_addr,37,40,12'h0f0,1,P_A_colour);
-   alphabetGen K(6'd10,horizontal_addr, vertical_addr,48,40,12'h0f0,1,K_colour);
-   alphabetGen P_P_E(6'd4,horizontal_addr,vertical_addr,60,40,12'h0f0,1,P_P_E_colour);
+    scoreDisplay s6(horizontal_addr,vertical_addr,4'd2,0,10,16,11,22,12'h0f0,TWO_colour);
+    alphabetGen P(6'd15,horizontal_addr,vertical_addr,25,10,12'h0f0,1,P_colour);
+    alphabetGen L(6'd11,horizontal_addr,vertical_addr,40,10,12'h0f0,1,L_colour);
+    alphabetGen A(6'd0,horizontal_addr,vertical_addr,55,10,12'h0f0,1,A_colour);
+    alphabetGen Y(6'd24,horizontal_addr,vertical_addr,70,10,12'h0f0,1,Y_colour);
+    alphabetGen P_E(6'd4,horizontal_addr,vertical_addr,85,10,12'h0f0,1,P_E_colour);
+    alphabetGen P_R(6'd17,horizontal_addr,vertical_addr,100,10,12'h0f0,1,P_R_colour);
+    alphabetGen P_S(6'd18,horizontal_addr,vertical_addr,10,40,12'h0f0,1,P_S_colour);
+    alphabetGen N(6'd13,horizontal_addr,vertical_addr,20,40,12'h0f0,1,N_colour);
+    alphabetGen P_A(6'd0,horizontal_addr,vertical_addr,37,40,12'h0f0,1,P_A_colour);
+    alphabetGen K(6'd10,horizontal_addr, vertical_addr,48,40,12'h0f0,1,K_colour);
+    alphabetGen P_P_E(6'd4,horizontal_addr,vertical_addr,60,40,12'h0f0,1,P_P_E_colour);
    
-   alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,5,39,12'h0f0,1,WIN_Y_colour);
-   alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,14,39,12'h0f0,1,WIN_O_colour);
-   alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,25,39,12'h0f0,1,WIN_U_colour);
-   alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,40,39,12'h0f0,1,WIN_W_colour);
-   alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,51,39,12'h0f0,1,WIN_I_colour);
-   alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,58,39,12'h0f0,1,WIN_N_colour);
+    alphabetGen WIN_Y(6'd24,horizontal_addr,vertical_addr,5,39,12'h0f0,1,WIN_Y_colour);
+    alphabetGen WIN_O(6'd14,horizontal_addr,vertical_addr,14,39,12'h0f0,1,WIN_O_colour);
+    alphabetGen WIN_U(6'd20,horizontal_addr,vertical_addr,25,39,12'h0f0,1,WIN_U_colour);
+    alphabetGen WIN_W(6'd22,horizontal_addr,vertical_addr,40,39,12'h0f0,1,WIN_W_colour);
+    alphabetGen WIN_I(6'd8,horizontal_addr,vertical_addr,51,39,12'h0f0,1,WIN_I_colour);
+    alphabetGen WIN_N(6'd13,horizontal_addr,vertical_addr,58,39,12'h0f0,1,WIN_N_colour);
    
-   alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,40,39,12'h0f0,1,LOSE_L_colour);
-   alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,50,39,12'h0f0,1,LOSE_O_colour);
-   alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,61,39,12'h0f0,1,LOSE_S_colour);
-   alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,71,39,12'h0f0,1,LOSE_E_colour);
+    alphabetGen LOSE_L(6'd11,horizontal_addr,vertical_addr,40,39,12'h0f0,1,LOSE_L_colour);
+    alphabetGen LOSE_O(6'd14,horizontal_addr,vertical_addr,50,39,12'h0f0,1,LOSE_O_colour);
+    alphabetGen LOSE_S(6'd18,horizontal_addr,vertical_addr,61,39,12'h0f0,1,LOSE_S_colour);
+    alphabetGen LOSE_E(6'd4,horizontal_addr,vertical_addr,71,39,12'h0f0,1,LOSE_E_colour);
    
-   alphabetGen P1_P(6'd15,horizontal_addr,vertical_addr,94,10,12'h0ff,0,P1_P_colour);
-   alphabetGen P1_1(6'd26,horizontal_addr,vertical_addr,100,10,12'h0ff,1,P1_1_colour);
-//   scoreDisplay P1_1(horizontal_addr,vertical_addr,4'd1,4'd0,100,102,10,14,12'h0ff,P1_1_colour);
-   scoreDisplay P1_score(horizontal_addr,vertical_addr,score_snake_one,4'd0,97,99,19,29,12'h0ff,P1_score_colour);
+    alphabetGen P1_P(6'd15,horizontal_addr,vertical_addr,94,10,12'h0ff,0,P1_P_colour);
+    alphabetGen P1_1(6'd26,horizontal_addr,vertical_addr,100,10,12'h0ff,1,P1_1_colour);
+    scoreDisplay P1_score(horizontal_addr,vertical_addr,score_snake_one,4'd0,97,99,19,29,12'h0ff,P1_score_colour);
    
-   alphabetGen P2_P(6'd15,horizontal_addr,vertical_addr,106,10,12'h04f,0,P2_P_colour);
-   alphabetGen P2_2(6'd27,horizontal_addr,vertical_addr,112,10,12'h04f,1,P2_2_colour);
-//   scoreDisplay P2_1(horizontal_addr,vertical_addr,4'd2,4'd0,112,114,10,15,12'h04f,P2_2_colour);
-   scoreDisplay P2_score(horizontal_addr,vertical_addr,score_snake_two,4'd0,109,111,19,29,12'h04f,P2_score_colour);
+    alphabetGen P2_P(6'd15,horizontal_addr,vertical_addr,106,10,12'h04f,0,P2_P_colour);
+    alphabetGen P2_2(6'd27,horizontal_addr,vertical_addr,112,10,12'h04f,1,P2_2_colour);
+    scoreDisplay P2_score(horizontal_addr,vertical_addr,score_snake_two,4'd0,109,111,19,29,12'h04f,P2_score_colour);
    
-   alphabetGen LIVES_L(6'd11,horizontal_addr,vertical_addr,120,10,12'hf0f,0,LIVES_L_colour);
-   alphabetGen LIVES_I(6'd8,horizontal_addr,vertical_addr,125,10,12'hf0f,0,LIVES_I_colour); 
-   alphabetGen LIVES_V(6'd21,horizontal_addr,vertical_addr,127,10,12'hf0f,0,LIVES_V_colour);
-   alphabetGen LIVES_E(6'd4,horizontal_addr,vertical_addr,134,10,12'hf0f,0,LIVES_E_colour);
-   alphabetGen LIVES_S(6'd18,horizontal_addr,vertical_addr,138,10,12'hf0f,0,LIVES_S_colour);
-   alphabetGen LIVES_heart_1(6'd28,horizontal_addr,vertical_addr,120,19,12'hf0f,0,LIVES_heart_colour_1);
-   alphabetGen LIVES_heart_2(6'd28,horizontal_addr,vertical_addr,130,19,12'hf0f,0,LIVES_heart_colour_2);
-   alphabetGen LIVES_heart_3(6'd28,horizontal_addr,vertical_addr,140,19,12'hf0f,0,LIVES_heart_colour_3);
-//   scoreDisplay LIVES_score(horizontal_addr,vertical_addr,(2'd3 - lives),4'd0,128,130,19,29,12'hf0f,LIVES_score_colour);
-   
-   reg [25:0] timer;
+    alphabetGen LIVES_L(6'd11,horizontal_addr,vertical_addr,120,10,12'hf0f,0,LIVES_L_colour);
+    alphabetGen LIVES_I(6'd8,horizontal_addr,vertical_addr,125,10,12'hf0f,0,LIVES_I_colour); 
+    alphabetGen LIVES_V(6'd21,horizontal_addr,vertical_addr,127,10,12'hf0f,0,LIVES_V_colour);
+    alphabetGen LIVES_E(6'd4,horizontal_addr,vertical_addr,134,10,12'hf0f,0,LIVES_E_colour);
+    alphabetGen LIVES_S(6'd18,horizontal_addr,vertical_addr,138,10,12'hf0f,0,LIVES_S_colour);
+    alphabetGen LIVES_heart_1(6'd28,horizontal_addr,vertical_addr,120,19,12'hf0f,0,LIVES_heart_colour_1);
+    alphabetGen LIVES_heart_2(6'd28,horizontal_addr,vertical_addr,130,19,12'hf0f,0,LIVES_heart_colour_2);
+    alphabetGen LIVES_heart_3(6'd28,horizontal_addr,vertical_addr,140,19,12'hf0f,0,LIVES_heart_colour_3);
    
     always @(posedge CLK) begin
         if (state_master == 2'd1) begin // 
@@ -406,45 +324,42 @@ module Snake_control(
                 
             end
             
-            if(timer <= counter_max*3) begin
-                timer <= timer + 26'd1;
-            end 
-            else begin
-                    // Check for collisions between snake one and snake two
-                for (i = 0; i < 27; i = i + 1) begin
-                    if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
-                        for (j = 0; j < 27; j = j + 1) begin
-                            if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
-                                // Check if snake one collides with snake two
+            // Check for collisions between snake one and snake two
+            for (i = 0; i < 27; i = i + 1) begin
+                if ((i / 3) <= score_snake_one) begin // Check if the segment is active for snake one
+                    for (j = 0; j < 27; j = j + 1) begin
+                        if ((j / 3) <= score_snake_two) begin // Check if the segment is active for snake two
+                            // Check if snake one collides with snake two
+                            if(SnakeState_Y[0] > 40 && SnakeState_Y[0] < MaxY-5 && SnakeState_Y_2[0] > 40 && SnakeState_Y_2[0] < MaxY-5) begin 
                                 if ((SnakeState_X[i] == SnakeState_X_2[j]) && 
                                     (SnakeState_Y[i] == SnakeState_Y_2[j])) begin
                                     crashed <= 1'b1;
                                 end
                             end
                         end
-                        // Check if snake one collides with the hollow box
-                    if (levels && (SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
-                        (SnakeState_Y[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y[i] == ((MaxY+52) >> 1) + 15)) begin
+                    end
+                    // Check if snake one collides with the hollow box
+                if (levels && (SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
+                    (SnakeState_Y[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y[i] == ((MaxY+52) >> 1) + 15)) begin
+                    crashed <= 1'b1;
+                end
+                if (levels && (SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
+                    (SnakeState_X[i] == 50)) begin
+                    crashed <= 1'b1;
+                end
+            end
+
+                if (levels && ((i / 3) <= score_snake_two)) begin // Check if the segment is active for snake two
+                    // Check if snake two collides with the hollow box
+                    if ((SnakeState_X_2[i] >= 5 && SnakeState_X_2[i] <= 50) &&
+                        (SnakeState_Y_2[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y_2[i] == ((MaxY+52) >> 1) + 15)) begin
                         crashed <= 1'b1;
                     end
-                    if (levels && (SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
-                        (SnakeState_X[i] == 50)) begin
+                    if ((SnakeState_Y_2[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y_2[i] <= ((MaxY+52) >> 1) + 15) &&
+                        (SnakeState_X_2[i] == 50)) begin
                         crashed <= 1'b1;
                     end
                 end
-    
-                    if (levels && ((i / 3) <= score_snake_two)) begin // Check if the segment is active for snake two
-                        // Check if snake two collides with the hollow box
-                        if ((SnakeState_X_2[i] >= 5 && SnakeState_X_2[i] <= 50) &&
-                            (SnakeState_Y_2[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y_2[i] == ((MaxY+52) >> 1) + 15)) begin
-                            crashed <= 1'b1;
-                        end
-                        if ((SnakeState_Y_2[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y_2[i] <= ((MaxY+52) >> 1) + 15) &&
-                            (SnakeState_X_2[i] == 50)) begin
-                            crashed <= 1'b1;
-                        end
-                    end
-                end 
             end
 
     

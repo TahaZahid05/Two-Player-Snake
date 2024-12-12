@@ -17,41 +17,41 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 21220
+INFO: [Synth 8-7075] Helper process launched with PID 12300
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1024.641 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1027.840 ; gain = 0.000
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'Master_Game' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
-INFO: [Synth 8-6157] synthesizing module 'PS2Receiver' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:2]
-INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Master_Game' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
+INFO: [Synth 8-6157] synthesizing module 'PS2Receiver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:2]
+INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:2]
 	Parameter COUNT_MAX bound to: 19 - type: integer 
 	Parameter COUNT_WIDTH bound to: 5 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'debouncer' (1#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:2]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:34]
-INFO: [Synth 8-6155] done synthesizing module 'PS2Receiver' (2#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Master_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'Master_State_Machine' (3#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Navigation_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:2]
-WARNING: [Synth 8-567] referenced signal 'state_snake' should be on the sensitivity list [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:17]
-INFO: [Synth 8-6155] done synthesizing module 'Navigation_State_Machine' (4#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Snake_control' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'debouncer' (1#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/debouncer.v:2]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:34]
+INFO: [Synth 8-6155] done synthesizing module 'PS2Receiver' (2#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/PS2Receiver.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Master_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Master_State_Machine' (3#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_State_Machine.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Navigation_State_Machine' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:2]
+WARNING: [Synth 8-567] referenced signal 'state_snake' should be on the sensitivity list [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:17]
+INFO: [Synth 8-6155] done synthesizing module 'Navigation_State_Machine' (4#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Navigation_State_Machine.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Snake_control' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:2]
 	Parameter MaxY bound to: 120 - type: integer 
 	Parameter MaxX bound to: 160 - type: integer 
 	Parameter SnakeLength bound to: 27 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'Generic_counter' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 	Parameter COUNTER_WIDTH bound to: 26 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'Generic_counter' (5#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
-WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'moveSnake' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:42]
-WARNING: [Synth 8-7023] instance 'moveSnake' of module 'Generic_counter' has 6 connections declared, but only 5 given [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:42]
-INFO: [Synth 8-6157] synthesizing module 'alphabetGen' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'alphabetGen' (6#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:3]
-INFO: [Synth 8-6157] synthesizing module 'scoreDisplay' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'scoreDisplay' (7#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'Snake_control' (8#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Target_Generator' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'Target_Generator' (9#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:1]
-INFO: [Synth 8-6157] synthesizing module 'VGA_Interface' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
-INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter' (5#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'moveSnake' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:53]
+WARNING: [Synth 8-7023] instance 'moveSnake' of module 'Generic_counter' has 6 connections declared, but only 5 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:53]
+INFO: [Synth 8-6157] synthesizing module 'alphabetGen' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'alphabetGen' (6#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/alphabetGen.v:3]
+INFO: [Synth 8-6157] synthesizing module 'scoreDisplay' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'scoreDisplay' (7#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/scoreDisplay.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'Snake_control' (8#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Snake_control.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Target_Generator' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'Target_Generator' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Target_Generator.v:1]
+INFO: [Synth 8-6157] synthesizing module 'VGA_Interface' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
+INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
 	Parameter VertTimeToPulseWeidthEnd bound to: 10'b0000000010 
 	Parameter VertTimeToBackPorchEnd bound to: 10'b0000011111 
 	Parameter VertTimeToDisplayTimeEnd bound to: 10'b0111111111 
@@ -60,169 +60,169 @@ INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [C:/Users/ddddd/OneDrive/D
 	Parameter HorzTimeToBackPorchEnd bound to: 10'b0010010000 
 	Parameter HorzTimeToDisplayTimeEnd bound to: 10'b1100010000 
 	Parameter HorzTimeToFrontPorchEnd bound to: 10'b1100100000 
-INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized0' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized0' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 	Parameter COUNTER_WIDTH bound to: 2 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized0' (9#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
-WARNING: [Synth 8-7071] port 'COUNT' of module 'Generic_counter' is unconnected for instance 'CounterTo3' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:38]
-WARNING: [Synth 8-7023] instance 'CounterTo3' of module 'Generic_counter' has 6 connections declared, but only 5 given [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:38]
-INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized1' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized0' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+WARNING: [Synth 8-7071] port 'COUNT' of module 'Generic_counter' is unconnected for instance 'CounterTo3' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:38]
+WARNING: [Synth 8-7023] instance 'CounterTo3' of module 'Generic_counter' has 6 connections declared, but only 5 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:38]
+INFO: [Synth 8-6157] synthesizing module 'Generic_counter__parameterized1' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
 	Parameter COUNTER_WIDTH bound to: 10 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized1' (9#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
-WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'CounterTo520' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:61]
-WARNING: [Synth 8-7023] instance 'CounterTo520' of module 'Generic_counter' has 6 connections declared, but only 5 given [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:61]
-INFO: [Synth 8-6155] done synthesizing module 'VGA_Driver' (10#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
-WARNING: [Synth 8-689] width (9) of port connection 'ADDRV' does not match port width (10) of module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:23]
-INFO: [Synth 8-6155] done synthesizing module 'VGA_Interface' (11#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
-INFO: [Synth 8-6157] synthesizing module 'Score_Counter' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'Score_Counter' (12#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:2]
-INFO: [Synth 8-6157] synthesizing module 'timer' [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'timer' (13#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'Master_Game' (14#1) [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'Generic_counter__parameterized1' (9#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Generic_counter.v:2]
+WARNING: [Synth 8-7071] port 'TRIG_OUT' of module 'Generic_counter' is unconnected for instance 'CounterTo520' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:61]
+WARNING: [Synth 8-7023] instance 'CounterTo520' of module 'Generic_counter' has 6 connections declared, but only 5 given [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:61]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Driver' (10#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Driver.v:2]
+WARNING: [Synth 8-689] width (9) of port connection 'ADDRV' does not match port width (10) of module 'VGA_Driver' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Interface' (11#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/VGA_Interface.v:2]
+INFO: [Synth 8-6157] synthesizing module 'Score_Counter' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Score_Counter' (12#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Score_Counter.v:2]
+INFO: [Synth 8-6157] synthesizing module 'timer' [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'timer' (13#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/new/timer.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Master_Game' (14#1) [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/sources_1/imports/new/Master_Game.v:3]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished RTL Elaboration : Time (s): cpu = 00:00:47 ; elapsed = 00:00:52 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:50 ; elapsed = 00:00:55 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:50 ; elapsed = 00:00:55 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.368 . Memory (MB): peak = 1201.723 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.913 . Memory (MB): peak = 1209.957 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc]
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[0]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:16]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:16]
+Parsing XDC File [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[0]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:16]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:16]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[0]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:17]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:17]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[0]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:17]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:17]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[1]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:20]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:20]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[1]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:20]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:20]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[1]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:21]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:21]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[1]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:21]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:21]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[2]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:24]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:24]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[2]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:24]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:24]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[2]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:25]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:25]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[2]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:25]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:25]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[3]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:28]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:28]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[3]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:28]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:28]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[3]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:29]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:29]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[3]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:29]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:29]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[4]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:32]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:32]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[4]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:32]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:32]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[4]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:33]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:33]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[4]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:33]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:33]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[5]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:36]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:36]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[5]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:36]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:36]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[5]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:37]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:37]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[5]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:37]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:37]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[6]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:40]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:40]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[6]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:40]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:40]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[6]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:41]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:41]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[6]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:41]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:41]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[7]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:44]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:44]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[7]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:44]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:44]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[7]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:45]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:45]
+WARNING: [Vivado 12-584] No ports matched 'HEX_OUT[7]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:45]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:45]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[0]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:104]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:104]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[0]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:104]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:104]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[0]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:105]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:105]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[0]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:105]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:105]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[1]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:108]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:108]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[1]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:108]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:108]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[1]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:109]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:109]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[1]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:109]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:109]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[2]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:112]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:112]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[2]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:112]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:112]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[2]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:113]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:113]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[2]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:113]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:113]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[3]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:116]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:116]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[3]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:116]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:116]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[3]'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:117]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:117]
+WARNING: [Vivado 12-584] No ports matched 'SEG_SELECT[3]'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:117]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:117]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNC'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:126]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:126]
+WARNING: [Vivado 12-584] No ports matched 'BTNC'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:126]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:126]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTND'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:127]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:127]
+WARNING: [Vivado 12-584] No ports matched 'BTND'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:127]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:127]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNL'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:128]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:128]
+WARNING: [Vivado 12-584] No ports matched 'BTNL'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:128]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:128]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNR'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:129]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:129]
+WARNING: [Vivado 12-584] No ports matched 'BTNR'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:129]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:129]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNU'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:130]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:130]
+WARNING: [Vivado 12-584] No ports matched 'BTNU'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:130]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:130]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNC'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:131]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:131]
+WARNING: [Vivado 12-584] No ports matched 'BTNC'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:131]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:131]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTND'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:132]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:132]
+WARNING: [Vivado 12-584] No ports matched 'BTND'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:132]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:132]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNL'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:133]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:133]
+WARNING: [Vivado 12-584] No ports matched 'BTNL'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:133]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:133]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNR'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:134]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:134]
+WARNING: [Vivado 12-584] No ports matched 'BTNR'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:134]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:134]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'BTNU'. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:135]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:135]
+WARNING: [Vivado 12-584] No ports matched 'BTNU'. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:135]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc:135]
 Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-Finished Parsing XDC File [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Master_Game_propImpl.xdc].
+Finished Parsing XDC File [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Master_Game_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/Master_Game_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1201.723 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1209.957 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.099 . Memory (MB): peak = 1201.723 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.213 . Memory (MB): peak = 1209.957 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished Constraint Validation : Time (s): cpu = 00:01:16 ; elapsed = 00:01:21 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:16 ; elapsed = 00:01:21 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:16 ; elapsed = 00:01:22 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_snake_reg' in module 'Navigation_State_Machine'
 ---------------------------------------------------------------------------------------------------
@@ -235,7 +235,7 @@ INFO: [Synth 8-802] inferred FSM for state register 'state_snake_reg' in module 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_snake_reg' using encoding 'sequential' in module 'Navigation_State_Machine'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:38 ; elapsed = 00:00:39 . Memory (MB): peak = 1201.723 ; gain = 177.082
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:45 ; elapsed = 00:01:52 . Memory (MB): peak = 1209.957 ; gain = 182.117
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -285,8 +285,8 @@ Detailed RTL Component Info :
 	   2 Input    3 Bit        Muxes := 4     
 	   2 Input    2 Bit        Muxes := 21    
 	   4 Input    2 Bit        Muxes := 4     
-	   2 Input    1 Bit        Muxes := 518   
-	   4 Input    1 Bit        Muxes := 198   
+	   2 Input    1 Bit        Muxes := 710   
+	   4 Input    1 Bit        Muxes := 197   
 	   3 Input    1 Bit        Muxes := 13    
 	   6 Input    1 Bit        Muxes := 2     
 	   5 Input    1 Bit        Muxes := 2     
@@ -322,25 +322,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:39 ; elapsed = 00:01:41 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:04:53 ; elapsed = 00:05:10 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:46 ; elapsed = 00:01:48 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:05:10 ; elapsed = 00:05:28 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:46 ; elapsed = 00:01:48 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Timing Optimization : Time (s): cpu = 00:05:10 ; elapsed = 00:05:28 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:48 ; elapsed = 00:01:51 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Technology Mapping : Time (s): cpu = 00:05:17 ; elapsed = 00:05:36 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -358,37 +358,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:52 ; elapsed = 00:01:55 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished IO Insertion : Time (s): cpu = 00:05:28 ; elapsed = 00:05:47 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:52 ; elapsed = 00:01:55 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Renaming Generated Instances : Time (s): cpu = 00:05:28 ; elapsed = 00:05:47 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:53 ; elapsed = 00:01:55 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:05:29 ; elapsed = 00:05:49 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:53 ; elapsed = 00:01:55 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Renaming Generated Ports : Time (s): cpu = 00:05:29 ; elapsed = 00:05:49 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:53 ; elapsed = 00:01:56 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Handling Custom Attributes : Time (s): cpu = 00:05:31 ; elapsed = 00:05:50 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:53 ; elapsed = 00:01:56 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Renaming Generated Nets : Time (s): cpu = 00:05:31 ; elapsed = 00:05:50 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -405,40 +405,39 @@ Report Cell Usage:
 |      |Cell   |Count |
 +------+-------+------+
 |1     |BUFG   |     1|
-|2     |CARRY4 |   591|
-|3     |LUT1   |   377|
-|4     |LUT2   |  1828|
-|5     |LUT3   |   690|
-|6     |LUT4   |  1138|
-|7     |LUT5   |   531|
-|8     |LUT6   |  4069|
-|9     |MUXF7  |     4|
-|10    |FDCE   |    91|
-|11    |FDPE   |    36|
-|12    |FDRE   |   915|
-|13    |IBUF   |     3|
-|14    |OBUF   |    14|
+|2     |CARRY4 |   575|
+|3     |LUT1   |   371|
+|4     |LUT2   |  1817|
+|5     |LUT3   |   667|
+|6     |LUT4   |  1152|
+|7     |LUT5   |   532|
+|8     |LUT6   |  4073|
+|9     |FDCE   |    91|
+|10    |FDPE   |    36|
+|11    |FDRE   |   893|
+|12    |IBUF   |     3|
+|13    |OBUF   |    14|
 +------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:53 ; elapsed = 00:01:56 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Finished Writing Synthesis Report : Time (s): cpu = 00:05:31 ; elapsed = 00:05:50 . Memory (MB): peak = 1627.168 ; gain = 599.328
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:29 ; elapsed = 00:01:50 . Memory (MB): peak = 1640.219 ; gain = 615.578
-Synthesis Optimization Complete : Time (s): cpu = 00:01:53 ; elapsed = 00:01:56 . Memory (MB): peak = 1640.219 ; gain = 615.578
+Synthesis Optimization Runtime : Time (s): cpu = 00:04:25 ; elapsed = 00:05:35 . Memory (MB): peak = 1627.168 ; gain = 599.328
+Synthesis Optimization Complete : Time (s): cpu = 00:05:31 ; elapsed = 00:05:51 . Memory (MB): peak = 1627.168 ; gain = 599.328
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.133 . Memory (MB): peak = 1640.219 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 595 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.343 . Memory (MB): peak = 1627.168 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 575 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1640.219 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1627.168 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
 50 Infos, 42 Warnings, 34 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:00 ; elapsed = 00:02:04 . Memory (MB): peak = 1640.219 ; gain = 615.578
-INFO: [Common 17-1381] The checkpoint 'C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.runs/synth_1/Master_Game.dcp' has been generated.
+synth_design: Time (s): cpu = 00:05:47 ; elapsed = 00:06:10 . Memory (MB): peak = 1627.168 ; gain = 599.328
+INFO: [Common 17-1381] The checkpoint 'C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/Master_Game.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file Master_Game_utilization_synth.rpt -pb Master_Game_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Dec 12 15:22:04 2024...
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 12 16:37:39 2024...

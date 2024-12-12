@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc rfile:../../../snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc} rfile:../../../snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:2 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports CLK]
 set_property src_info {type:XDC file:1 line:16 export:INPUT save:INPUT read:READ} [current_design]

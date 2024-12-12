@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.tcl"
+  variable script "C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.tcl"
   variable category "vivado_impl"
 }
 
@@ -129,15 +129,15 @@ OPTRACE "create in-memory project" START { }
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.cache/wt [current_project]
-  set_property parent.project_path C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.xpr [current_project]
+  set_property webtalk.parent_dir {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.cache/wt} [current_project]
+  set_property parent.project_path {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.xpr} [current_project]
   set_property ip_output_repo {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game/snake_game.cache/ip}} [current_project]
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.runs/synth_1/Master_Game.dcp
+  add_files -quiet {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/Master_Game.dcp}}
 OPTRACE "read constraints: implementation" START { }
-  read_xdc C:/Users/ddddd/OneDrive/Desktop/testing/snake_game/snake_game/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc
+  read_xdc {{C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.srcs/constrs_1/imports/new/Snake_Constr.xdc}}
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }
