@@ -8,7 +8,9 @@ module Snake_control(
     input [1:0] state_navigation,
     input [1:0] state_navigation_2,
     input [14:0] target_address,
+    input [14:0] target_address_2,
     input [14:0] poison_address,
+    input [14:0] poison_address_2,
     input [18:0] pixel_address,
     input [3:0] second_counter_units,
     input [2:0] second_counter_tens,
@@ -19,19 +21,25 @@ module Snake_control(
     output [11:0] COLOUR_OUT,
     output reached_target_one,
     output reached_target_two,
+    output reached_target_2_one,
+    output reached_target_2_two,
     output reached_poison_one,
     output reached_poison_two,
+    output reached_poison_2_one,
+    output reached_poison_2_two,
     output fail
     );
 
     parameter MaxY = 120; parameter MaxX = 160; parameter SnakeLength = 27;
     
     wire [25:0] counter; wire [6:0] target_vertical_addr; wire [7:0] target_horizontal_addr; wire [6:0] poison_vertical_addr; wire [7:0] poison_horizontal_addr; 
-    wire [9:0] horizontal_addr; wire [8:0] vertical_addr;
+    wire [9:0] horizontal_addr; wire [8:0] vertical_addr; wire [6:0] target_vertical_addr_2; wire [7:0] target_horizontal_addr_2;
+    wire [6:0] poison_vertical_addr_2; wire [7:0] poison_horizontal_addr_2;
     
     reg crashed; reg [11:0] colour; reg [25:0] counter_max; reg reached_one; reg reached_two; reg reached_p_one; reg reached_p_two; 
     reg [7:0] SnakeState_X [0:SnakeLength-1]; reg [6:0] SnakeState_Y [0:SnakeLength-1]; reg [7:0] SnakeState_X_2 [0:SnakeLength-1]; 
-    reg [6:0] SnakeState_Y_2 [0:SnakeLength-1];
+    reg [6:0] SnakeState_Y_2 [0:SnakeLength-1]; reg reached_2_one; reg reached_2_two;
+    reg reached_p_2_one; reg reached_p_2_two;
     
     integer i;
     integer j;
@@ -61,13 +69,23 @@ module Snake_control(
     assign reached_target_one = reached_one;
     assign reached_target_two = reached_two;
     
+    assign reached_target_2_one = reached_2_one;
+    assign reached_target_2_two = reached_2_two;
+    
     assign reached_poison_one = reached_p_one;
     assign reached_poison_two = reached_p_two;
+    
+    assign reached_poison_2_one = reached_p_2_one;
+    assign reached_poison_2_two = reached_p_2_two;
 
     assign target_horizontal_addr = target_address[14:7]; //8bit
     assign target_vertical_addr = target_address[6:0]; //7bit
+    assign target_horizontal_addr_2 = target_address_2[14:7];
+    assign target_vertical_addr_2 = target_address_2[6:0];
     assign poison_horizontal_addr = poison_address[14:7]; 
     assign poison_vertical_addr = poison_address[6:0];
+    assign poison_horizontal_addr_2 = poison_address_2[14:7]; 
+    assign poison_vertical_addr_2 = poison_address_2[6:0];
     assign vertical_addr = pixel_address[8:0]; //9 bit
     assign horizontal_addr = pixel_address[18:9]; //10 bit
     
@@ -202,6 +220,24 @@ module Snake_control(
             reached_p_one <= 1'b0;
             reached_p_two <= 1'b0;
         end
+        
+        if (SnakeState_X[0] == target_horizontal_addr_2[7:0] && SnakeState_Y[0] == target_vertical_addr_2[6:0])
+            reached_2_one <= 1'b1;
+        else if (SnakeState_X_2[0] == target_horizontal_addr_2[7:0] && SnakeState_Y_2[0] == target_vertical_addr_2[6:0])
+            reached_2_two <= 1'b1;
+        else begin
+            reached_2_one <= 1'b0;
+            reached_2_two <= 1'b0;
+        end
+        
+        if (SnakeState_X[0] == poison_horizontal_addr_2[7:0] && SnakeState_Y[0] == poison_vertical_addr_2[6:0])
+            reached_p_2_one <= 1'b1;
+        else if (SnakeState_X_2[0] == poison_horizontal_addr_2[7:0] && SnakeState_Y_2[0] == poison_vertical_addr_2[6:0])
+            reached_p_2_two <= 1'b1;
+        else begin
+            reached_p_2_one <= 1'b0;
+            reached_p_2_two <= 1'b0;
+        end
     end
 
     
@@ -280,12 +316,12 @@ module Snake_control(
             colour <= 12'h000; // Default color
             crashed <= 1'b0;
             
-            if((reached_p_one || reached_p_two)&&((score_snake_one == -4'd1) && (score_snake_two == -4'd1)))
+            if((reached_p_one || reached_p_two || reached_p_2_one || reached_p_2_two) && ((score_snake_one == -4'd1) && (score_snake_two == -4'd1)))
                 crashed <= 1'b1;
             // Check for seed and poison addresses
-            else if (target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) begin
+            else if ((target_horizontal_addr[7:0] == horizontal_addr[9:2] && target_vertical_addr[6:0] == vertical_addr[8:2]) || (target_horizontal_addr_2[7:0] == horizontal_addr[9:2] && target_vertical_addr_2[6:0] == vertical_addr[8:2])) begin
                 colour <= 12'h00f; // Seed color
-            end else if (poison_horizontal_addr[7:0] == horizontal_addr[9:2] && poison_vertical_addr[6:0] == vertical_addr[8:2]) begin
+            end else if ((poison_horizontal_addr[7:0] == horizontal_addr[9:2] && poison_vertical_addr[6:0] == vertical_addr[8:2]) || (poison_horizontal_addr_2[7:0] == horizontal_addr[9:2] && poison_vertical_addr_2[6:0] == vertical_addr[8:2])) begin
                 colour <= 12'h0f0; // Poison color
             end else begin
                 // Check for snake one segments

@@ -20,14 +20,20 @@ module Master_Game(
     wire [1:0] state_navigation;
     wire [1:0] state_navigation_2;
     wire [14:0] target_address;
+    wire [14:0] target_address_2;
     wire [14:0] poison_address;
+    wire [14:0] poison_address_2;
     wire [18:0] address;
     wire [11:0] colour;
     wire fail;
     wire reached_target_one;
     wire reached_target_two;
+    wire reached_target_2_one;
+    wire reached_target_2_two;
     wire reached_poison_one;
     wire reached_poison_two;
+    wire reached_poison_2_one;
+    wire reached_poison_2_two;
     wire reset;
     wire [15:0] keycode;
     wire flag;
@@ -46,15 +52,15 @@ module Master_Game(
     always @(posedge CLK) begin
         if (flag) begin
             case (keycode[7:0])
-                8'h1A: BTNL <= 1; // Z
+                8'h1C: BTNL <= 1; // A
                 8'h1D: BTNU <= 1; // W
                 8'h1B: BTND <= 1; // S
                 8'h23: BTNR <= 1; // D
                 8'h2D: BTNC <= 1; // 'R' Key (Reset)
-                8'h3B: BTNL_2 <= 1; // J
-                8'h43: BTNU_2 <= 1; // I
-                8'h42: BTND_2 <= 1; // K
-                8'h4B: BTNR_2 <= 1; // L
+                8'h6B: BTNL_2 <= 1; // J
+                8'h75: BTNU_2 <= 1; // I
+                8'h72: BTND_2 <= 1; // K
+                8'h74: BTNR_2 <= 1; // L
                 default: begin
                     BTNU <= 0; BTND <= 0; BTNL <= 0; BTNR <= 0;
                     BTNC <= 0;
@@ -116,7 +122,9 @@ module Master_Game(
                         .state_navigation(state_navigation),
                         .state_navigation_2(state_navigation_2),
                         .target_address(target_address),
+                        .target_address_2(target_address_2),
                         .poison_address(poison_address),
+                        .poison_address_2(poison_address_2),
                         .pixel_address(address),
                         .second_counter_units(second_counter_units),
                         .second_counter_tens(second_counter_tens),
@@ -127,8 +135,12 @@ module Master_Game(
                         .COLOUR_OUT(colour),
                         .reached_target_one(reached_target_one),
                         .reached_target_two(reached_target_two),
+                        .reached_target_2_one(reached_target_2_one),
+                        .reached_target_2_two(reached_target_2_two),
                         .reached_poison_one(reached_poison_one),
                         .reached_poison_two(reached_poison_two),
+                        .reached_poison_2_one(reached_poison_2_one),
+                        .reached_poison_2_two(reached_poison_2_two),
                         .fail(fail)
                     );
                     
@@ -138,10 +150,14 @@ module Master_Game(
                             .CLK(CLK),
                             .RESET(BTNC),
                             .reached_target(reached_target_one | reached_target_two),
+                            .reached_target_2(reached_target_2_one | reached_target_2_two),
                             .reached_poison(reached_poison_one | reached_poison_two),
+                            .reached_poison_2(reached_poison_2_one | reached_poison_2_two),
                             .levels(levels),
                             .rand_target_address(target_address),
-                            .rand_poison_address(poison_address)
+                            .rand_target_address_2(target_address_2),
+                            .rand_poison_address(poison_address),
+                            .rand_poison_address_2(poison_address_2)
                         );
                         
     
@@ -161,6 +177,10 @@ module Master_Game(
                             .reached_poison_one(reached_poison_one),
                             .reached_target_two(reached_target_two),
                             .reached_poison_two(reached_poison_two),
+                            .reached_target_2_one(reached_target_2_one),
+                            .reached_target_2_two(reached_target_2_two),
+                            .reached_poison_2_one(reached_poison_2_one),
+                            .reached_poison_2_two(reached_poison_2_two),
                             .master_state(state_master),
                             .SCORE_SNAKE_ONE(score_snake_one),
                             .SCORE_SNAKE_TWO(score_snake_two),

@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date         : Thu Dec 12 16:39:51 2024
+| Date         : Fri Dec 13 01:28:34 2024
 | Host         : Taha running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -file Master_Game_timing_summary_routed.rpt -pb Master_Game_timing_summary_routed.pb -rpx Master_Game_timing_summary_routed.rpx -warn_on_violation
 | Design       : Master_Game
@@ -39,10 +39,10 @@ check_timing report
 
 Table of Contents
 -----------------
-1. checking no_clock (1028)
+1. checking no_clock (1088)
 2. checking constant_clock (0)
 3. checking pulse_width_clock (0)
-4. checking unconstrained_internal_endpoints (2125)
+4. checking unconstrained_internal_endpoints (2270)
 5. checking no_input_delay (2)
 6. checking no_output_delay (14)
 7. checking multiple_clock (0)
@@ -52,9 +52,9 @@ Table of Contents
 11. checking partial_output_delay (0)
 12. checking latch_loops (0)
 
-1. checking no_clock (1028)
+1. checking no_clock (1088)
 ---------------------------
- There are 1015 register/latch pins with no clock driven by root clock pin: CLK (HIGH)
+ There are 1075 register/latch pins with no clock driven by root clock pin: CLK (HIGH)
 
  There are 13 register/latch pins with no clock driven by root clock pin: keyboard_receiver/db_clk/O_reg/Q (HIGH)
 
@@ -69,9 +69,9 @@ Table of Contents
  There are 0 register/latch pins which need pulse_width check
 
 
-4. checking unconstrained_internal_endpoints (2125)
+4. checking unconstrained_internal_endpoints (2270)
 ---------------------------------------------------
- There are 2125 pins that are not constrained for maximum delay. (HIGH)
+ There are 2270 pins that are not constrained for maximum delay. (HIGH)
 
  There are 0 pins that are not constrained for maximum delay due to constant clock.
 
