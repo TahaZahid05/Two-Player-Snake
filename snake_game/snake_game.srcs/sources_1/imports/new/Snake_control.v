@@ -17,7 +17,7 @@ module Snake_control(
     input [3:0] minute_counter_units,
     input [2:0] minute_counter_tens,
     input [1:0] lives,
-    input levels,
+    input [1:0] levels,
     output [11:0] COLOUR_OUT,
     output reached_target_one,
     output reached_target_two,
@@ -40,6 +40,7 @@ module Snake_control(
     reg [7:0] SnakeState_X [0:SnakeLength-1]; reg [6:0] SnakeState_Y [0:SnakeLength-1]; reg [7:0] SnakeState_X_2 [0:SnakeLength-1]; 
     reg [6:0] SnakeState_Y_2 [0:SnakeLength-1]; reg reached_2_one; reg reached_2_two;
     reg reached_p_2_one; reg reached_p_2_two;
+    reg [1:0] prev_level;
     
     integer i;
     integer j;
@@ -49,7 +50,7 @@ module Snake_control(
     assign fail = crashed;
     
     always @(*) begin
-        if (levels)
+        if (levels == 2'd1 || levels == 2'd2)
             counter_max = 2500000;
         else 
             counter_max = 5000000;
@@ -109,6 +110,17 @@ module Snake_control(
     
     //Determine next position of snake
     always@(posedge CLK) begin
+        if (RESET || (levels != prev_level)) begin
+            // Set initial position for snake one
+            SnakeState_X[0] <= 8'd6; // x-coordinate between 7 and 145
+            SnakeState_Y[0] <= 7'd55; // y-coordinate between 45 and 110
+
+            // Set initial position for snake two
+            SnakeState_X_2[0] <= MaxX-6; // x-coordinate between 7 and 145
+            SnakeState_Y_2[0] <= MaxY-6; // y-coordinate between 45 and 110
+            
+            prev_level <= levels;
+        end else begin
         if (counter == counter_max) begin
             case(state_navigation)
                 2'd0: begin
@@ -200,6 +212,7 @@ module Snake_control(
                         SnakeState_X_2[0] <= SnakeState_X_2[0] - 1;
                 end
             endcase
+        end
         end
     end      
     
@@ -375,17 +388,26 @@ module Snake_control(
                         end
                     end
                     // Check if snake one collides with the hollow box
-                if (levels && (SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
+                if (levels == 2'd1 && (SnakeState_X[i] >= 5 && SnakeState_X[i] <= 50) &&
                     (SnakeState_Y[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y[i] == ((MaxY+52) >> 1) + 15)) begin
                     crashed <= 1'b1;
                 end
-                if (levels && (SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
+                if (levels == 2'd1 && (SnakeState_Y[i] >= ((MaxY+52) >> 1) - 15 && SnakeState_Y[i] <= ((MaxY+52) >> 1) + 15) &&
                     (SnakeState_X[i] == 50)) begin
+                    crashed <= 1'b1;
+                end
+                // Check if snake one collides with the vertical and horizontal lines (level 2)
+                if (levels == 2'd2 && (SnakeState_X[i] >= 76 && SnakeState_X[i] <= 80) &&
+                    (SnakeState_Y[i] >= 35 && SnakeState_Y[i] <= MaxY)) begin
+                    crashed <= 1'b1;
+                end
+                if (levels == 2'd2 && (SnakeState_Y[i] >= 75 && SnakeState_Y[i] <= 79) &&
+                    (SnakeState_X[i] >= 0 && SnakeState_X[i] <= MaxX)) begin
                     crashed <= 1'b1;
                 end
             end
 
-                if (levels && ((i / 3) <= score_snake_two)) begin // Check if the segment is active for snake two
+                if (levels == 2'd1 && ((i / 3) <= score_snake_two)) begin // Check if the segment is active for snake two
                     // Check if snake two collides with the hollow box
                     if ((SnakeState_X_2[i] >= 5 && SnakeState_X_2[i] <= 50) &&
                         (SnakeState_Y_2[i] == ((MaxY+52) >> 1) - 15 || SnakeState_Y_2[i] == ((MaxY+52) >> 1) + 15)) begin
@@ -396,6 +418,17 @@ module Snake_control(
                         crashed <= 1'b1;
                     end
                 end
+                if (levels == 2'd2 && ((i/3) <= score_snake_two)) begin
+                    if ((SnakeState_X_2[i] >= 76 && SnakeState_X_2[i] <= 80) &&
+                        (SnakeState_Y_2[i] >= 35 && SnakeState_Y_2[i] <= MaxY)) begin
+                        crashed <= 1'b1;
+                    end
+                    if ((SnakeState_Y_2[i] >= 75 && SnakeState_Y_2[i] <= 79) &&
+                        (SnakeState_X_2[i] >= 0 && SnakeState_X_2[i] <= MaxX)) begin
+                        crashed <= 1'b1;
+                    end 
+                end
+                
             end
 
     
@@ -404,13 +437,19 @@ module Snake_control(
                 (vertical_addr[8:2] >= 35 && vertical_addr[8:2] <= 40) || 
                 (vertical_addr[8:2] >= MaxY - 5 && vertical_addr[8:2] <= MaxY) || 
                 // Hollow smaller box in the center
-                (levels && (horizontal_addr[9:2] >= 5 && horizontal_addr[9:2] <= 50) &&
+                (levels == 2'd1 && (horizontal_addr[9:2] >= 5 && horizontal_addr[9:2] <= 50) &&
                  (vertical_addr[8:2] == ((MaxY+52) >> 1) - 15 || vertical_addr[8:2] == ((MaxY+52) >> 1) + 15)) || 
-                (levels && (vertical_addr[8:2] >= ((MaxY+52) >> 1) - 15 && vertical_addr[8:2] <= ((MaxY+52) >> 1) + 15) &&
-                 (horizontal_addr[9:2] == 50))
+                (levels == 2'd1 && (vertical_addr[8:2] >= ((MaxY+52) >> 1) - 15 && vertical_addr[8:2] <= ((MaxY+52) >> 1) + 15) &&
+                 (horizontal_addr[9:2] == 50)) ||
+                 (levels == 2'd2 && (horizontal_addr[9:2] >= 76 && horizontal_addr[9:2] <= 80) &&
+                (vertical_addr[8:2] >= 35 && vertical_addr[8:2] <= MaxY)) ||
+                (levels == 2'd2 && (vertical_addr[8:2] >= 75 && vertical_addr[8:2] <= 79) &&
+                (horizontal_addr[9:2] >= 0 && horizontal_addr[9:2] <= MaxX))
                 ) begin
-                if(~levels)
+                if(levels == 2'd0)
                     colour <= 12'hf00;
+                else if(levels == 2'd1)
+                    colour <= 12'h0f0;
                 else
                     colour <= 12'h00f;
                 end

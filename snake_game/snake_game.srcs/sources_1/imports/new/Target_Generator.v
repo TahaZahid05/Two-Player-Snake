@@ -5,7 +5,7 @@ module Target_Generator(
     input reached_target_2,
     input reached_poison,
     input reached_poison_2,
-    input levels,
+    input [1:0] levels,
     output [14:0] rand_target_address,
     output [14:0] rand_target_address_2,
     output [14:0] rand_poison_address,
@@ -71,7 +71,7 @@ module Target_Generator(
                 mapped_x <= (lfsr_h % (152 - 8 + 1)) + 8; // x-range: 5 to 155
                 mapped_y <= (lfsr_v % (112 - 43 + 1)) + 43;  // y-range: 40 to 115
                 
-                if (mapped_x >= 5 && mapped_x <= 51 && mapped_y >= 70 && mapped_y <= 102 && levels) begin
+                if (mapped_x >= 5 && mapped_x <= 51 && mapped_y >= 70 && mapped_y <= 102) begin
                     if(mapped_x == 50 && mapped_y >= 71 && mapped_y <= 101)
                         mapped_x <= mapped_x + 2;
                     else if(mapped_y == 71 || mapped_y == 101)
@@ -90,11 +90,34 @@ module Target_Generator(
                         mapped_y <= mapped_y + 1;
                 end
 
+                // Conditions for horizontal line
+                if (mapped_y >= 74 && mapped_y <= 80) begin
+                    if (mapped_y == 74)
+                        mapped_y <= mapped_y - 1;
+                    else if (mapped_y == 80)
+                        mapped_y <= mapped_y + 1;
+                    else if (mapped_y >= 75 && mapped_y <= 77)
+                        mapped_y <= 73;
+                    else if (mapped_y == 78 || mapped_y == 79)
+                        mapped_y <= 81;
+                end
+                // Conditions for vertical line
+                if (mapped_x >= 75 && mapped_x <= 81) begin
+                    if (mapped_x == 75)
+                        mapped_x <= mapped_x - 1;
+                    else if (mapped_x == 81)
+                        mapped_x <= mapped_x + 1;
+                    else if (mapped_x >= 76 && mapped_x <= 78)
+                        mapped_x <= 74;
+                    else if (mapped_x == 79 || mapped_x == 80)
+                        mapped_x <= 82;
+                end
+
                 // Map LFSR outputs to valid ranges for second target
                 mapped_x_2 <= (lfsr_h_2 % (152 - 8 + 1)) + 8; // x-range: 5 to 155
                 mapped_y_2 <= (lfsr_v_2 % (112 - 43 + 1)) + 43;  // y-range: 40 to 115
                 
-                if (mapped_x_2 >= 5 && mapped_x_2 <= 51 && mapped_y_2 >= 70 && mapped_y_2 <= 102 && levels) begin
+                if (mapped_x_2 >= 5 && mapped_x_2 <= 51 && mapped_y_2 >= 70 && mapped_y_2 <= 102) begin
                     if(mapped_x_2 == 50 && mapped_y_2 >= 71 && mapped_y_2 <= 101)
                         mapped_x_2 <= mapped_x_2 + 2;
                     else if(mapped_y_2 == 71 || mapped_y_2 == 101)
@@ -113,11 +136,34 @@ module Target_Generator(
                         mapped_y_2 <= mapped_y_2 + 1;
                 end
 
+                // Conditions for horizontal line
+                if (mapped_y_2 >= 74 && mapped_y_2 <= 80) begin
+                    if (mapped_y_2 == 74)
+                        mapped_y_2 <= mapped_y_2 - 1;
+                    else if (mapped_y_2 == 80)
+                        mapped_y_2 <= mapped_y_2 + 1;
+                    else if (mapped_y_2 >= 75 && mapped_y_2 <= 77)
+                        mapped_y_2 <= 73;
+                    else if (mapped_y_2 == 78 || mapped_y_2 == 79)
+                        mapped_y_2 <= 81;
+                end
+                // Conditions for vertical line
+                if (mapped_x_2 >= 75 && mapped_x_2 <= 81) begin
+                    if (mapped_x_2 == 75)
+                        mapped_x_2 <= mapped_x_2 - 1;
+                    else if (mapped_x_2 == 81)
+                        mapped_x_2 <= mapped_x_2 + 1;
+                    else if (mapped_x_2 >= 76 && mapped_x_2 <= 78)
+                        mapped_x_2 <= 74;
+                    else if (mapped_x_2 == 79 || mapped_x_2 == 80)
+                        mapped_x_2 <= 82;
+                end
+
                 // Map LFSR outputs to valid ranges for poison
                 mapped_poison_x <= (lfsr_poison_h % (152 - 8 + 1)) + 8;
                 mapped_poison_y <= (lfsr_poison_v % (112 - 43 + 1)) + 43;
                 
-                if (mapped_poison_x >= 5 && mapped_poison_x <= 51 && mapped_poison_y >= 70 && mapped_poison_y <= 102 && levels) begin
+                if (mapped_poison_x >= 5 && mapped_poison_x <= 51 && mapped_poison_y >= 70 && mapped_poison_y <= 102) begin
                     if(mapped_poison_x == 50 && mapped_poison_y >= 71 && mapped_poison_y <= 101)
                         mapped_poison_x <= mapped_poison_x + 2;
                     else if(mapped_poison_y == 71 || mapped_poison_y == 101)
@@ -136,11 +182,34 @@ module Target_Generator(
                         mapped_poison_y <= mapped_poison_y + 1;
                 end
 
+                // Conditions for horizontal line
+                if (mapped_poison_y >= 74 && mapped_poison_y <= 80) begin
+                    if (mapped_poison_y == 74)
+                        mapped_poison_y <= mapped_poison_y - 1;
+                    else if (mapped_poison_y == 80)
+                        mapped_poison_y <= mapped_poison_y + 1;
+                    else if (mapped_poison_y >= 75 && mapped_poison_y <= 77)
+                        mapped_poison_y <= 73;
+                    else if (mapped_poison_y == 78 || mapped_poison_y == 79)
+                        mapped_poison_y <= 81;
+                end
+                // Conditions for vertical line
+                if (mapped_poison_x >= 75 && mapped_poison_x <= 81) begin
+                    if (mapped_poison_x == 75)
+                        mapped_poison_x <= mapped_poison_x - 1;
+                    else if (mapped_poison_x == 81)
+                        mapped_poison_x <= mapped_poison_x + 1;
+                    else if (mapped_poison_x >= 76 && mapped_poison_x <= 78)
+                        mapped_poison_x <= 74;
+                    else if (mapped_poison_x == 79 || mapped_poison_x == 80)
+                        mapped_poison_x <= 82;
+                end
+
                 // Map LFSR outputs to valid ranges for second poison
                 mapped_poison_x_2 <= (lfsr_poison_h_2 % (152 - 8 + 1)) + 8;
                 mapped_poison_y_2 <= (lfsr_poison_v_2 % (112 - 43 + 1)) + 43;
                 
-                if (mapped_poison_x_2 >= 5 && mapped_poison_x_2 <= 51 && mapped_poison_y_2 >= 70 && mapped_poison_y_2 <= 102 && levels) begin
+                if (mapped_poison_x_2 >= 5 && mapped_poison_x_2 <= 51 && mapped_poison_y_2 >= 70 && mapped_poison_y_2 <= 102) begin
                     if(mapped_poison_x_2 == 50 && mapped_poison_y_2 >= 71 && mapped_poison_y_2 <= 101)
                         mapped_poison_x_2 <= mapped_poison_x_2 + 2;
                     else if(mapped_poison_y_2 == 71 || mapped_poison_y_2 == 101)
@@ -157,6 +226,29 @@ module Target_Generator(
                         mapped_poison_y_2 <= mapped_poison_y_2 - 1;
                     else if(mapped_poison_y_2 == 102)
                         mapped_poison_y_2 <= mapped_poison_y_2 + 1;
+                end
+
+                // Conditions for horizontal line
+                if (mapped_poison_y_2 >= 74 && mapped_poison_y_2 <= 80) begin
+                    if (mapped_poison_y_2 == 74)
+                        mapped_poison_y_2 <= mapped_poison_y_2 - 1;
+                    else if (mapped_poison_y_2 == 80)
+                        mapped_poison_y_2 <= mapped_poison_y_2 + 1;
+                    else if (mapped_poison_y_2 >= 75 && mapped_poison_y_2 <= 77)
+                        mapped_poison_y_2 <= 73;
+                    else if (mapped_poison_y_2 == 78 || mapped_poison_y_2 == 79)
+                        mapped_poison_y_2 <= 81;
+                end
+                // Conditions for vertical line
+                if (mapped_poison_x_2 >= 75 && mapped_poison_x_2 <= 81) begin
+                    if (mapped_poison_x_2 == 75)
+                        mapped_poison_x_2 <= mapped_poison_x_2 - 1;
+                    else if (mapped_poison_x_2 == 81)
+                        mapped_poison_x_2 <= mapped_poison_x_2 + 1;
+                    else if (mapped_poison_x_2 >= 76 && mapped_poison_x_2 <= 78)
+                        mapped_poison_x_2 <= 74;
+                    else if (mapped_poison_x_2 == 79 || mapped_poison_x_2 == 80)
+                        mapped_poison_x_2 <= 82;
                 end
             end
         end

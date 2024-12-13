@@ -14,7 +14,7 @@ module Score_Counter(
     output reg signed [3:0] SCORE_SNAKE_ONE,
     output reg signed [3:0] SCORE_SNAKE_TWO,
     output reg [1:0] lives,
-    output reg levels
+    output reg [1:0] levels
     );
 
     reg target_reached_flag;
@@ -148,7 +148,7 @@ module Score_Counter(
                 poison_2_reached_flag <= 1'b0;
             end
 
-            if ((SCORE_SNAKE_ONE + SCORE_SNAKE_TWO == 4'd8) && ~levels) begin
+            if ((SCORE_SNAKE_ONE + SCORE_SNAKE_TWO == 4'd8) && levels == 2'd0) begin
                 // Reset score to 0
                 SCORE_SNAKE_ONE <= 4'd0;
                 SCORE_SNAKE_TWO <= 4'd0;
@@ -157,14 +157,24 @@ module Score_Counter(
                 poison_reached_flag <= 1'b0;
                 poison_2_reached_flag <= 1'b0;
                 lives <= 2'd0;
-                levels <= 1;
+                levels <= 2'd1;
+            end
+            else if ((SCORE_SNAKE_ONE + SCORE_SNAKE_TWO == 4'd8) && levels == 2'd1) begin
+                SCORE_SNAKE_ONE <= 4'd0;
+                SCORE_SNAKE_TWO <= 4'd0;
+                target_reached_flag <= 1'b0;
+                target_2_reached_flag <= 1'b0;
+                poison_reached_flag <= 1'b0;
+                poison_2_reached_flag <= 1'b0;
+                lives <= 2'd0;
+                levels <= 2'd2;
             end
         end else if (master_state == 2'd2 || master_state == 2'd0) begin
             if (master_state == 2'd0) begin
                 SCORE_SNAKE_ONE <= 4'd0;
                 SCORE_SNAKE_TWO <= 4'd0;
                 lives <= 2'd0;
-                levels <= 0;
+                levels <= 2'd0;
             end
             target_reached_flag <= 1'b0;
             poison_reached_flag <= 1'b0;

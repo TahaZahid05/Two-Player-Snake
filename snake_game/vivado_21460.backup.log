@@ -2,22 +2,27 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Wed Dec 11 16:26:23 2024
-# Process ID: 14200
-# Current directory: C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent20176 C:\Users\ddddd\OneDrive\Desktop\Two-Player-Snake-main\snake_game\snake_game\snake_game.xpr
-# Log file: C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/vivado.log
-# Journal file: C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game\vivado.jou
+# Start of session at: Fri Dec 13 00:22:59 2024
+# Process ID: 21460
+# Current directory: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent3328 C:\Users\ddddd\OneDrive\Desktop\Semester 3\DLD\Project\Two-Player-Snake\snake_game\snake_game.xpr
+# Log file: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/vivado.log
+# Journal file: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.xpr
+open_project {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.xpr}
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game'
 Scanning sources...
 Finished scanning sources
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.1/data/ip'.
-open_project: Time (s): cpu = 00:00:15 ; elapsed = 00:00:07 . Memory (MB): peak = 1027.188 ; gain = 0.000
+open_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:10 . Memory (MB): peak = 1016.461 ; gain = 0.000
 update_compile_order -fileset sources_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Fri Dec 13 00:24:22 2024] Launched impl_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/runme.log
 open_hw_manager
 connect_hw_server -allow_non_jtag
 INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
@@ -40,16 +45,16 @@ INFO: [Labtools 27-2221] Launch Output:
 
 
 
-connect_hw_server: Time (s): cpu = 00:00:01 ; elapsed = 00:00:11 . Memory (MB): peak = 1027.188 ; gain = 0.000
+connect_hw_server: Time (s): cpu = 00:00:01 ; elapsed = 00:00:09 . Memory (MB): peak = 1015.602 ; gain = 0.000
 open_hw_target
 INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210183AF2A1DA
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
 current_hw_device [get_hw_devices xc7a35t_0]
 refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
 INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
 set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
 program_hw_devices [get_hw_devices xc7a35t_0]
 INFO: [Labtools 27-3164] End of startup status: HIGH
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
@@ -57,10 +62,10 @@ INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed wi
 close_hw_manager
 reset_run synth_1
 launch_runs impl_1 -to_step write_bitstream -jobs 4
-[Wed Dec 11 16:42:55 2024] Launched synth_1...
-Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/synth_1/runme.log
-[Wed Dec 11 16:42:55 2024] Launched impl_1...
-Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/runme.log
+[Fri Dec 13 00:57:15 2024] Launched synth_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/runme.log
+[Fri Dec 13 00:57:15 2024] Launched impl_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/runme.log
 open_hw_manager
 connect_hw_server -allow_non_jtag
 INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
@@ -83,41 +88,52 @@ INFO: [Labtools 27-2221] Launch Output:
 
 
 
-connect_hw_server: Time (s): cpu = 00:00:01 ; elapsed = 00:00:11 . Memory (MB): peak = 2306.918 ; gain = 0.000
+connect_hw_server: Time (s): cpu = 00:00:00 ; elapsed = 00:00:09 . Memory (MB): peak = 2330.137 ; gain = 0.000
 open_hw_target
 INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210183AF2A1DA
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
 current_hw_device [get_hw_devices xc7a35t_0]
 refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
 INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
 set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Fri Dec 13 01:16:43 2024] Launched synth_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/runme.log
+[Fri Dec 13 01:16:43 2024] Launched impl_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/runme.log
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Fri Dec 13 01:24:44 2024] Launched synth_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/synth_1/runme.log
+[Fri Dec 13 01:24:44 2024] Launched impl_1...
+Run output will be captured here: C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/runme.log
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
 program_hw_devices [get_hw_devices xc7a35t_0]
 INFO: [Labtools 27-3164] End of startup status: HIGH
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
 INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
 set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Semester 3/DLD/Project/Two-Player-Snake/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
 program_hw_devices [get_hw_devices xc7a35t_0]
 INFO: [Labtools 27-3164] End of startup status: HIGH
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
 INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
-set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
-program_hw_devices [get_hw_devices xc7a35t_0]
-INFO: [Labtools 27-3164] End of startup status: HIGH
-refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
-INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
-set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
-set_property PROGRAM.FILE {C:/Users/ddddd/OneDrive/Desktop/Two-Player-Snake-main/snake_game/snake_game/snake_game.runs/impl_1/Master_Game.bit} [get_hw_devices xc7a35t_0]
-program_hw_devices [get_hw_devices xc7a35t_0]
-INFO: [Labtools 27-3164] End of startup status: HIGH
-refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
-INFO: [Labtools 27-1434] Device xc7a35t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
-close_hw_manager
 exit
-INFO: [Common 17-206] Exiting Vivado at Wed Dec 11 18:25:44 2024...
+INFO: [Common 17-206] Exiting Vivado at Fri Dec 13 01:37:45 2024...

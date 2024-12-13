@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date         : Fri Dec 13 01:27:56 2024
+| Date         : Fri Dec 13 06:29:26 2024
 | Host         : Taha running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Master_Game_control_sets_placed.rpt
 | Design       : Master_Game
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |    26 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    96 |
+| Unused register locations in slices containing registers |    97 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -58,47 +58,47 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              44 |           22 |
-| No           | No                    | Yes                    |              72 |           27 |
-| No           | Yes                   | No                     |              98 |           38 |
-| Yes          | No                    | No                     |             734 |          329 |
-| Yes          | No                    | Yes                    |             117 |           47 |
-| Yes          | Yes                   | No                     |              23 |            7 |
+| No           | No                    | No                     |              47 |           21 |
+| No           | No                    | Yes                    |              72 |           24 |
+| No           | Yes                   | No                     |             102 |           43 |
+| Yes          | No                    | No                     |             704 |          337 |
+| Yes          | No                    | Yes                    |             117 |           50 |
+| Yes          | Yes                   | No                     |              53 |           24 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+-----------------------------------+---------------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
-|            Clock Signal           |                   Enable Signal                   |                Set/Reset Signal               | Slice Load Count | Bel Load Count | Bels / Slice |
-+-----------------------------------+---------------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
-|  CLK_IBUF_BUFG                    |                                                   | vgai/vga/CounterTo520/count_value_reg[3]_0    |                1 |              1 |         1.00 |
-|  CLK_IBUF_BUFG                    |                                                   | vgai/vga/CounterTo799/count_value_reg[6]_0    |                1 |              1 |         1.00 |
-|  CLK_IBUF_BUFG                    | vgai/vga/CounterTo799/E[0]                        |                                               |                1 |              2 |         2.00 |
-|  CLK_IBUF_BUFG                    | vgai/vga/CounterTo3/E[0]                          |                                               |                2 |              4 |         2.00 |
-|  CLK_IBUF_BUFG                    | s1/E[0]                                           | BTNC_reg_n_0                                  |                2 |              4 |         2.00 |
-|  CLK_IBUF_BUFG                    | s1/state_game_reg[0]_0[0]                         | BTNC_reg_n_0                                  |                2 |              4 |         2.00 |
-|  CLK_IBUF_BUFG                    | t1/MINUTES_UNITS[3]_i_1_n_0                       | BTNC_reg_n_0                                  |                2 |              4 |         2.00 |
-|  CLK_IBUF_BUFG                    | t1/SECONDS_UNITS[3]_i_1_n_0                       | BTNC_reg_n_0                                  |                2 |              4 |         2.00 |
-| ~keyboard_receiver/db_clk/O_reg_0 | keyboard_receiver/cnt                             | keyboard_receiver/cnt[3]_i_1_n_0              |                1 |              4 |         4.00 |
-|  CLK_IBUF_BUFG                    | keyboard_receiver/db_data/count[4]_i_2__0_n_0     | keyboard_receiver/db_data/count[4]_i_1__0_n_0 |                1 |              5 |         5.00 |
-|  CLK_IBUF_BUFG                    | vgai/vga/CounterTo3/E[0]                          | vgai/vga/CounterTo799/count_value[9]_i_1_n_0  |                2 |              6 |         3.00 |
-|  CLK_IBUF_BUFG                    | s1/moveSnake/SnakeState_Y_2_reg[0][4]_0[0]        |                                               |                5 |              7 |         1.40 |
-|  CLK_IBUF_BUFG                    | s1/moveSnake/E[0]                                 |                                               |                4 |              7 |         1.75 |
-|  CLK_IBUF_BUFG                    | vgai/vga/CounterTo799/E[0]                        | vgai/vga/CounterTo520/count_value             |                3 |              8 |         2.67 |
-|  CLK_IBUF_BUFG                    | s1/moveSnake/FSM_sequential_state_snake_reg[0][0] |                                               |                5 |              8 |         1.60 |
-|  CLK_IBUF_BUFG                    | s1/moveSnake/SnakeState_Y_2_reg[0][4][0]          |                                               |                4 |              8 |         2.00 |
-|  CLK_IBUF_BUFG                    | keyboard_receiver/oflag_i_1_n_0                   |                                               |                1 |              8 |         8.00 |
-|  CLK_IBUF_BUFG                    |                                                   | keyboard_receiver/p_0_in                      |                6 |              9 |         1.50 |
-| ~keyboard_receiver/db_clk/O_reg_0 |                                                   |                                               |                3 |              9 |         3.00 |
-|  CLK_IBUF_BUFG                    |                                                   | s1/moveSnake/count_value[0]_i_1_n_0           |                7 |             26 |         3.71 |
-|  CLK_IBUF_BUFG                    |                                                   |                                               |               19 |             35 |         1.84 |
-|  CLK_IBUF_BUFG                    | msm/counter                                       | BTNC_reg_n_0                                  |               14 |             41 |         2.93 |
-|  CLK_IBUF_BUFG                    | s1/reached_p_two_reg_0[0]                         | BTNC_reg_n_0                                  |               25 |             60 |         2.40 |
-|  CLK_IBUF_BUFG                    |                                                   | vgai/vga/p_0_in                               |               23 |             61 |         2.65 |
-|  CLK_IBUF_BUFG                    |                                                   | BTNC_reg_n_0                                  |               27 |             72 |         2.67 |
-|  CLK_IBUF_BUFG                    | s1/moveSnake/count_value_reg[25]_0[0]             |                                               |              307 |            690 |         2.25 |
-+-----------------------------------+---------------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
++-------------------------------+-----------------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
+|          Clock Signal         |                    Enable Signal                    |                Set/Reset Signal               | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------------------+-----------------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
+|  CLK_IBUF_BUFG                |                                                     | vgai/vga/CounterTo520/count_value_reg[3]_0    |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                |                                                     | vgai/vga/CounterTo799/count_value_reg[6]_0    |                1 |              1 |         1.00 |
+|  CLK_IBUF_BUFG                | vgai/vga/CounterTo799/E[0]                          |                                               |                1 |              2 |         2.00 |
+|  CLK_IBUF_BUFG                | t1/MINUTES_UNITS[3]_i_1_n_0                         | BTNC_reg_n_0                                  |                3 |              4 |         1.33 |
+|  CLK_IBUF_BUFG                | t1/SECONDS_UNITS[3]_i_1_n_0                         | BTNC_reg_n_0                                  |                2 |              4 |         2.00 |
+|  CLK_IBUF_BUFG                | sc/SCORE_SNAKE_ONE[3]_i_1_n_0                       | BTNC_reg_n_0                                  |                2 |              4 |         2.00 |
+|  CLK_IBUF_BUFG                | sc/SCORE_SNAKE_TWO[3]_i_1_n_0                       | BTNC_reg_n_0                                  |                3 |              4 |         1.33 |
+|  CLK_IBUF_BUFG                | vgai/vga/CounterTo3/E[0]                            |                                               |                1 |              4 |         4.00 |
+| ~keyboard_receiver/db_clk/clk | keyboard_receiver/cnt                               | keyboard_receiver/cnt[3]_i_1_n_0              |                1 |              4 |         4.00 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/db_data/count[4]_i_2__0_n_0       | keyboard_receiver/db_data/count[4]_i_1__0_n_0 |                2 |              5 |         2.50 |
+|  CLK_IBUF_BUFG                | vgai/vga/CounterTo3/E[0]                            | vgai/vga/CounterTo799/count_value[9]_i_1_n_0  |                2 |              6 |         3.00 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/E[0]                                   | sc/SR[0]                                      |                5 |              7 |         1.40 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/FSM_sequential_state_snake_reg[0][0]   | sc/SR[0]                                      |                4 |              7 |         1.75 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/FSM_sequential_state_snake_reg[1][0]   | sc/SR[0]                                      |                4 |              8 |         2.00 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/FSM_sequential_state_snake_reg[0]_0[0] | sc/SR[0]                                      |                4 |              8 |         2.00 |
+|  CLK_IBUF_BUFG                | keyboard_receiver/keycode[7]_i_1_n_0                |                                               |                1 |              8 |         8.00 |
+|  CLK_IBUF_BUFG                | vgai/vga/CounterTo799/E[0]                          | vgai/vga/CounterTo520/count_value             |                2 |              8 |         4.00 |
+|  CLK_IBUF_BUFG                |                                                     | keyboard_receiver/oflag_reg_0                 |                7 |              9 |         1.29 |
+| ~keyboard_receiver/db_clk/clk |                                                     |                                               |                3 |              9 |         3.00 |
+|  CLK_IBUF_BUFG                |                                                     | s1/moveSnake/count_value[0]_i_1_n_0           |                7 |             26 |         3.71 |
+|  CLK_IBUF_BUFG                |                                                     |                                               |               18 |             38 |         2.11 |
+|  CLK_IBUF_BUFG                | msm/counter                                         | BTNC_reg_n_0                                  |               13 |             41 |         3.15 |
+|  CLK_IBUF_BUFG                | s1/E[0]                                             | BTNC_reg_n_0                                  |               27 |             60 |         2.22 |
+|  CLK_IBUF_BUFG                |                                                     | vgai/vga/VerAddr[8]_i_1_n_0                   |               27 |             65 |         2.41 |
+|  CLK_IBUF_BUFG                |                                                     | BTNC_reg_n_0                                  |               24 |             72 |         3.00 |
+|  CLK_IBUF_BUFG                | s1/moveSnake/count_value_reg[24]_0[0]               |                                               |              334 |            690 |         2.07 |
++-------------------------------+-----------------------------------------------------+-----------------------------------------------+------------------+----------------+--------------+
 
 

@@ -8,7 +8,7 @@ module Master_Game(
         output HS,
         output VS
     );
-    wire levels; // 0 = 1st level, 1 = 2nd level
+    wire [1:0] levels; // 0 = 1st level, 1 = 2nd level
     wire [1:0] lives;
     wire [3:0] second_counter_units;
     wire [3:0] minute_counter_units;
